@@ -1,0 +1,2 @@
+[% title = loc('Information') %]
+[% INCLUDE templates/root/content/pages/status/error_info/content.tt2 %]

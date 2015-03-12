@@ -1,0 +1,210 @@
+.jspDrag {
+	background-color: rgb(226, 226, 226);
+	box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.2);
+
+	background-image: url('/static/images/icons/control/scrollbar/track-tile-background.png');
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+
+	border-color: rgba(72, 192, 43, 0.9);
+	border-style: solid;
+	border-width: 0px;
+}
+
+.jspArrow {
+	background: -webkit-linear-gradient(top, rgb(245, 245, 245) 0%,rgb(214, 214, 214) 100%);
+
+	border-color: rgba(72, 192, 43, 0.9);
+	border-style: solid;
+	border-width: 0px;
+}
+
+.jspArrow.jspArrowUp.jspDisabled {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-up-disabled.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowDown.jspDisabled {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-down-disabled.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowLeft.jspDisabled {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-left-disabled.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowRight.jspDisabled {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-right-disabled.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowDown.jspActive {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-down-active.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowUp.jspActive {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-up-active.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowRight.jspActive {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-right-active.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrow.jspArrowLeft.jspActive {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-left-active.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspDrag.jspHover {
+	box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.1);
+	border-color: rgba(72, 192, 43, 0.9);
+	border-style: solid;
+	border-width: 0px;
+}
+
+.jspDrag.jspActive {
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+
+	border-color: rgba(72, 192, 43, 0.9);
+	border-style: solid;
+	border-width: 0px;
+}
+
+.jspArrowUp {
+	/*border-radius: 10px 10px 0px 0px;*/
+}
+
+.jspArrowDown {
+	/*border-radius: 0px 0px 10px 10px;*/
+}
+
+.jspArrowLeft {
+	/*border-radius: 10px 0px 0px 10px;*/
+}
+
+.jspArrowRight {
+	/*border-radius: 0px 10px 10px 0px;*/
+}
+
+.jspVerticalBar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 15px;
+	background: transparent;
+}
+
+.jspHorizontalBar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 15px;
+	background: transparent;
+}
+
+.jspVerticalBar .jspTrack {
+	background: transparent;
+	background-image: url('/static/images/icons/control/scrollbar/track-tile-background.png');
+	background-repeat: repeat;
+	background-position: top left !important;
+
+	position: relative;
+}
+
+.jspHorizontalBar .jspTrack {
+	background: transparent;
+	background-image: url('/static/images/icons/control/scrollbar/track-tile-background.png');
+	background-repeat: repeat;
+	background-position: top left !important;
+
+	position: relative;
+}
+
+.jspArrowLeft {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-left.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrowRight {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-right.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrowUp {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-up.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.jspArrowDown {
+	background-image: url('/static/images/icons/control/scrollbar/arrow-down.png');
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+
+.jspHorizontalBar .jspArrow {
+	width: 15px;
+	height: 15px;
+}
+
+.jspVerticalBar .jspArrow {
+	width: 15px;
+	height: 15px;
+}
+
+.jspHorizontalBar .jspTrack .jspDrag {
+	background-image: url('/static/images/icons/control/scrollbar/drag-horizontal.png');
+
+	background-repeat: no-repeat !important;
+	background-position: 50% 50%;
+	border-radius: 5px;
+}
+
+.jspVerticalBar .jspTrack .jspDrag {
+	background-image: url('/static/images/icons/control/scrollbar/drag-vertical.png');
+
+	background-repeat: no-repeat !important;
+	background-position: 50% 50%;
+	border-radius: 5px;
+}
+
+.jspCorner {
+	background: rgb(247, 247, 247);
+	float: left;
+	height: 100%;
+
+}
+.ui-icon-gripsmall-diagonal-se {
+    background-image: url('/static/images/icons/control/scrollbar/drag-vertical.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: 50% 50% !important;
+}

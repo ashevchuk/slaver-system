@@ -1,0 +1,49 @@
+<script>
+$(function () {
+    $('#upload-file-field').fileupload({
+	dataType: 'json',
+	url: '/file/upload/broker/put',
+	filesContainer: '.files',
+
+	add: function (e, data) {
+
+	    data.context = $('<button/>').text('Upload ' + data.files[0].name).appendTo($('#file-upload-container')).click(function () {
+		data.context=$('<p/>').text('Uploading...').replaceAll($(this));
+		$('#progress').fadeIn();
+
+		data.submit();
+	    });
+	},
+	done: function (e, data) {
+
+	    $('#progress').fadeOut();
+	    data.context.text('Upload finished');
+	    data.context.remove();
+
+	    Alertify.log.success("Upload finished");
+	},
+	progressall: function (e, data) {
+
+	    var progress = parseInt(data.loaded / data.total * 100, 10);
+	    $('#progress').css('width', progress + '%');
+	}
+    });
+});
+</script>
+
+							<div class="table">
+								<div class="row">
+									<div class="cell"><label for="file" class="ui-widget">File</label></div>
+									<div class="cell">
+
+										<form id="avatar-form" action='/file/upload/broker/put' method="post" enctype="multipart/form-data">
+											<input id="upload-file-field" type="file" name="file" />
+											<div id="file-upload-container"></div>
+											<div id='progress' class="upload-progress-bar"></div>
+										</form>
+										<div id="files" class="files"></div>
+
+									</div>
+								</div>
+
+							</div>

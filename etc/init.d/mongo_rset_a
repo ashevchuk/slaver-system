@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongo localhost:27017/test /home/slayer/devel/perl/Slaver/etc/rset_test_a.js

@@ -1,0 +1,21 @@
+						<form class="registration-form" action="/repair" method="POST">
+							<div class="table">
+								<div class="row">
+									<div class="cell"><label for="user" class="ui-widget">User</label></div>
+									<div class="cell"><input type="text" name="username" placeholder="Username" id="username" class="text ui-widget ui-widget-content ui-corner-all" value=""/></div>
+								</div>
+								<div class="row">
+									<div class="cell"><label for="email" class="ui-widget">Email</label></div>
+									<div class="cell"><input type="text" name="email" placeholder="Email" id="email" class="text ui-widget ui-widget-content ui-corner-all" value=""/></div>
+								</div>
+
+								<div class="row">
+									<div class="cell"></div>
+									<div class="cell">
+										<input type="submit" value="Repair" class="button button-register ui-button ui-widget ui-corner-all ui-button-text-only"/>
+									</div>
+									
+
+								</div>
+							</div>
+						</form>

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/a/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/b/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/c/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/3/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/3/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/3/*

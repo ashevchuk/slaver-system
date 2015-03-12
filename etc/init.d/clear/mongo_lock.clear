@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/a/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/b/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/arbiterdb/c/*.lock
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/1/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/2/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/configdb/3/*.lock
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/1/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/2/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/a/3/*.lock
+
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/1/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/2/*.lock
+rm -rf /home/slayer/devel/perl/Slaver/var/data/mongodb/rset/b/3/*.lock

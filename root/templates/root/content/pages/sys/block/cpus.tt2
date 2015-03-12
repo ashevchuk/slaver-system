@@ -1,0 +1,85 @@
+[%- USE Digest.MD5 -%]
+<script language="javascript" type="text/javascript">
+//    var ws_scheme = ('https:' == document.location.protocol ? 'wss' : 'ws');
+
+//    websocket = new WebSocket( ws_scheme + "://[% host %]/ws/sys/stats");
+    websocket = new WebSocket( "ws://[% host %]/ws/sys/stats");
+
+    websocket.onopen = function(evt) {
+//	console.log("ws open");
+    };
+    websocket.onclose = function(evt) {
+//	console.log("ws close");
+    };
+    websocket.onerror = function(evt) {
+//	console.log("ws error");
+    };
+
+    websocket.onmessage = function(evt) {
+	var data = JSON.parse( evt.data );
+	var host = data['host_hash'];
+	var cpu_data = data['cpu'];
+	var mem_data = data['mem'];
+	var mem_total_pc = mem_data['memused'] / mem_data['memtotal'] * 100;
+	//console.log("data", data);
+
+	//console.log("data", mem_data);
+
+	if ( mem_total_pc > 90 ) {
+	    $("#progress-" + host + "-mem-memused").addClass("progress-bar-danger");
+	}
+	else {
+	    $("#progress-" + host + "-mem-memused").removeClass("progress-bar-danger");
+	}
+
+	$("#progress-" + host + "-mem-memused").css("width", mem_total_pc + "%");
+	$("#progress-" + host + "-mem-memused").html("Memory: " + parseFloat(mem_total_pc).toFixed(2) + "%");
+
+	for (cpu in cpu_data) {
+	    for (key in cpu_data[cpu]) {
+		$("#progress-" + host + "-cpu-" + cpu + "-" + key).css("width", cpu_data[cpu][key] + "%");
+		$("#progress-" + host + "-cpu-"+ cpu + "-" + key).html(cpu_data[cpu][key] + "%");
+		if ( cpu_data[cpu][key] > 90 && key != 'idle' ) {
+		    $("#progress-" + host + "-cpu-" + cpu + "-" + key).addClass("progress-bar-danger");
+		}
+		else {
+		    $("#progress-" + host + "-cpu-" + cpu + "-" + key).removeClass("progress-bar-danger");
+		}
+	    }
+	}
+
+    };
+</script>
+
+<table class="table table-striped table-hover">
+    <thead>
+	<tr>
+            <th>cpu</th>
+            <th>usage</th>
+            <th>idle</th>
+            <th>nice</th>
+            <th>iowait</th>
+            <th>irq</th>
+            <th>softirq</th>
+            <th>system</th>
+            <th>user</th>
+	</tr>
+    </thead>
+
+    <tbody>
+	[%- FOREACH cpu IN cpus -%]
+	    [%- INCLUDE templates/root/content/pages/sys/block/cpu.tt2 cpu = cpu host = host -%]
+	[%- END -%]
+
+        <tr>
+            <td colspan="10">
+                <div class="progress">
+                    <div id="progress-[% host | md5_hex %]-mem-memused" class="progress-bar" style="width: 0%;">
+                        0%
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

@@ -1,0 +1,105 @@
+[% BLOCK highlight %]
+    <div class="code-container">
+	<div class="code-container-title">
+		<span class="icon-image expand toggle" style="display: none;"></span>
+		<span class="icon-image collapse toggle"></span>
+
+		<span class="code-container-title-string">[% title %]</span>
+		<span class="code-container-source">[% language %]</span>
+	</div>
+		[% c.model( 'Content::Syntax::Highlight' ).render({ language => language, code => content, title => title } ) %]
+    </div>
+[% END %]
+
+<div class="mid-left-container">
+
+[% IF category.defined %]
+	[% IF category.description.defined %]
+		<h1 class="interface">[% category.description | html %]</h1>
+	[% END %]
+[% ELSE %]
+	<h1 class="interface">[% title or c.config.application.title or c.config.application.name | html %]</h1>
+[% END %]
+
+    <div id="content" class="editable">
+
+[% IF data.defined %]
+	<pre>
+		[% data %]
+	</pre>
+[% END %]
+
+[% WRAPPER highlight language = 'Perl' title = 'source.pl' %]
+use Perl or die;
+
+sub main() {
+    printf("%s\n", "this is simple line");
+    printf("%s\n", "and this is very long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long line");
+
+    return undef;
+}
+
+sub main() {
+    printf("%s\n", "this is simple line");
+    printf("%s\n", "and this is very long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long line");
+
+    return undef;
+}
+
+sub main() {
+    printf("%s\n", "this is simple line");
+    printf("%s\n", "and this is very long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long line");
+
+    return undef;
+}
+[% END %]
+
+	[% content %]
+	[% l('Hello') %]
+	Don't try to imagine atoms. It is more complicated than you think.
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+	Lorem Ipsum is simply dummy text
+	Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+
+    </div>
+
+    [% INCLUDE templates/root/pager.tt2 %]
+
+</div>

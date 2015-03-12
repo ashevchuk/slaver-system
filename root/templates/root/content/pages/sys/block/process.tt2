@@ -1,0 +1,51 @@
+[% USE dumper(indent=0, pad="<br>") %]
+[% SET pid = process.key %]
+[%# dumper.dump(process.value.fd.$pid.fd) %]
+
+	<tr>
+	    <td>[% process.key %]</td>
+	    <td>[% process.value.cmd %]</td>
+	    <td style="max-width: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+		<span data-toggle="popover" data-content="[%- process.value.cmdline -%]">
+		    [%- process.value.cmdline -%]
+		</span>
+	    </td>
+	    <td>[% process.value.cpu %]</td>
+	    <td>[% process.value.actime %]</td>
+	    <td>[% process.value.ttime %]</td>
+	    <td>[% process.value.utime | truncate(7) %]</td>
+	    <td>[% process.value.state %]</td>
+	    <td>[% process.value.nice %]</td>
+	    <td>[% process.value.prior %]</td>
+	    <td>[% process.value.ppid %]</td>
+	    <td>[% process.value.size %]</td>
+	    <td>[% process.value.vsize %]</td>
+	    <td>[% process.value.resident %]</td>
+	    <td>[% process.value.share %]</td>
+	    <td>
+		<span data-toggle="popover" data-content="
+		[%- IF process.value.fd.$pid.fd.size > 0 -%]
+		    <table class='table table-striped table-hover'>
+			<thead>
+			    <tr>
+				<th>fd</th>
+				<th>file</th>
+			    </tr>
+			</thead>
+			<tbody>
+			[%- FOREACH fd IN process.value.fd.$pid.fd.pairs -%]
+			    <tr>
+				<td>[% fd.key %]</td>
+				<td>[% fd.value %]</td>
+			    </tr>
+			[%- END -%]
+			</tbody>
+		    </table>
+		[%- ELSE -%]
+		    [%- l('No file descriptors') -%]
+		[%- END -%]
+		">
+		    [%- process.value.fd.$pid.fd.size or 0 -%]
+		</span>
+	    </td>
+	</tr>

@@ -1,0 +1,1 @@
+[% INCLUDE templates/root/content/pages/status/internal_error/content.tt2 %]

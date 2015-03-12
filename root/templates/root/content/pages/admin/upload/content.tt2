@@ -1,0 +1,14 @@
+[% MACRO l(text, args) BLOCK;
+    c.localize(text, args);
+END; %]
+
+[% title = l('Localization') %]
+
+<div class="mid-left-container">
+	<h1 class="interface">[% title or c.config.application.title or c.config.application.name %]</h1>
+
+	<div id="content" class="editable">
+	    [% content %]
+	    [% INCLUDE templates/root/content/pages/admin/upload/block/form.tt2 %]
+	</div>
+</div>

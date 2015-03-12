@@ -1,0 +1,1 @@
+[% INCLUDE templates/root/content/pages/admin/upload/layout.tt2 %]

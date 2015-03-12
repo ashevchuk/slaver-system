@@ -1,0 +1,52 @@
+<div class="center-container">
+<div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <div class="well well-sm">
+                <form id="comment-submin-form-[% document_id %]" data-document-id="[% document_id %]" class="comment-submit-form">
+		<fieldset>
+		<legend>Your Comment</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Name</label>
+                            <input name="name" type="text" class="form-control form-input-name" placeholder="Enter name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                <input name="email" type="email" class="form-control form-input-email" placeholder="Enter email"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                Subject</label>
+                            <select name="subject" class="form-control form-input-subject">
+                                <option value="na" selected="">Choose One:</option>
+                                <option value="service">General Customer Service</option>
+                                <option value="suggestions">Suggestions</option>
+                                <option value="product">Product Support</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Message</label>
+                            <textarea name="message" class="form-control form-input-message" rows="9" cols="25" required="required" placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-default pull-right" id="comment-submin-btn-[% document_id %]" data-document-id="[% document_id %]">
+                            Send Message</button>
+                    </div>
+                </div>
+		</fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

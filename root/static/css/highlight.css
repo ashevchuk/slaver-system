@@ -1,0 +1,126 @@
+.code-container {
+	font-size: 13px;
+//	width: 640px;
+}
+
+.code {
+/*	border-radius: 6px;
+	box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.3);
+	text-shadow: 1px 1px 1px rgb(146, 146, 146);*/
+	font-family: 'Conv_TerminusMedium', Sans-Serif, monospace;
+	height: 255px;
+}
+
+.comment {
+	font-weight: normal;
+}
+
+.string {
+	font-weight: normal;
+	font-style: italic;
+	color: #ff0000;
+}
+
+.number {
+	font-weight: normal;
+	color: #ff0000;
+}
+
+.key1 {
+	font-weight: bold;
+}
+
+.key2 {
+	font-weight: normal;
+	color: #0000ff;
+}
+
+.key3 {
+	font-weight: bold;
+}
+
+.key4 {
+	font-weight: normal;
+}
+
+.key5 {
+	font-weight: normal;
+}
+
+.key6 {
+	font-weight: normal;
+}
+
+.key7 {
+	font-weight: normal;
+}
+
+.key8 {
+	font-weight: normal;
+}
+
+.code .code-line-number {
+	padding-right: 4px;
+	padding-left: 2px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	border-radius: 5px 0px 0px 5px;
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.21);
+	background: -webkit-linear-gradient(top, rgb(245, 245, 245) 0%,rgb(230, 230, 230) 100%);
+}
+
+.code .code-line-string {
+	padding: 4px;
+	width: 100%;
+	border-bottom-width: 1px;
+}
+
+.code .table .row {
+	/*background: -webkit-linear-gradient(top, rgb(245, 245, 245) 0%,#bbbbbb 100%);
+	border-radius: 6px;*/
+}
+
+.code .table .row .cell.code-line-string {
+	border-color: rgba(235, 235, 235, 0.44);
+	border-style: dotted;
+	border-width: 0px;
+	border-bottom-width: 1px;
+/*	overflow-x: auto;
+	max-width: 590px;*/
+}
+
+.code .table .row .cell.code-line-string:hover {
+	background: -webkit-linear-gradient(top, rgb(253, 253, 253) 0%,rgb(228, 228, 228) 100%);
+}
+
+.code-container .code-container-title {
+	text-shadow: 1px 1px 1px rgb(255, 255, 255);
+	box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.16);
+	font-family: monospace;
+	background: -webkit-linear-gradient(top, rgb(245, 245, 245) 0%,rgb(226, 226, 226) 100%);
+	padding-left: 4px;
+	margin-bottom: 4px;
+/*	border-radius: 10px 10px 0px 0px;*/
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	cursor: pointer;
+}
+
+.code-container .code-container-title .code-container-title-string {
+	margin-left: 4px;
+}
+
+.code-container .code-container-title .code-container-source {
+	float: right;
+	color: rgb(143, 143, 143);
+	margin-right: 6px;
+}
+
+.code .table {
+	margin-bottom: 20px;
+	max-height: 50px;
+	height: 50px;
+}

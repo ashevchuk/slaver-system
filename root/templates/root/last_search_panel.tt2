@@ -1,0 +1,7 @@
+[% USE cache = Cache ( cache_root => c.config.application.content.template.cache_root ) %]
+<div class="panel panel-default">
+	<div class="panel-heading">[% loc('Last search') %]</div>
+	<div class="panel-body">
+	    [% cache.inc( 'template' => 'templates/root/last_search.tt2', 'ttl' => 60 ) %]
+	</div>
+</div>

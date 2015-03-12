@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MONGOS_PID=$(cat /home/slayer/devel/perl/Slaver/var/run/mongos.pid)
+
+echo "Killing $MONGOS_PID"
+
+kill -9 $MONGOS_PID
+
+mongos --config /home/slayer/devel/perl/Slaver/etc/mongos_a.conf --shutdown
+killall mongos

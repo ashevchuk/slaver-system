@@ -1,0 +1,9 @@
+[% USE Number.Format %]
+	<tr>
+	    <td>[% network.key %]</td>
+	    <td>[% network.value.txbyt | format_bytes(2) %]</td>
+	    <td>[% network.value.rxbyt | format_bytes(2) %]</td>
+	    <td>[% network.value.txpcks %]</td>
+	    <td>[% network.value.rxpcks %]</td>
+
+	</tr>

@@ -1,0 +1,24 @@
+[% title = search_query or c.flash.data.search.last_query | html %]
+
+[% MACRO round(n)
+GET n + 0.5
+FILTER format("%d");
+%]
+
+[% IF results.items.size %]
+
+    [% FOREACH result IN results.items %]
+
+	[% IF result.document_class == 'Content::Type::File' %]
+	    [% INCLUDE templates/root/file.tt2 file = result %]
+	[% END %]
+
+	[% IF result.document_class == 'Content::Type::Article' %]
+	    [% INCLUDE templates/root/article.tt2 article = result %]
+	[% END %]
+
+    [% END %]
+
+[% ELSE %]
+    [% loc('Nothing found') %]
+[% END %]

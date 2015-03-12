@@ -1,0 +1,125 @@
+#!/bin/bash
+
+EXT_IF="{ext_if}"
+EXT_ADDR="{ext_addr}"
+
+declare -a shards=({ext_nodes})
+
+iptables --flush
+
+iptables -X valid-src
+iptables -X valid-dst
+
+iptables -N valid-src
+iptables -N valid-dst
+
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
+#---------------------------------------------------------------
+# Verify valid source and destination addresses for all packets
+
+iptables -A INPUT -i $EXT_ADDR -j valid-src
+iptables -A FORWARD -i $EXT_ADDR -j valid-src
+iptables -A OUTPUT -o $EXT_ADDR -j valid-dst
+iptables -A FORWARD -o $EXT_ADDR -j valid-dst
+
+#---------------------------------------------------------------
+# Source and Destination Address Sanity Checks
+
+iptables -A valid-src -s 10.0.0.0/8 -j DROP
+iptables -A valid-src -s 172.16.0.0/12 -j DROP
+iptables -A valid-src -s 192.168.0.0/16 -j DROP
+iptables -A valid-src -s 224.0.0.0/4 -j DROP
+iptables -A valid-src -s 240.0.0.0/5 -j DROP
+iptables -A valid-src -s 127.0.0.0/8 -j DROP
+iptables -A valid-src -s 0.0.0.0/8 -j DROP
+iptables -A valid-src -d 255.255.255.255 -j DROP
+iptables -A valid-src -s 169.254.0.0/16 -j DROP
+
+iptables -A valid-src -s $EXT_ADDR -j DROP
+
+iptables -A valid-dst -d 224.0.0.0/4 -j DROP
+
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+iptables -A OUTPUT -p udp -o $EXT_IF --dport 53 --sport 1024:65535 -j ACCEPT
+iptables -A INPUT -p udp -i $EXT_IF --sport 53 --dport 1024:65535 -j ACCEPT
+
+iptables -A OUTPUT -p udp -o $EXT_IF --dport 123 --sport 123 -j ACCEPT
+iptables -A INPUT -p udp -i $EXT_IF --sport 123 --dport 123 -j ACCEPT
+
+#---------------------------------------------------------------
+# Allow previously established connections
+
+iptables -A OUTPUT -o $EXT_IF -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+#---------------------------------------------------------------
+# Allow SSH, HTTP service connections
+
+iptables -A INPUT -p tcp -i $EXT_IF --dport 22 --sport 1024:65535 -m state --state NEW -j ACCEPT
+iptables -A INPUT -p tcp -i $EXT_IF --dport 220 --sport 1024:65535 -m state --state NEW -j ACCEPT
+
+iptables -A INPUT -p tcp -i $EXT_IF --dport 80 --sport 1024:65535 -m state --state NEW -j ACCEPT
+iptables -A INPUT -p tcp -i $EXT_IF --dport 443 --sport 1024:65535 -m state --state NEW -j ACCEPT
+
+#---------------------------------------------------------------
+# Allow local services
+
+# MongoDB
+iptables -A INPUT -s $EXT_ADDR -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -d $EXT_ADDR -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -s $EXT_ADDR -p tcp --destination-port 27018 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -d $EXT_ADDR -p tcp --source-port 27018 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -s $EXT_ADDR -p tcp --destination-port 27019 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -d $EXT_ADDR -p tcp --source-port 27019 -m state --state ESTABLISHED -j ACCEPT
+
+# Memcached
+iptables -A INPUT -s $EXT_ADDR -p tcp --destination-port 11211 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -d $EXT_ADDR -p tcp --source-port 11211 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -s $EXT_ADDR -p udp --destination-port 11211 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -d $EXT_ADDR -p udp --source-port 11211 -m state --state ESTABLISHED -j ACCEPT
+
+#---------------------------------------------------------------
+# Allow cluser services
+
+for shard in "${shards[@]}"
+do
+# MongoDB
+    iptables -A INPUT -s $shard -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A OUTPUT -d $shard -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+
+    iptables -A INPUT -s $shard -p tcp --destination-port 27018 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A OUTPUT -d $shard -p tcp --source-port 27018 -m state --state ESTABLISHED -j ACCEPT
+
+    iptables -A INPUT -s $shard -p tcp --destination-port 27019 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A OUTPUT -d $shard -p tcp --source-port 27019 -m state --state ESTABLISHED -j ACCEPT
+
+# Memcached
+    iptables -A INPUT -s $shard -p tcp --destination-port 11211 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A OUTPUT -d $shard -p tcp --source-port 11211 -m state --state ESTABLISHED -j ACCEPT
+
+    iptables -A INPUT -s $shard -p udp --destination-port 11211 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A OUTPUT -d $shard -p udp --source-port 11211 -m state --state ESTABLISHED -j ACCEPT
+done
+
+#---------------------------------------------------------------
+# Allow connections from the firewall
+
+iptables -A OUTPUT -j ACCEPT -m state --state NEW,ESTABLISHED,RELATED -o $EXT_IF -p tcp
+
+#---------------------------------------------------------------
+# Allow previously established connections
+
+iptables -A INPUT -j ACCEPT -m state --state ESTABLISHED,RELATED -i $EXT_IF -p tcp
+
+#iptables -A OUTPUT -j LOG
+#iptables -A INPUT -j LOG
+#iptables -A FORWARD -j LOG
+
+iptables -A OUTPUT -j DROP
+iptables -A INPUT -j DROP
+iptables -A FORWARD -j DROP

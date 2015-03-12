@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_a_3.conf --shutdown

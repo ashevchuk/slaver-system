@@ -1,0 +1,1 @@
+[% INCLUDE templates/root/block/gen/nested_list.tt2 tree = c.model('Content::Menu').get() %]

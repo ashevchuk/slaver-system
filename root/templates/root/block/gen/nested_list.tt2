@@ -1,0 +1,21 @@
+[% VIEW nested_list %]
+    [% BLOCK hash %]
+	<ul class="nav nav-list tree">
+	[% FOREACH i IN item.nodes %]
+	    <li>
+		[% IF i.value.uri.defined %]
+		    <a href="[% i.value.uri %]">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+		[% ELSE %]
+		    <a href="/[% i.value.role %]/[% i.value.alias %]/">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+		[% END %]
+
+		[% IF i.value.items.nodes %]
+		    [% nested_list.print(i.value.items) %]
+		[% END %]
+	    </li>
+	[% END %]
+	</ul>
+    [% END %]
+[% END %]
+
+[% nested_list.print(tree) %]

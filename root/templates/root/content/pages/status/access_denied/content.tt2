@@ -1,0 +1,15 @@
+<div class="mid-left-container">
+
+<h1 class="interface">[% c.loc('Access denied') %]</h1>
+
+    <div id="content">
+	<p>[% c.loc('Access denied') %] : <a href="[% c.req.uri | html %]">[% c.req.uri | html %]</a></p>
+	<p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
+	[% content | html %]
+    </div>
+
+</div>
+
+<div style="position:fixed;left:0%;bottom:0;z-index:100500">
+    <img src="/static/images/system/500.png" width="192" height="56">
+</div>

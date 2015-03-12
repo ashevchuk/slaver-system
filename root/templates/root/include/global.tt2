@@ -1,0 +1,10 @@
+[%- MACRO loc(text, args) BLOCK; c.localize(text, args); END; -%]
+[%- MACRO l(text, args) BLOCK; c.localize(text, args); END; -%]
+
+[% DEFAULT lang = 'en' %]
+
+[% DEFAULT include.header.files.css = [ ] %]
+[% DEFAULT include.header.files.js = [ ] %]
+[% DEFAULT include.default.header.files.css = [ ] %]
+[% DEFAULT include.default.header.files.js = [ ] %]
+[% DEFAULT title = l('Home') %]

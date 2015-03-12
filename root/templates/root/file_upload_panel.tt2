@@ -1,0 +1,6 @@
+<div class="panel panel-default">
+	<div class="panel-heading">[% l('Upload') %]</div>
+	<div class="panel-body">
+	    [% INCLUDE templates/root/block/file/upload/widget.tt2 %]
+	</div>
+</div>

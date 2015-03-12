@@ -1,0 +1,3 @@
+[% title = loc('Profile') %]
+
+[% INCLUDE templates/root/content/pages/user/profile/content.tt2 %]

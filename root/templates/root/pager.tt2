@@ -1,0 +1,57 @@
+[% IF pager && pager.last_page > 1 %]
+
+[% FOREACH page IN c.req.uri.path_segments %]
+    [% IF page == 'page' %]
+	[% SET page_url = page_url _ '/' %]
+	[% LAST %]
+    [% END %]
+    [% SET page_url = page_url _ page _ '/' %]
+[% END %]
+
+[% page_url = page_url.remove('\/$') %]
+
+[% SET pager_elements = c.config.application.content.pager.elements %]
+[% SET pager_shift_elements = c.config.application.content.pager.elements div 2 %]
+
+[% BLOCK pager_block %]
+    [% page_url = page_url.remove('\/$') %]
+	<li class="pager-page-number [% page_class.join(' ') %]"><a href="[% root or page_url %]/page/[% page %]/" title="[% page %]">[% page_title or page %]</a></li>
+[% END %]
+
+<div class="row">
+	<div class="pagination pull-right">
+	  <ul class="pagination">
+
+	[% IF pager.first_page && pager.first_page != pager.current_page && pager.first_page != pager.previous_page %]
+		[% PROCESS pager_block page = pager.first_page page_title = '<i class="fa fa-chevron-up"></i>' %]
+		[%# PROCESS pager_block page = pager.first_page page_title = pager.first_page %]
+	[% END %]
+
+	[% IF pager.previous_page %]
+		[% PROCESS pager_block page = pager.previous_page page_title = '<i class="fa fa-chevron-left"></i>' %]
+	[% END %]
+
+	[% start = (pager.current_page - pager_shift_elements) > 0 ? (pager.current_page - pager_shift_elements) : 1; FOREACH page IN [ start .. pager.last_page ] %]
+		[% LAST IF loop.count > pager_elements %]
+		[% PROCESS pager_block page = page page_title = page page_class = pager.current_page == page ? ['active'] : [] %]
+	[% END %]
+
+	[% IF pager.next_page %]
+		[% PROCESS pager_block page = pager.next_page page_title = '<i class="fa fa-chevron-right"></i>' %]
+	[% END %]
+
+	[% IF pager.last_page && pager.last_page != pager.current_page && pager.last_page != pager.next_page %]
+		[% PROCESS pager_block page = pager.last_page page_title = '<i class="fa fa-chevron-down"></i>' %]
+		[%# PROCESS pager_block page = pager.last_page page_title = pager.last_page %]
+	[% END %]
+<!--
+	<div class="pager-counter">
+		Page [% pager.current_page %] of [% pager.last_page %]
+	</div>
+-->
+
+	  </ul>
+	</div>
+</div>
+
+[% END %]

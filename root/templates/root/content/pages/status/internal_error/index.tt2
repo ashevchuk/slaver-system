@@ -1,0 +1,4 @@
+[% title = loc('Internal error') %]
+[% include.header.files.css.push('/static/css/error.css') %]
+[% include.header.files.css.push('/static/css/error-source-highlight.css') %]
+[% INCLUDE templates/root/content/pages/status/internal_error/layout.tt2 %]

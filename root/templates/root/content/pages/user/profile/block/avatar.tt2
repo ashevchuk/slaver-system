@@ -1,0 +1,78 @@
+[% include.header.files.js.push('/static/lib/upload/js/vendor/jquery.ui.widget.js') %]
+[% include.header.files.js.push('/static/lib/upload/js/jquery.iframe-transport.js') %]
+[% include.header.files.js.push('/static/lib/upload/js/jquery.fileupload.js') %]
+[% include.header.files.js.push('/static/lib/upload/js/jquery.fileupload-process.js') %]
+[% include.header.files.js.push('/static/lib/upload/js/jquery.fileupload-validate.js') %]
+[% include.header.files.js.push('/static/lib/upload/js/jquery.fileupload-ui.js') %]
+
+[% include.header.files.css.push('/static/lib/upload/css/jquery.fileupload.css') %]
+[% include.header.files.css.push('/static/lib/upload/css/jquery.fileupload-ui.css') %]
+
+<script type="text/javascript">
+$(function () {
+
+    $('#avatar-form').fileupload({
+	dataType: 'json',
+	url: '/user/profile/avatar/upload',
+	xhrFields: { withCredentials: true },
+	add: function (e, data) {
+	    data.context = $('<button/>')
+		.append('<i class="fa fa-cloud-upload"></i>')
+		.append('<span>Upload ' + data.files[0].name + '</span>')
+		.addClass('btn btn-default btn-xs')
+		.appendTo($('#avatar-form'))
+		.click(function () { $(this).remove(); data.submit(); });
+	},
+	done: function (e, data) {
+//	    data.context.text('Upload finished');
+//	    data.context.remove();
+	    $('.user-picture').each(function(){$(this).attr('src', $(this).attr('src')+'?'+Math.random());})
+//	    $('#progress').fadeOut();
+	    $('#progress-bar').css('width', '0%');
+	    $('#progress-bar-text').html('');
+//	    $("#avatar-form").show();
+	},
+	progressall: function (e, data) {
+	    var progress = parseInt(data.loaded / data.total * 100, 10);
+	    $('#progress-bar').css('width', progress + '%');
+	    $('#progress-bar-text').html(progress + '%');
+//	    $('#progress').fadeIn();
+	}
+    });
+
+});
+</script>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Avatar</div>
+  <div class="panel-body">
+
+<div id="avatar-upload-container" class="row2">
+
+    <div class="col-xs-6 col-md-3">
+
+	<div class="thumbnail">
+	    <img class="user-picture" src="/user/profile/avatar/get" alt="">
+
+	    <div id="progress" class="fileupload-progress fade in" style="width: 100%; display: block;">
+		<div class="progress progress-striped active">
+		    <div id="progress-bar" class="progress-bar progress-bar-default" style="width: 0%;"><span id="progress-bar-text"></span></div>
+		</div>
+	    </div>
+
+	</div>
+
+	<form id="avatar-form" action='/user/profile/avatar/upload' method="post" enctype="multipart/form-data">
+	    <span id="btn-upld-add" class="btn btn-default fileinput-button btn-xs">
+		<i class="fa fa-folder-open"></i>
+		<span>[% l('Choose file') %]...</span>
+		<input id="avatar-file-field" type="file" name="file">
+	    </span>
+	</form>
+
+    </div>
+
+</div>
+
+  </div>
+</div>

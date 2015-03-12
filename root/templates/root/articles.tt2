@@ -1,0 +1,4 @@
+[% INCLUDE templates/root/file.tt2 %]
+[% INCLUDE templates/root/file.tt2 %]
+
+[% INCLUDE templates/root/article.tt2 %]

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mongos --config /home/slayer/devel/perl/Slaver/etc/mongos_a.conf
+
+#mongo localhost:27017/admin /home/slayer/devel/perl/Slaver/etc/mongos_add_shard_a.js
+#mongo localhost:27017/admin /home/slayer/devel/perl/Slaver/etc/mongos_add_shard_b.js
+#mongo localhost:27017/test /home/slayer/devel/perl/Slaver/etc/mongo_test_b.js

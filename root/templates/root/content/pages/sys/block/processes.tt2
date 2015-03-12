@@ -1,0 +1,28 @@
+<table class="table table-striped table-hover">
+    <thead>
+	<tr>
+	    <th>pid</th>
+	    <th>cmd</th>
+	    <th>cmdline</th>
+	    <th>cpu</th>
+	    <th>actime</th>
+	    <th>ttime</th>
+	    <th>utime</th>
+	    <th>state</th>
+	    <th>nice</th>
+	    <th>prior</th>
+	    <th>ppid</th>
+	    <th>size</th>
+	    <th>vsize</th>
+	    <th>resident</th>
+	    <th>share</th>
+	    <th>fd</th>
+	</tr>
+    </thead>
+
+    <tbody>
+	[%- FOREACH process IN processes -%]
+	    [%- INCLUDE templates/root/content/pages/sys/block/process.tt2 process = process -%]
+	[%- END -%]
+    </tbody>
+</table>

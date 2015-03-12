@@ -1,0 +1,70 @@
+[% USE cache = Cache ( cache_root => c.config.application.content.template.cache_root ) %]
+
+<div class="row wrap">
+
+	<!--left-->
+	<div class="col-sm-2">
+
+		<div class="row">
+			<div class="col-xs-12">
+			<!--<h2>Side</h2>-->
+
+			<div class="panel panel-default">
+				<div class="panel-heading">[% loc('Navigator') %]</div>
+				<div class="panel-body">
+				[% INCLUDE templates/root/panel_menu_tree.tt2 %]
+				</div>
+			</div>
+
+			[% INCLUDE templates/root/left_panel.tt2 %]
+
+			</div>
+		</div>
+
+	</div><!--/left-->
+
+	<!--center-->
+	<div class="col-sm-8">
+
+[% cache.inc( 'template' => 'templates/root/breadcrumbs.tt2',
+    'keys' => { 'language' => language, uri => c.request.uri.hostless },
+    'ttl' => c.config.application.content.template.cache_ttl ) %]
+
+		[% INCLUDE templates/root/messages.tt2 %]
+
+		[% IF include_templates %]
+		    [% FOREACH include_template IN include_templates %]
+			[% PROCESS "$include_template" %]
+		    [% END %]
+		[% END %]
+
+		[% IF content %]
+		    [% content %]
+		[% END %]
+
+		[% IF !content && !include_templates %]
+		    [% INCLUDE templates/root/content/pages/home/index.tt2 %]
+		[% ELSE %]
+		[% END %]
+
+		[%# INCLUDE templates/root/articles.tt2 %]
+
+		[% INCLUDE templates/root/pager.tt2 %]
+
+	</div><!--/center-->
+
+	<!--right-->
+	<div class="col-sm-2">
+		<div class="row">
+			<div class="col-xs-12">
+				<!--<h2>Side</h2>-->
+				[% INCLUDE templates/root/user_panel.tt2 %]
+				[%# INCLUDE templates/root/file_upload_panel.tt2 %]
+				[% INCLUDE templates/root/last_search_panel.tt2 %]
+				[%# INCLUDE templates/root/finance_panel.tt2 %]
+			</div>
+		</div>
+	</div><!--/right-->
+
+
+</div><!-- /.container -->

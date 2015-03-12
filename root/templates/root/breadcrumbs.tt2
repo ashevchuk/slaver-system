@@ -1,0 +1,9 @@
+[% IF breadcrumbs %]
+<div class="row">
+<ul class="breadcrumb">
+[% FOREACH link IN breadcrumbs %]
+  <li><a href="[% link.uri %]">[% loc(link.caption) %]</a> <span class="breadcrumb-separator"></span></li>
+[% END %]
+</ul>
+</div>
+[% END %]

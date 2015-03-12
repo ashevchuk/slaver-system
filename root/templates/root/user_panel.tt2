@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+	[% IF c.user_exists %]
+		[% l('Dashboard') %]
+	[% ELSE %]
+		[% l('_text_login') %]
+	[% END %]
+	</div>
+	<div class="panel-body">
+	[% IF c.user_exists %]
+		[% INCLUDE templates/root/user_dashboard.tt2 %]
+	[% ELSE %]
+		[% INCLUDE templates/root/login_form.tt2 %]
+	[% END %]
+	</div>
+</div>
+
+<hr>

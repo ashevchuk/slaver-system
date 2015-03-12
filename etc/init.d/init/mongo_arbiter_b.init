@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongo localhost:10004/admin /home/slayer/devel/perl/Slaver/etc/add_arbiter_b.js

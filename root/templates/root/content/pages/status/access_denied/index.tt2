@@ -1,0 +1,2 @@
+[% title = loc('Access denied') %]
+[% INCLUDE templates/root/content/pages/status/access_denied/content.tt2 %]

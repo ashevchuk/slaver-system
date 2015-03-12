@@ -1,0 +1,51 @@
+.source-line {
+	font-family: monospace;
+}
+
+.comment {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.string 
+	font-weight: normal;
+	font-style: italic;
+	color: #ff0000;
+}
+
+.number {
+	font-family: monospace;
+	font-weight: bold;
+}
+
+.key1 {
+	font-weight: bold;
+}
+
+.key2 {
+	font-weight: normal;
+}
+
+.key3 {
+	font-weight: bold;
+}
+
+.key4 {
+	font-weight: normal;
+}
+
+.key5 {
+	font-weight: normal;
+}
+
+.key6 {
+	font-weight: normal;
+}
+
+.key7 {
+	font-weight: normal;
+}
+
+.key8 {
+	font-weight: normal;
+}

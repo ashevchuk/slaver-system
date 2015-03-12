@@ -1,0 +1,19 @@
+#!/bin/bash
+
+for i in {a..z}
+do
+    echo $i;
+    mkdir $i;
+done
+
+for i in {A..Z}
+do
+    echo $i;
+    mkdir $i;
+done
+
+for i in {0..9}
+do
+    echo $i;
+    mkdir $i;
+done

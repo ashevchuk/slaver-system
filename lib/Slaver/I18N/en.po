@@ -1,0 +1,205 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "_text_login"
+msgstr "Login"
+
+msgid "_text_about"
+msgstr "About"
+
+msgid "About Page"
+msgstr "About Page"
+
+msgid "Add files"
+msgstr "Add files"
+
+msgid "Article comma separated tags"
+msgstr "Article comma separated tags"
+
+msgid "Article description"
+msgstr "Article description"
+
+msgid "Article small description"
+msgstr "Article small description"
+
+msgid "Article tags"
+msgstr "Article tags"
+
+msgid "Article title"
+msgstr "Article title"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Choose file"
+msgstr "Choose file"
+
+msgid "Click to edit content..."
+msgstr "Click to edit content..."
+
+msgid "Contacts"
+msgstr "Contacts"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create content"
+msgstr "Create content"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "File size"
+msgstr "File size"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Home Page"
+msgstr "Home Page"
+
+msgid "Labs"
+msgstr "Labs"
+
+msgid "Labs 0"
+msgstr "Labs 0"
+
+msgid "Labs 1"
+msgstr "Labs 1"
+
+msgid "Labs 2"
+msgstr "Labs 2"
+
+msgid "Labs 2 0"
+msgstr "Labs 2 0"
+
+msgid "Labs Page"
+msgstr "Labs Page"
+
+msgid "Labs0 Page"
+msgstr "Labs0 Page"
+
+msgid "Labs1 Page"
+msgstr "Labs1 Page"
+
+msgid "Last search"
+msgstr "Last search"
+
+msgid "Locale"
+msgstr "Locale"
+
+msgid "Login successful"
+msgstr "Login successful"
+
+msgid "Navigator"
+msgstr "Navigator"
+
+msgid "Nothing found"
+msgstr "Nothing found"
+
+msgid "Processing"
+msgstr "Processing"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Read More"
+msgstr "Read More"
+
+msgid "Registration"
+msgstr "Registration"
+
+msgid "Registration information"
+msgstr "Registration information"
+
+msgid "Retry"
+msgstr "Retry"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Tech Labs"
+msgstr "Tech Labs"
+
+msgid "Tech Labs 0"
+msgstr "Tech Labs 0"
+
+msgid "Tech Labs 1"
+msgstr "Tech Labs 1"
+
+msgid "Tech Labs 2"
+msgstr "Tech Labs 2"
+
+msgid "Tech Labs 2 0"
+msgstr "Tech Labs 2 0"
+
+msgid "Tech Labs Page"
+msgstr "Tech Labs Page"
+
+msgid "Tech Labs1 Page"
+msgstr "Tech Labs1 Page"
+
+msgid "Tech Labs2 Page"
+msgstr "Tech Labs2 Page"
+
+msgid "Tech Labs20 Page"
+msgstr "Tech Labs20 Page"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Upload date"
+msgstr "Upload date"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Comments"
+msgstr "Comments"
+
+msgid "Go back"
+msgstr "Go back"
+
+msgid "Internal error"
+msgstr "Internal error"
+
+msgid "Labs2 Page"
+msgstr "Labs2 Page"
+
+msgid "Labs20 Page"
+msgstr "Labs20 Page"
+
+msgid "Logout successful"
+msgstr "Logout successful"
+
+msgid "No"
+msgstr "No"
+
+msgid "Not found"
+msgstr "Not found"
+
+msgid "Page not found"
+msgstr "Page not found"
+
+msgid "%quant(%1,_text_comment,_text_comments,_text_no_comments)"
+msgstr "%quant(%1,Comment,Comments,No Comments)"
+

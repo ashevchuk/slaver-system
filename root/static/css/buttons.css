@@ -1,0 +1,86 @@
+.button-image {
+	margin: 0;
+	padding: 0;
+
+	width: 16px;
+	height: 16px;
+
+	min-width: 16px;
+	min-height: 16px;
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.button-image {
+	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.2);
+}
+
+.button-image:hover {
+	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.4);
+}
+
+.button-image.exit {
+	background-image: url('/static/images/icons/door_in.png') !important;
+}
+
+.button-image.cog {
+	background-image: url('/static/images/icons/cog.png') !important;
+}
+
+.button-image.bookmark {
+	background-image: url('/static/images/icons/bookmark.png') !important;
+}
+
+.button-image.compass {
+	background-image: url('/static/images/icons/compass.png') !important;
+}
+
+.button-image.comment {
+	background-image: url('/static/images/icons/comment.png') !important;
+}
+
+.button-image.dashboard {
+	background-image: url('/static/images/icons/dashboard.png') !important;
+}
+
+.button-image.direction {
+	background-image: url('/static/images/icons/direction.png') !important;
+}
+
+.button-image.email {
+	background-image: url('/static/images/icons/email.png') !important;
+}
+
+.button-image.email-open {
+	background-image: url('/static/images/icons/email-open.png') !important;
+}
+
+.button-image.feed {
+	background-image: url('/static/images/icons/feed.png') !important;
+}
+
+.button-image.find {
+	background-image: url('/static/images/icons/find.png') !important;
+}
+
+.button-image.folder {
+	background-image: url('/static/images/icons/folder.png') !important;
+}
+
+.button-image.tools {
+	background-image: url('/static/images/icons/hammer_screwdriver.png') !important;
+}
+
+.button-image.house {
+	background-image: url('/static/images/icons/house.png') !important;
+}
+
+.button-image.inbox {
+	background-image: url('/static/images/icons/inbox.png') !important;
+}
+
+.button-image.key {
+	background-image: url('/static/images/icons/key.png') !important;
+}
+

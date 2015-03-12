@@ -1,0 +1,12 @@
+[% title = loc(category.caption) %]
+[% include.header.files.css.push('/static/css/bootstrap/style.css') %]
+
+[% IF category.description %]
+<h3>[% loc(category.description) %]</h3>
+[% END %]
+
+[% IF category_id %]
+<a id="category_id" href="/[% category_id%]">C</a>
+[% END%]
+
+[% content %]

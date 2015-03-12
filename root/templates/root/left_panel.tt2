@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Last events</div>
+    <div class="panel-body">
+
+
+<ul class="list-unstyled">
+        <strong class="pull-left primary-font">Foo</strong>
+        <small class="pull-right text-muted">
+           7 mins ago
+	    <span class="glyphicon glyphicon-time"></span>
+	</small>
+
+        </br>
+        <li class="ui-state-default">
+	    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+	</li>
+
+        </br>
+        <strong class="pull-left primary-font">Bar</strong>
+        <small class="pull-right text-muted">
+           14 mins ago
+	    <span class="glyphicon glyphicon-time"></span>
+	</small>
+        </br>
+        <li class="ui-state-default">
+	    Duis aute irure dolor in reprehenderit...
+	</li>
+
+</ul>
+
+
+
+</div>
+</div>
+<hr>

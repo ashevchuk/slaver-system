@@ -1,0 +1,37 @@
+[% include.header.files.js.push('/static/admin/tinymce/js/tinymce/tinymce.min.js') %]
+<script type="text/javascript">
+
+tinymce.init({
+    selector: "div.editable",
+    inline: true,
+    schema: "html5",
+    autosave_ask_before_unload: false,
+    save_enablewhendirty: true,
+    save_onsavecallback: function() {
+//	console.log(tinymce.activeEditor.getContent({format: 'raw'}));
+//	console.log(tinymce.activeEditor.getContent());
+	console.log("e:", this.id);
+	console.log("content:", this.bodyElement.innerHTML);
+    },
+
+        plugins: [
+                "advlist autolink autosave save link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking layer",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft layer | save",
+
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+        ]
+});
+
+</script>
+

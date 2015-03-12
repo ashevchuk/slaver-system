@@ -1,0 +1,17 @@
+<table class="table table-striped table-hover">
+    <thead>
+	<tr>
+	    <th>status</th>
+	    <th>remote_addr</th>
+	    <th>remote_port</th>
+	    <th>local_addr</th>
+	    <th>local_port</th>
+	</tr>
+    </thead>
+
+    <tbody>
+	[%- FOREACH socket IN sockets -%]
+	    [%- INCLUDE templates/root/content/pages/sys/block/socket.tt2 socket = socket -%]
+	[%- END -%]
+    </tbody>
+</table>

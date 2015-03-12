@@ -1,0 +1,10 @@
+[% title = loc('Repair password') %]
+
+<div class="mid-left-container">
+	<h1 class="interface">[% title or c.config.application.title or c.config.application.name %]</h1>
+
+	<div id="content" class="editable">
+	    [% content %]
+	    [% INCLUDE templates/root/content/pages/user/repair/block/form.tt2 %]
+	</div>
+</div>

@@ -1,0 +1,65 @@
+[% USE date %]
+[% USE time_dir = Time.Duration %]
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	[% stat.host %] Host Stats @ [% stat.issue %] ([% time_dir.ago(date.now - stat.issue.epoch) %])
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	Processes
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/processes.tt2 processes = stat.processes host = stat.host %]
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	Sockets
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/sockets.tt2 sockets = stat.sockets host = stat.host %]
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	Storage
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/storages.tt2 storages = stat.diskusage host = stat.host %]
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	CPU
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/cpus.tt2 cpus = stat.cpustats host = stat.host %]
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	Memory
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/memory.tt2 memory = stat.memstats host = stat.host %]
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading expander">
+	Network
+    </div>
+    <div class="panel-body expandable" style="display: none;">
+	[% INCLUDE templates/root/content/pages/sys/block/networks.tt2 networks = stat.netinfo host = stat.host %]
+    </div>
+</div>
+
+    </div>
+</div>

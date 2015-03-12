@@ -1,0 +1,49 @@
+[% IF error_msg or c.flash.alert_msg %]
+<div class="row">
+	<div class="alert alert-block">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <h4>[% loc('Alert') %]</h4>
+	  [% alert_msg or c.flash.alert_msg %]
+	</div>
+</div>
+[% END %]
+
+[% IF error_msg or c.flash.error_msg %]
+<div class="row">
+	<div class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>[% loc('Error') %]</h4>
+		[% error_msg or c.flash.error_msg %]
+	</div>
+</div>
+[% END %]
+
+[% IF error_msg or c.flash.success_msg %]
+<div class="row">
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>[% loc('Success') %]</h4>
+		[% success_msg or c.flash.success_msg %]
+	</div>
+</div>
+[% END %]
+
+[% IF error_msg or c.flash.info_msg %]
+<div class="row">
+	<div class="alert alert-info">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>[% loc('Info') %]</h4>
+		[% success_msg or c.flash.info_msg %]
+	</div>
+</div>
+[% END %]
+
+[% IF status_msg or c.flash.status_msg %]
+<div class="row">
+	<div class="alert alert-info">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>[% loc('Status') %]</h4>
+		[% status_msg or c.flash.status_msg %]
+	</div>
+</div>
+[% END %]

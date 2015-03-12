@@ -1,0 +1,12 @@
+[% IF category_id %]
+    [% tree = c.model('Content::Menu').get_by_id( category_id, { limit => { depth => 3 } } ) %]
+[% ELSE %]
+    [% tree = c.model('Content::Menu').get( { limit => { depth => 3 } } ) %]
+[% END %]
+
+[% UNLESS tree %]
+    [% category_id = c.model('Content::Menu').get_parent( category_id ) %]
+    [% tree = c.model('Content::Menu').get_parent_by_id( category_id, { limit => { depth => 3 } } ) %]
+[% END %]
+
+[% INCLUDE templates/root/block/panel/gen/nested_list.tt2 tree = tree %]

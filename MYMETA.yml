@@ -1,0 +1,43 @@
+---
+abstract: 'Catalyst based application'
+author:
+  - ',,,'
+build_requires:
+  ExtUtils::MakeMaker: 6.36
+  Test::More: 0.88
+configure_requires:
+  ExtUtils::MakeMaker: 6.36
+dynamic_config: 0
+generated_by: 'Module::Install version 1.06, CPAN::Meta::Converter version 2.133380'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Slaver
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  Any::Moose: 0
+  Catalyst::Action::RenderView: 0
+  Catalyst::Authentication::Store::MongoDB: 0
+  Catalyst::Helper::Model::MongoDB: 0
+  Catalyst::Model::MongoDB: 0
+  Catalyst::Plugin::ConfigLoader: 0
+  Catalyst::Plugin::Session::Store::MongoDB: 0
+  Catalyst::Plugin::Static::Simple: 0
+  Catalyst::Runtime: 5.90019
+  Config::General: 0
+  Data::Localize::Storage::MongoDB: 0
+  Digest::SHA: 0
+  Linux::Inotify2: 0
+  Log::Log4perl: 0
+  Log::Log4perl::Catalyst: 0
+  Moose: 0
+  YAML::Syck: 0
+  YAML::XS: 0
+  namespace::autoclean: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01

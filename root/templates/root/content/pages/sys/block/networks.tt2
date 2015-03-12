@@ -1,0 +1,17 @@
+<table class="table table-striped table-hover">
+    <thead>
+	<tr>
+	    <th>if</th>
+	    <th>txb</th>
+	    <th>rxb</th>
+	    <th>txp</th>
+	    <th>rxp</th>
+	</tr>
+    </thead>
+
+    <tbody>
+	[%- FOREACH network IN networks -%]
+	    [%- INCLUDE templates/root/content/pages/sys/block/network.tt2 network = network -%]
+	[%- END -%]
+    </tbody>
+</table>

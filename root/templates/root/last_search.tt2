@@ -1,0 +1,7 @@
+[% db = c.model('Data::Provider').db('content') %]
+[% last_search_collection = db.get_collection('search.last') %]
+[% last_search_currsor = last_search_collection.find( { }, { sort_by => { _id => -1 } } ).limit(16) %]
+
+[% WHILE (last_search = last_search_currsor.next) %]
+<div style="float: left;" class="elide50pc-mw"><a class="elide50pc-mw" href="/search/[% last_search.query | uri %]/" title="[% last_search.query | html %]">[% last_search.query | html %]</a> &nbsp;</div>
+[% END %]

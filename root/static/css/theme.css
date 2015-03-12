@@ -1,0 +1,53 @@
+input.ui-button {
+	border-radius:	5px 5px 5px 5px;
+	text-shadow:	0px 2px 3px rgb(146, 146, 146);
+	background:	#efefef;
+	background:	linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background:	-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background:	-webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
+	color:		#000000;
+/*	vertical-align:	baseline;
+*/
+	border-width:	1px;
+	padding:	0 1em !important;
+}
+
+input.ui-widget-content {
+	border-radius:	5px 5px 5px 5px;
+	text-shadow:	0px 2px 3px rgb(226, 226, 226);
+	text-indent:	4px;
+	background:	#efefef;
+	background:	linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background:	-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background:	-webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
+}
+
+input.ui-state-default {
+	border:	1px solid #000000;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	font-weight:	normal;
+}
+
+.ui-widget {
+	font-family:	'Anonymous Pro', sans-serif;
+	font-size:	14px;
+	line-height:	16px;
+}
+
+.ui-widget .text {
+	font-family:	'Anonymous Pro', sans-serif;
+	font-size:	14px;
+	line-height:	16px;
+}
+
+.ui-search-button {
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #aaaaaa;
+	background: #efefef;
+	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
+	cursor: pointer;
+}

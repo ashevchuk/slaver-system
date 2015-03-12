@@ -1,0 +1,18 @@
+[% IF error_msg or c.flash.error_msg %]
+
+<script>
+    jQuery(document).ready(function() {
+	Alertify.log.error("[% error_msg or c.flash.error_msg %]");
+    });
+</script>
+
+<div class="right-container-inner">
+    <h3 class="interface">Error</h3>
+
+    <div class="error-container" style="float: left;">
+	<div class="icon-image error"></div>
+	<span class="error">[% error_msg or c.flash.error_msg %]</span>
+    </div>
+</div>
+
+[% END %]

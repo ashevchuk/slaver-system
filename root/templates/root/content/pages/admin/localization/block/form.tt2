@@ -1,0 +1,26 @@
+						<form class="localization-form" action="/localize" method="POST">
+							<div class="table">
+
+								<div class="row">
+									<div class="cell"><label for="user" class="ui-widget">Language</label></div>
+									<div class="cell"><input type="text" name="username" placeholder="Language" class="text ui-widget ui-widget-content ui-corner-all" value=""/></div>
+								</div>
+
+								<div class="row">
+									<div class="cell"><label for="text" class="ui-widget">User</label></div>
+									<div class="cell"><input type="text" name="text" placeholder="Text" class="text ui-widget ui-widget-content ui-corner-all" value=""/></div>
+								</div>
+
+								<div class="row">
+									<div class="cell"><label for="translation" class="ui-widget">Translation</label></div>
+									<div class="cell"><input type="text" name="username" placeholder="Translation" class="text ui-widget ui-widget-content ui-corner-all" value=""/></div>
+								</div>
+
+								<div class="row">
+									<div class="cell"></div>
+									<div class="cell">
+										<input type="submit" value="Localize" class="button button-localize ui-button ui-widget ui-corner-all ui-button-text-only"/>
+									</div>
+								</div>
+							</div>
+						</form>

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongo*.sock
+
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/arbiter/a/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/arbiter/b/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/arbiter/c/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/config/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/config/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/config/3/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/a/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/a/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/a/3/*
+
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/b/1/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/b/2/*
+rm -rf /home/slayer/devel/perl/Slaver/var/tmp/mongodb/rset/b/3/*

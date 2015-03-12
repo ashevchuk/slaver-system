@@ -1,0 +1,15 @@
+[% INCLUDE templates/root/avatar.tt2 %]
+
+	    <a href="[% c.uri_for('/content/pages/admin/content/create') %]" class="button-image"><i class="fa fa-asterisk"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-cog"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-bookmark-empty"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-random"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-comments-alt"></i></a>
+	    <a href="[% c.uri_for('/content/pages/user/profile') %]" class="button-image" title="profile"><i class="fa fa-dashboard"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-envelope"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-rss"></i></a>
+	    <a href="/logout" class="button-image"><i class="fa fa-wrench"></i></a>
+	    <a href="/logout" class="button-image" title="logout"><i class="fa fa-off"></i></a>
+	<div class="col-sm-offset-2 col-sm-10">
+	    <a class="btn btn-default btn-xs pull-right" href="[% c.uri_for('/auth/logout') %]">[% loc("Logout") %]</a>
+	</div>

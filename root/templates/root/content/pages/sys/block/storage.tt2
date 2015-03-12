@@ -1,0 +1,16 @@
+[% USE Number.Format %]
+	<tr>
+	    <td>[% storage.key %]</td>
+	    <td>[% storage.value.mountpoint %]</td>
+	    <td>[% storage.value.total * 1024 | format_bytes(2) %]</td>
+	    <td>[% storage.value.usage * 1024 | format_bytes(2) %]</td>
+	    <td>[% storage.value.free * 1024 | format_bytes(2) %]</td>
+	    <td>
+		<div class="progress">
+		    [%- SET percent_usage = storage.value.usage / storage.value.total * 100 -%]
+		    <div class="progress-bar [% IF percent_usage > 90 %]progress-bar-danger[%- END -%]" style="width: [%- percent_usage -%]%;">
+			[%- percent_usage | format('%.2f') -%]%
+		    </div>
+		</div>
+	    </td>
+	</tr>

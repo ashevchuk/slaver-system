@@ -1,0 +1,6 @@
+[% USE cache = Cache ( cache_root => c.config.application.content.template.cache_root ) %]
+
+[% cache.inc( 'template' => 'templates/root/block/panel/nested_list.tt2',
+    'keys' => { 'language' => language, 'uri' => c.request.uri.hostless },
+    'ttl' => c.config.application.content.template.cache_ttl ) %]
+[%# INCLUDE templates/root/block/panel/nested_list.tt2 %]

@@ -1,0 +1,56 @@
+<div class="panel panel-default" id="article-create">
+<div class="panel-heading">
+
+    <div class="form-group">
+	<label for="article-title">[% loc("Title") %]:</label>
+	<input type="text" class="form-control" id="article-title" placeholder="[% loc("Article title") %]">
+    </div>
+
+    <div class="form-group">
+	<label for="article-tags">[% loc("Tags") %]:</label>
+	<input type="text" class="form-control" id="article-tags" placeholder="[% loc("Article tags") %]">
+	<span class="help-block">[% loc("Article comma separated tags") %]</span>
+    </div>
+
+    <div class="form-group">
+	<label for="article-description">[% loc("Description") %]:</label>
+	<input type="text" class="form-control" id="article-description" placeholder="[% loc("Article description") %]">
+	<span class="help-block">[% loc("Article small description") %]</span>
+    </div>
+
+</div>
+
+    <div class="panel-body editable" id="article-body">
+	[% loc("Click to edit content...") %]
+    </div>
+
+    <div class="panel-footer">
+	<button type="submit" class="btn btn-default btn-xs" id="article-submit">[% loc("Create") %]</button>
+    </div>
+</div>
+
+<script type='text/javascript'>
+$(function() {
+    $("#article-submit").click(function() {
+	$.ajax({
+	    type: "POST",
+	    url: "/admin/content/article/manager/create",
+	    data: {
+		title: $("#article-title").val(),
+		tags: $("#article-tags").val(),
+		description: $("#article-description").val(),
+		content: tinymce.activeEditor.getContent()
+	    }
+	})
+	.done(function() {
+	    //alert( "success" );
+	})
+	.fail(function() {
+	    alert( "error" );
+	})
+	.always(function() {
+	    //alert( "complete" );
+	});
+    });
+});
+</script>

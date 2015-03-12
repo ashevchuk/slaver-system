@@ -1,0 +1,9 @@
+^blib$
+^srv$
+/root/cache/
+/var/data/
+/var/log/
+/var/run/
+/var/tmp/
+/var/tmp/mongodb
+/vendor/

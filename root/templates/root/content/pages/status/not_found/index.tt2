@@ -1,0 +1,2 @@
+[% title = loc('Not found') %]
+[% INCLUDE templates/root/content/pages/status/not_found/content.tt2 %]

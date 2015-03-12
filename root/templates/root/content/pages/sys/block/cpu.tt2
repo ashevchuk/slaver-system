@@ -1,0 +1,21 @@
+[%- USE Number.Format -%]
+[%- USE Digest.MD5 -%]
+
+[% props = [ 'total', 'idle', 'nice', 'iowait', 'irq', 'softirq', 'system', 'user' ] %]
+
+[% BLOCK row %]
+	    <td>
+		<div class="progress">
+		    <div id="progress-[% host | md5_hex %]-cpu-[% cpu.key %]-[% prop %]" class="progress-bar [% IF cpu.value.$prop > 90 and prop != 'idle' %]progress-bar-danger[%- END -%]" style="width: [%- cpu.value.$prop -%]%;">
+			[%- cpu.value.$prop | format('%.2f') -%]%
+		    </div>
+		</div>
+	    </td>
+[% END %]
+
+	<tr>
+	    <td>[% cpu.key %]</td>
+	    [% FOREACH prop IN props %]
+	       [% PROCESS row prop = prop %]
+	    [% END %]
+	</tr>

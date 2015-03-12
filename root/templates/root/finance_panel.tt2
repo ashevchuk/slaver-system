@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+    <div class="panel-heading">[% l('Donations') %]</div>
+    <div class="panel-body">
+	<div class="media">
+	<a class="pull-left" href="bitcoin:125deB3ZF9wsY3iVPZfceZrSA4CzCQueGJ?label=enslaver.net&message=research">
+	    <img src="/static/images/finance/125deB3ZF9wsY3iVPZfceZrSA4CzCQueGJ.png" width="124px" height="124px" class="thumbnail">
+	</a>
+	<div class="media-body">
+	<p>You can help by supporting our research with your contributions.</p>
+	<p>To donate, please scan the QR or send bitcoins to the following address:</p>
+	<a href="bitcoin:125deB3ZF9wsY3iVPZfceZrSA4CzCQueGJ?label=enslaver.net&message=research">125deB3ZF9wsY3iVPZfceZrSA4CzCQueGJ</a>
+	</div>
+	</div>
+    </div>
+</div>
+
+<hr>

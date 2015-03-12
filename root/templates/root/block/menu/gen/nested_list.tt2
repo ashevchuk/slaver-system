@@ -1,0 +1,30 @@
+[% VIEW nested_list %]
+    [% BLOCK hash %]
+	<ul class="dropdown-menu" role="menu">
+	[% FOREACH i IN item.nodes %]
+		[% IF i.value.uri.defined %]
+			<li>
+			<a href="[% i.value.uri %]">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+		[% ELSE %]
+			[% IF i.value.items.nodes %]
+				<li class="dropdown-submenu">
+				<a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+<!--				<a href="/[% i.value.role %]/[% i.value.alias %]/" class="dropdown-toggle" data-toggle="dropdown">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+-->
+			[% ELSE %]
+				<li>
+				<a href="/[% i.value.role %]/[% i.value.alias %]/">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+			[% END %]
+<!--		    <a href="/[% i.value.role %]/[% i.value.alias %]/">[% IF i.value.icon %]<i class="icon-fixed-width [% i.value.icon %]"></i>[% END %][% loc(i.value.caption) %]</a>
+-->
+		[% END %]
+		[% IF i.value.items.nodes %]
+		    [% nested_list.print(i.value.items) %]
+		[% END %]
+	    </li>
+	[% END %]
+	</ul>
+    [% END %]
+[% END %]
+
+[% nested_list.print(tree) %]

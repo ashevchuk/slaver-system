@@ -1,0 +1,23 @@
+[% USE cache = Cache ( cache_root => c.config.application.content.template.cache_root ) %]
+		<ul class="nav navbar-nav">
+			<li><a href="/"><i class="icon-fixed-width fa fa-home"></i>[% loc('Home') %]</a></li>
+			<li><a href="/content/pages/about/"><i class="icon-fixed-width fa fa-group"></i>[% loc('About') %]</a></li>
+			<li><a href="/content/pages/contacts/"><i class="icon-fixed-width fa fa-envelope"></i>[% loc('Contacts') %]</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown" data-toggle="dropdown">
+				    <i class="icon-fixed-width fa fa-cloud"></i>[% loc('Categories') %]<b class="caret"></b>
+				</a>
+
+[% cache.inc( 'template' => 'templates/root/block/menu/nested_list.tt2',
+'keys' => { 'language' => language },
+'ttl' => c.config.application.content.template.cache_ttl ) %]
+
+[%# INCLUDE templates/root/block/menu/nested_list.tt2 %]
+
+			</li>
+
+[% cache.inc( 'template' => 'templates/root/locale.tt2',
+'keys' => { 'language' => language },
+'ttl' => c.config.application.content.template.cache_ttl ) %]
+
+		</ul>

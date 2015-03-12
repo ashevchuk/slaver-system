@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongo_config_3.conf --shutdown

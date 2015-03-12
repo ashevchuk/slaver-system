@@ -1,0 +1,49 @@
+<script type='text/javascript'>
+    $(document).ready(function() {
+	$('.trace-item-header').click(function() { $(this).parent().children('.trace-item-code').toggle(200); });
+    });
+</script>
+
+<div class="internal-error-container">
+
+	<span class="internal-error-header">[% c.loc('Internal error') %]</span>
+
+	<p>[% c.loc('Internal error') %] : <a href="[% c.req.uri | html %]">[% c.req.uri | html %]</a></p>
+
+    [% IF errors %]
+	[% FOREACH error IN errors %]
+	    <pre>[% error | html %]</pre>
+	[% END %]
+    [% END %]
+
+	<p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
+
+	[% IF content %]
+	    <div class="trace-item">
+		<div class="trace-item-header">
+		    [Context]
+		</div>
+		<div class="trace-item-code">
+		    <pre>[% content | html %]</pre>
+		</div>
+	    </div>
+	[% END %]
+
+    [% IF stacktrace %]
+	[% FOREACH trace_item IN stacktrace %]
+	    <div class="trace-item">
+		<div class="trace-item-header">
+		    [[% trace_item.pkg %]] File: "[% trace_item.file %]" line: [% trace_item.line %]
+		</div>
+		<div class="trace-item-code">
+		    <pre>[% trace_item.content %]</pre>
+		</div>
+	    </div>
+	[% END %]
+    [% END %]
+
+</div>
+
+<div style="position:fixed;left:0%;bottom:0;z-index:100500">
+    <img src="/static/images/system/500.png" width="192" height="56">
+</div>

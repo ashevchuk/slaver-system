@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm -rf /home/slayer/devel/perl/Slaver/var/run/mongo*.pid

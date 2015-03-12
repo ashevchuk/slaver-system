@@ -1,0 +1,25 @@
+[% USE LanguageName %]
+
+<li class="dropdown">
+	<a href="#" class="dropdown" data-toggle="dropdown"><i class="icon-fixed-width fa fa-flag"></i>[% loc('Locale') %]<b class="caret"></b></a>
+	<ul class="dropdown-menu">
+
+[% BLOCK locale_block %]
+	<li>
+		<a href="/locale?lang=[% language %]"><img class="[% IF c.session.locale == language %]flag-active[% ELSE %]flag-pasive[% END %]" width="16" height="14" src="/static/images/flags/[% language %].png"/> [% language | language_name %]</a>
+	</li>
+[% END %]
+
+[% FOREACH language IN c.installed_languages.keys.sort %]
+    [% TRY %]
+	[% USE File('root/static/images/flags/' _ language _ '.png') %]
+	[% PROCESS locale_block language = language %]
+    [% CATCH File %]
+	[% language %] not found,
+	[% PROCESS locale_block language = language %]
+    [% END %]
+
+[% END %]
+
+	</ul>
+</li>

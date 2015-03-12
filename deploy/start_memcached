@@ -1,0 +1,21 @@
+#!/bin/bash
+
+USER_NAME=$(cat ./etc/user)
+PASSWORD=$(cat ./etc/password)
+ROOT_PASSWORD=$(cat ./etc/root)
+
+./deploy.pl \
+    --plan start_memcached \
+    --user $USER_NAME \
+    --password $PASSWORD \
+    --root_password $ROOT_PASSWORD \
+    --timeout=1440 \
+    --verbose \
+    --host=node0.enslaver.net:220 \
+    --host=node1.enslaver.net:220 \
+    --host=node2.enslaver.net:220 \
+    --host=node3.enslaver.net:220 \
+    --host=node4.enslaver.net:220 \
+    --host=node5.enslaver.net:220 \
+    --host=node6.enslaver.net:220 \
+    --host=node7.enslaver.net:220

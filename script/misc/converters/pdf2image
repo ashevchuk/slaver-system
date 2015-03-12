@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/local/bin/convert -alpha remove -density 288 -resize 100% $1[$2] $3

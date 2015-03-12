@@ -1,0 +1,49 @@
+.icon-image {
+	margin: 0;
+	padding: 0;
+
+	width: 16px;
+	height: 16px;
+
+	min-width: 16px;
+	min-height: 16px;
+
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+}
+
+.icon-image {
+/*	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.2);*/
+margin-right: 6px;
+float: left;
+}
+
+.icon-image:hover {
+/*	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.4);*/
+}
+
+.icon-image.error {
+	background-image: url('/static/images/icons/error.png') !important;
+}
+
+.icon-image.exclamation {
+	background-image: url('/static/images/icons/exclamation.png') !important;
+}
+
+.icon-image.expand {
+	background-image: url('/static/images/icons/control/expand.png') !important;
+	width: 19px;
+	height: 16px;
+
+	min-width: 19px;
+	min-height: 16px;
+}
+
+.icon-image.collapse {
+	background-image: url('/static/images/icons/control/collapse.png') !important;
+	width: 19px;
+	height: 16px;
+
+	min-width: 19px;
+	min-height: 16px;
+}

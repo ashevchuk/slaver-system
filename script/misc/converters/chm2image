@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ -e "$1.pdf" ]
+then
+    echo "file already exists"
+else
+    echo "generate book"
+    /usr/bin/chm2pdf UTF8 --book "$1" "$1.pdf"
+
+    if [ -e "$1.pdf" ]
+    then
+	echo "generated book"
+    else
+	echo "generate webpage"
+	/usr/bin/chm2pdf UTF8 --webpage "$1" "$1.pdf"
+    fi
+
+    if [ -e "$1.pdf" ]
+    then
+	echo "generated webpage"
+    else
+	echo "generate continuous"
+	/usr/bin/chm2pdf --continuous "$1" "$1.pdf"
+    fi
+fi
+
+if [ -e "$1.pdf" ]
+then
+    echo "get image"
+    ~/local/bin/convert -alpha remove -density 288 -resize 100% "$1.pdf"[$2] $3
+else
+    echo "generated file not found"
+fi

@@ -1,0 +1,68 @@
+#!/bin/bash
+
+../clear/mongo_proc.clear
+
+sleep 2
+
+../clear/mongo_pid.clear
+../clear/mongo_tmp.clear
+../clear/mongo_lock.clear
+../clear/mongo_log.clear
+
+../clear/mongo_data.clear
+
+sleep 2
+
+../start/mongo_config_1.start
+sleep 2
+../start/mongo_config_2.start
+sleep 2
+../start/mongo_config_3.start
+
+sleep 60
+
+../start/mongos_a.start
+
+sleep 2
+
+../start/mongo_rset_a_1.start
+../start/mongo_rset_a_2.start
+../start/mongo_rset_a_3.start
+
+sleep 60
+
+../init/mongo_rset_a.init
+
+sleep 60
+
+../init/mongos_shard_a.init
+
+sleep 60
+
+../start/mongo_arbiter_a.start
+
+sleep 2
+
+../init/mongo_arbiter_a.init
+
+sleep 2
+
+../start/mongo_rset_b_1.start
+../start/mongo_rset_b_2.start
+../start/mongo_rset_b_3.start
+
+sleep 60
+
+../init/mongo_rset_b.init
+
+sleep 60
+
+../init/mongos_shard_b.init
+
+sleep 60
+
+../start/mongo_arbiter_b.start
+
+sleep 2
+
+../init/mongo_arbiter_b.init

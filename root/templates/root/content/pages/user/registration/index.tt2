@@ -1,0 +1,16 @@
+[% title = loc('Registration') %]
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <legend>[% loc("Registration") %]</legend>
+            <form method="post" action="[% c.uri_for('/user/register') %]" class="form" role="form">
+        	<input class="form-control" name="name" placeholder="Display Name" type="text" required autofocus />
+        	<input class="form-control" name="username" placeholder="Your Email (Username)" type="email" required />
+        	<input class="form-control" name="password" placeholder="Password" type="password" required />
+        	<input class="form-control" name="repeat-password" placeholder="Re-enter Password" type="password" required />
+        	<br />
+        	<button class="btn btn-lg btn-default btn-block" type="submit">[% loc("Sign up") %]</button>
+            </form>
+        </div>
+    </div>
+</div>

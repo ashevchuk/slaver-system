@@ -1,0 +1,77 @@
+[% IF article %]
+
+[% USE time_dir = Time.Duration %]
+[% USE Filter.String.Truncate %]
+[% USE HtmlToText %]
+[% USE date %]
+
+<div class="row">
+	<div class="col-xs-12">
+
+		[% IF article.props.caption %]
+		<h2>[% article.props.caption %]</h2>
+		[% END %]
+
+		[% IF article.props.description %]
+		<p>
+			[% FILTER elide(128) -%]
+				[% FILTER html2text %]
+					[% article.props.description %]
+				[% END %]
+			[%- END %]
+		</p>
+		[% END %]
+
+		<div id="category-[% category_id %]-item-[% article.id %]" class="editable">
+		    [% article.props.body %]
+		</div>
+
+		<p class="lead">
+		    <a class="btn btn-default btn-xs" href="/content/[% article.props.shortcut ? article.props.shortcut : article.id %]/">
+			<i class="glyphicon glyphicon-eye-open"></i> [% loc("Read More") %]
+		    </a>
+		</p>
+
+		<p class="pull-right">
+			[% FOREACH tag IN article.props.tags %]
+			    <a href="/search/[% tag %]/" class="label label-default">[% tag %]</a>
+			[% END %]
+
+			<ul class="list-inline">
+				[% IF article.score_pc %]
+				<li>
+					<i class="glyphicon glyphicon-filter"></i> [% article.score_pc %]% Score
+				</li>
+				[% END %]
+				<li>
+					<i class="glyphicon glyphicon-calendar"></i> [% time_dir.ago(date.now - article.id_time) %]
+				</li>
+				<li>
+					<a href="#" id="comments-toggle-show-[% article.id %]" data-document-id="[% article.id %]" class="comments-toggle-show"><i class="glyphicon glyphicon-comment"></i> [% loc("[quant,_1,_text_comment,_text_comments,_text_no_comments]", article.props.get_comments.size) %]</a>
+				</li>
+				<li>
+					<a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a>
+				</li>
+				<li>
+					<a href="#" id="like-toggle-[% article.id %]" data-document-id="[% article.id %]" class="like-toggle"><i class="fa fa-thumbs-up"></i><span class="vote-mark">[% article.props.votes.likes ? article.props.votes.likes : 0 %]</span></a>
+				</li>
+				<li>
+					<a href="#" id="dislike-toggle-[% article.id %]" data-document-id="[% article.id %]" class="dislike-toggle"><i class="fa fa-thumbs-down"></i><span class="vote-mark">[% article.props.votes.dislikes ? article.props.votes.dislikes : 0 %]</span></a>
+				</li>
+
+			</ul>
+	</div>
+</div>
+
+<p class="lead">
+    <div id="comments-panel-[% article.id %]" class="comments-panel" data-document-id="[% article.id %]">
+	<div id="comments-section-[% article.id %]" class="comments-section" data-document-id="[% article.id %]">
+	    [%# INCLUDE templates/root/comments_panel.tt2 comments = article.props.get_comments %]
+	</div>
+        [% INCLUDE templates/root/comment_form.tt2 document_id = article.id %]
+    </div>
+</p>
+
+<hr />
+
+[% END %]

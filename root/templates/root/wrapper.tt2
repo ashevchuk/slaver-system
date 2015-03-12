@@ -1,0 +1,67 @@
+[%- contents = PROCESS templates/root/content.tt2 -%]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=[% IF charset.defined %][% charset %][% ELSE %][% c.config.application.content.charset %][% END %]" />
+		<meta http-equiv="Content-Language" content="[% IF language.defined %][% language %][% ELSE %][% c.config.application.content.language %][% END %]" />
+
+		<meta http-equiv="powered by" content="[% c.config.name -%] [% c.config.version -%]" />
+
+		<meta name="language" content="[% IF language %][% language %][% ELSE %][% c.config.application.content.language %][% END %]" />
+		<meta name="keywords" content="[% IF keywords %][% keywords %][% ELSE %][% c.config.application.content.keywords %][% END %]" />
+		<meta name="description" content="[% IF description %][% description %][% ELSE %][% c.config.application.content.description %][% END %]" />
+
+		<meta name="robots" content="[% IF robots %][% robots%][% ELSE %][% robots or c.config.application.content.robots %][% END %]" />
+<!-- Automatic meta includes -->
+		[% FOREACH meta IN include.header.meta %]
+		<meta name="[% meta.name %]" content="[% meta.content %]" />
+		[% END %]
+<!-- /Automatic meta includes -->
+
+		<link href=[% c.config.application.content.favicon or "/static/favicon.ico" %] rel="icon" type="image/x-icon" />
+
+<!-- Manual css includes -->
+		[% PROCESS templates/root/css.tt2 %]
+
+		[% FOREACH file IN include.default.header.files.css %]
+		<link href='[% file %]' rel='stylesheet' type='text/css'>
+		[% END %]
+<!-- /Manual css includes -->
+
+<!-- Automatic css includes -->
+		[% FOREACH file IN include.header.files.css %]
+		<link href='[% file %]' rel='stylesheet' type='text/css'>
+		[% END %]
+<!-- /Automatic css includes -->
+
+[% INCLUDE templates/root/block/ga.tt2 %]
+
+[% INCLUDE templates/root/block/clustering.tt2 %]
+
+<!-- Manual js includes -->
+		[% PROCESS templates/root/js.tt2 %]
+
+		[% FOREACH file IN include.default.header.files.js %]
+		<script src="[% file %]"></script>
+		[% END %]
+<!-- /Manual js includes -->
+
+<!-- Automatic js includes -->
+		[% FOREACH file IN include.header.files.js %]
+		<script src="[% file %]"></script>
+		[% END %]
+<!-- /Automatic js includes -->
+
+		<title>[% c.config.application.content.name | html -%] - [% title or c.config.application.content.title | html -%]</title>
+
+	</head>
+
+	<body>
+	    [% IF c.user_exists %]
+		[% INCLUDE templates/root/editor.tt2 %]
+	    [% END %]
+
+	    [% INCLUDE templates/root/top_wraper.tt2 %]
+	    [% contents %]
+	</body>
+</html>

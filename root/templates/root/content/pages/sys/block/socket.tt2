@@ -1,0 +1,7 @@
+	<tr>
+	    <td>[% socket.status %]</td>
+	    <td>[% socket.remote_addr %]</td>
+	    <td>[% socket.remote_port %]</td>
+	    <td>[% socket.local_addr %]</td>
+	    <td>[% socket.local_port %]</td>
+	</tr>

@@ -1,0 +1,29 @@
+[% title = loc(category.caption) %]
+
+[% IF category.description %]
+<h3>[% loc(category.description) %]</h3>
+[% END %]
+
+[% IF category_id %]
+<a id="category_id" href="/[% category_id%]"></a>
+[% END%]
+
+[% content %]
+
+[% IF results.items.size %]
+
+    [% FOREACH result IN results.items %]
+
+	[% IF result.document_class == 'Content::Type::File' %]
+	    [% INCLUDE templates/root/file.tt2 file = result %]
+	[% END %]
+
+	[% IF result.document_class == 'Content::Type::Article' %]
+	    [% INCLUDE templates/root/article.tt2 article = result %]
+	[% END %]
+
+    [% END %]
+
+[% ELSE %]
+    [% loc('Nothing found') %]
+[% END %]

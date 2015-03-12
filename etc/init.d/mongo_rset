@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_a_1.conf
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_a_2.conf
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_a_3.conf
+
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_b_1.conf
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_b_2.conf
+mongod --config /home/slayer/devel/perl/Slaver/etc/mongod_rset_b_3.conf

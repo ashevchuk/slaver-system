@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/bin/mongod --config /home/developer/devel/perl/Slaver/etc/single/mongodb/mongod.conf --storageEngine wiredTiger --wiredTigerDirectoryForIndexes

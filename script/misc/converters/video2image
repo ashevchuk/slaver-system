@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -e "$1" ]
+then
+    #ffmpeg -i "$1" -c:v libvpx -b:v 1M -c:a libvorbis -threads 2 "$2"
+    #vpxenc --rt --cpu-used=2 --width=640 --height=480 -o "$2" "$1"
+    #ffmpeg -i "$1" -c:v libvpx -b:v 10k -maxrate 10k -c:a libvorbis -threads 4 -crf 51 -qua lity realtime -cpu-used 0 -f webm -vf scale=640:480 "$2"
+    ffmpeg -ss 00:00:01.01 -i "$1" -y -f image2 -vcodec png -vframes 1 "$2"
+fi

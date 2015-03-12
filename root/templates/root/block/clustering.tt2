@@ -1,0 +1,16 @@
+<script>
+[% SET CLUSTER_HOSTS = [ ] -%]
+[%- cluster_hosts = c.model('Content::CDN::Provider').get_cluster_hosts -%]
+[%- FOREACH host IN cluster_hosts.sort -%]
+[% CLUSTER_HOSTS.push( '\'' _ host _ '\'' ) %]
+[%- END -%]
+    var CLUSTER_HOSTS_ITERATOR = 0;
+    var CLUSTER_HOSTS = [ [% CLUSTER_HOSTS.join(' ,') %] ];
+    var CLUSTER_HOSTS_MAX_HOTS = CLUSTER_HOSTS.length;
+    function GET_CLUSTER_HOST() {
+	if ( CLUSTER_HOSTS_ITERATOR > CLUSTER_HOSTS_MAX_HOTS -1 ) {
+	    CLUSTER_HOSTS_ITERATOR = 0;
+	}
+	return CLUSTER_HOSTS[CLUSTER_HOSTS_ITERATOR++];
+    }
+</script>

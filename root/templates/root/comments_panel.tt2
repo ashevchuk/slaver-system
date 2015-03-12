@@ -1,0 +1,38 @@
+[% USE time_dir = Time.Duration %]
+[% USE Filter.String.Truncate %]
+[% USE HtmlToText %]
+[% USE Number.Format %]
+[% USE Dumper %]
+[% USE date %]
+
+[% IF comments %]
+<section class="comment-list">
+
+    [% FOREACH comment IN comments %]
+          <article class="row">
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow right">
+                <div class="panel-body">
+                  <header class="text-right">
+<!--                    <div class="comment-user"><i class="fa fa-user"></i> That Guy</div> -->
+                    <time class="comment-date" datetime="[% comment.issue %]"><i class="fa fa-clock-o"></i>[% time_dir.ago(date.now - comment.issue.epoch ) %]</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      [% comment.text | html %]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 col-sm-1 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg">
+                <figcaption class="text-center">username</figcaption>
+              </figure>
+            </div>
+          </article>
+    [% END %]
+
+</section>
+[% END %]

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongo localhost:27017/admin /home/slayer/devel/perl/Slaver/etc/mongos_add_shard_a.js

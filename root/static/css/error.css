@@ -1,0 +1,88 @@
+.error-container {
+	width:		245px;
+	float:		left;
+	color:		#ff0000;
+	padding:	0px 15px;
+}
+
+.error-container a {
+	color:	#ff0000;
+}
+
+.internal-error-container {
+	color:			#00ff00;
+	width:			100%;
+}
+
+.internal-error-container a {
+	color:	#ff0000;
+}
+
+.internal-error-container .internal-error-header {
+	font-size:		20px;
+	font-weight:		bold;
+}
+
+.internal-error-container pre {
+	background-color:	#000000;
+	color:			#00ff00;
+	border: 0px solid #cccccc;
+	white-space:	pre-wrap;
+	margin: 0;
+	padding: 0;
+}
+
+.trace-item {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.trace-item .trace-item-header {
+	background-color: rgba(88, 86, 86, 0.75);
+	width: 100%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.trace-item .trace-item-code {
+	width: 99%;
+	display: none;
+	border: 1px solid #00ff00;
+	padding-bottom: 24px;
+	padding-top: 24px;
+}
+
+.trace-item .trace-item-code .trace-item-code-line {
+	background-color: rgba(255, 0, 0, 0.5);
+	color: #00ff00;
+	width: 100%;
+	float: left;
+}
+
+.trace-item-code-source-line {
+	color: #00ff00;
+	float: left;
+}
+
+.line-number {
+	color: #00ff00;
+	float: left;
+	width: 60px;
+	text-align: right;
+	margin-right: 16px;
+}
+
+.error-line {
+	background-color: rgba(255, 0, 0, 0.5);
+	color: #00ff00;
+	float: left;
+}
+
+.source-line {
+	width: 100%;
+	clear: both;
+}
+
+.trace-item-code-source-line pre {
+	background: transparent;
+}

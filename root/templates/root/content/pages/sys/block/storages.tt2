@@ -1,0 +1,18 @@
+<table class="table table-striped table-hover">
+    <thead>
+	<tr>
+	    <th>dev</th>
+	    <th>mount</th>
+	    <th>total</th>
+	    <th>usage</th>
+	    <th>free</th>
+	    <th>level</th>
+	</tr>
+    </thead>
+
+    <tbody>
+	[%- FOREACH storage IN storages -%]
+	    [%- INCLUDE templates/root/content/pages/sys/block/storage.tt2 storage = storage -%]
+	[%- END -%]
+    </tbody>
+</table>

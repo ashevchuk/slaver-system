@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongos --config /home/slayer/devel/perl/Slaver/etc/mongos.conf

@@ -1,0 +1,86 @@
+[% IF file %]
+
+[% USE time_dir = Time.Duration %]
+[% USE Filter.String.Truncate %]
+[% USE HtmlToText %]
+[% USE Number.Format %]
+[% USE Dumper %]
+[% USE date %]
+
+<div class="row">
+	<div class="col-xs-12">
+		[% IF file.props.caption %]
+		<h2>[% file.props.caption %]</h2>
+		[% END %]
+
+		[% IF file.props.description %]
+		<p>[% file.props.description %]</p>
+		[% END %]
+
+		<p class="lead">
+
+		[% FOREACH thumbnail IN file.props.thumbnails %]
+		    <div class="col-xs-6 col-md-3 thumbnail">
+			<a href="/data/thumbnails/[% thumbnail.id.value %]/thumb.png" data-lightbox="[% file.id %]">
+			    <img src="/data/thumbnails/[% thumbnail.id.value %]/thumb.png" alt="[% file.props.caption %]">
+			</a>
+		    </div>
+		[% END %]
+
+		</p>
+
+	</div>
+</div>
+
+		<p class="lead">
+		    [% FOREACH location IN file.props.locations %]
+			<a class="btn btn-default btn-xs" href="/data/files/[% location.id.value %]/[% file.props.caption %]">
+			    <i class="glyphicon glyphicon-cloud-download"></i> Download
+			</a>
+		    [% END %]
+		</p>
+
+		<p class="pull-right">
+			[% FOREACH tag IN file.props.tags %]
+			    <a href="/search/[% tag %]/" class="label label-default">[% tag %]</a>
+			[% END %]
+
+			<ul class="list-inline">
+				<li data-toggle="popover" data-content="[% loc("Upload date") %]">
+					<i class="glyphicon glyphicon-calendar"></i> [% time_dir.ago(date.now - file.id_time) %]
+				</li>
+				<li data-toggle="popover" data-content="[% loc("File size") %]">
+					<i class="glyphicon glyphicon-floppy-disk"></i> [% file.props.length | format_bytes %]
+				</li>
+				[% IF file.props.md5_sum %]
+				<li data-toggle="popover" data-content="md5">
+					<i class="fa fa-qrcode"></i> [%- file.props.md5_sum -%]
+				</li>
+				[% END %]
+				<li>
+					<a href="#" id="comments-toggle-show-[% file.id %]" data-document-id="[% file.id %]" class="comments-toggle-show"><i class="glyphicon glyphicon-comment"></i> [% loc("[quant,_1,_text_comment,_text_comments,_text_no_comments]", file.props.get_comments.size) %]</a>
+				</li>
+				<li>
+					<a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a>
+				</li>
+				<li>
+					<a href="#" id="like-toggle-[% file.id %]" data-document-id="[% file.id %]" class="like-toggle"><i class="fa fa-thumbs-up"></i><span class="vote-mark">[% file.props.votes.likes ? file.props.votes.likes : 0 %]</span></a>
+				</li>
+				<li>
+					<a href="#" id="dislike-toggle-[% file.id %]" data-document-id="[% file.id %]" class="dislike-toggle"><i class="fa fa-thumbs-down"></i><span class="vote-mark">[% file.props.votes.dislikes ? file.props.votes.dislikes : 0 %]</span></a>
+				</li>
+			</ul>
+		</p>
+
+<p class="lead">
+    <div id="comments-panel-[% file.id %]" class="comments-panel" data-document-id="[% file.id %]">
+	<div id="comments-section-[% file.id %]" class="comments-section" data-document-id="[% file.id %]">
+	    [%# INCLUDE templates/root/comments_panel.tt2 comments = file.props.get_comments %]
+	</div>
+	[% INCLUDE templates/root/comment_form.tt2 document_id = file.id %]
+    </div>
+</p>
+
+<hr />
+
+[% END %]
