@@ -1,4 +1,3 @@
-syntax: glob
 *~
 *.log
 *log*
@@ -6,17 +5,13 @@ syntax: glob
 *.tar.gz
 *.ttc
 *.git
-
-syntax: regexp
-^\.git$
-^blib$
-^srv$
-/cache/
-/root/cache/
-/var/tmp/
-/var/tmp/tt/home/
-/var/tmp/mongodb/
-/var/log/mongodb/
-/var/monitor/
-/var/run/
-/var/data/backup/dump/
+cache
+root/cache
+var/tmp
+var/tmp/tt/home
+var/tmp/mongodb
+var/data
+var/log/mongodb
+var/monitor
+var/run
+var/data/backup/dump
