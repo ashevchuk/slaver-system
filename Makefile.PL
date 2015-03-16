@@ -164,6 +164,8 @@ requires 'Catalyst::Plugin::Authorization::ACL';
 
 requires 'Cache::Memcached::Fast';
 requires 'URI::SmartURI';
+requires 'CatalystX::LeakChecker';
+requires 'CatalystX::Profile';
 
 test_requires 'Test::More' => '0.88';
 catalyst;
