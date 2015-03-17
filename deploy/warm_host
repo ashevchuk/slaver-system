@@ -1,0 +1,15 @@
+#!/bin/bash
+
+USER_NAME=$(cat ./etc/user)
+PASSWORD=$(cat ./etc/password)
+ROOT_PASSWORD=$(cat ./etc/root)
+
+./deploy.pl \
+    --plan warm_host \
+    --user $USER_NAME \
+    --password $PASSWORD \
+    --root_password $ROOT_PASSWORD \
+    --root \
+    --timeout=1440 \
+    --verbose \
+    --host=node7.enslaver.net:220
