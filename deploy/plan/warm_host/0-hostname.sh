@@ -1,1 +1,1 @@
-echo "node7.enslaver.net" > /etc/hostname
+echo -n "{HOSTNAME}" > /etc/hostname
