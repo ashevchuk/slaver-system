@@ -103,7 +103,10 @@ apt-get install -y sshfs
 apt-get install -y vpx-tools
 apt-get install -y chm2pdf
 apt-get install -y libevent-dev
-apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev
+apt-get install -y liblcms2-2
+apt-get install -y liblcms2-dev
+
+apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev liblcms2-2 liblcms2-dev
 
 hg clone https://dev.ashevchuk@code.google.com/p/slaver-system/ ./Slaver
 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.2.tgz
