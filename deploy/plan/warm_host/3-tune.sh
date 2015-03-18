@@ -1,8 +1,13 @@
 echo 600> /sys/block/sda/device/timeout
 echo 600> /sys/block/sr0/device/timeout
+echo noop> /sys/block/sda/queue/scheduler
+echo noop> /sys/block/sr0/queue/scheduler
+echo never> /sys/kernel/mm/transparent_hugepage/defrag
 echo 'echo 600> /sys/block/sda/device/timeout' >> /etc/rc.local
 echo 'echo 600> /sys/block/sr0/device/timeout' >> /etc/rc.local
-echo 'echo never > /sys/kernel/mm/transparent_hugepage/defrag' >> /etc/rc.loca
+echo 'echo never> /sys/kernel/mm/transparent_hugepage/defrag' >> /etc/rc.loca
+echo 'echo noop> /sys/block/sda/queue/scheduler' >> /etc/rc.loca
+echo 'echo noop> /sys/block/sr0/queue/scheduler' >> /etc/rc.loca
 echo 'net.ipv4.conf.all.accept_redirects = 0' >> /etc/sysctl.conf
 echo 'net.ipv4.conf.eth0.accept_redirects = 0' >> /etc/sysctl.conf
 echo 'net.ipv4.conf.default.accept_redirects = 0' >> /etc/sysctl.conf
