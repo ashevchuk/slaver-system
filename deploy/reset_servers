@@ -1,0 +1,13 @@
+#!/bin/bash
+
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107877-8598&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-11103&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-11105&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-11107&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-11108&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-11355&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-20977&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-20978&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-26947&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-26949&action=reset" https://panel.cloudatcost.com/api/v1/poweropp
+curl --data "key=evEreNu5yhyrEnaVyvadE6aSu&login=dev.ashevchuk@gmail.com&sid=c1107876-26948&action=reset" https://panel.cloudatcost.com/api/v1/poweropp

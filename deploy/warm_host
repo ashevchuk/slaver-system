@@ -12,4 +12,4 @@ ROOT_PASSWORD=$(cat ./etc/root)
     --root \
     --timeout=1440 \
     --verbose \
-    --host=node7.enslaver.net:220
+    --host=config2.enslaver.net:22
