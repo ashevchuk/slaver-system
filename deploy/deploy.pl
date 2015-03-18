@@ -12,7 +12,7 @@ use Pod::Usage;
 
 my $ssh;
 
-my $timeout = 1440;
+my $timeout = 1600;
 my $default_port = 22;
 my $shell = "/bin/bash -l -i";
 my $sync;
@@ -109,12 +109,30 @@ foreach my $host (@hosts) {
 		while (my $command = <$FILE>) {
 			chomp ($command); next unless length $command; next if $command =~ m/^\#/;
 			$expect->clear_accum();
-			printf("Executing command: %s @ %s\n", $command, $hostname) if $verbose;
-			$expect->send("$command\n");
-			$expect->send("echo \"]DNE[\" | rev\n");
 
-			$ssh->{$hostname}->{commands}++;
-			$expect->expect($timeout, [ qr/\[END\]/ => sub { printf ("%s @ Commands executed: %s\n", $hostname, $ssh->{$hostname}->{commands}) if $verbose; } ] );
+			$command =~ s/\{HOSTNAME\}/$hostname/sg;
+
+			if ( $command =~ m/^\{EXEC\}/isg ) {
+			    my ( $cmd ) = $command =~ m/^\{EXEC\}(.*?)$/is;
+			    chomp $cmd;
+			    printf("Executing local command: %s\n", $cmd) if $verbose;
+			    system($cmd);
+			    next;
+			}
+			elsif ( $command =~ m/^\{UPLOAD\}/isg ) {
+			    my ( $local_file, $remote_file ) = $command =~ m/^\{UPLOAD\}(.*?)\=\>(.*?)$/is;
+			    printf("Uploading: %s @ %s:%s\n", $local_file, $hostname, $remote_file) if $verbose;
+			    $ssh->{$hostname}->{sock}->scp_put({ verbose => 0, recursive => 1, glob => 1, async => 0 }, $local_file, $remote_file);
+			    printf("Uploading done: %s @ %s:%s\n", $local_file, $hostname, $remote_file) if $verbose;
+			    next;
+			}
+			else {
+			    printf("Executing command: %s @ %s\n", $command, $hostname) if $verbose;
+			    $expect->send("$command");
+			    $expect->send(" ; (echo \"]DNE[\" | rev)\n");
+			    $ssh->{$hostname}->{commands}++;
+			    $expect->expect($timeout, [ qr/\[END\]/ => sub { printf ("%s @ Commands executed: %s\n", $hostname, $ssh->{$hostname}->{commands}) if $verbose; } ] );
+			}
 		}
 
 		close $FILE;
@@ -136,9 +154,7 @@ foreach my $host (@hosts) {
     print( $pproc || "" ) if $sync;
 }
 
-foreach my $proc (@procs) {
-    print( $proc || "" ) if defined $proc;
-}
+print( $_ || "" ) for @procs;
 
 __END__
 
