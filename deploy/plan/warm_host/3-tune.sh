@@ -27,3 +27,6 @@ echo 'kernel.msgmax = 65536' >> /etc/sysctl.conf
 echo 'kernel.shmmax = 494967295' >> /etc/sysctl.conf
 echo 'kernel.shmall = 268435456' >> /etc/sysctl.conf
 echo 'net.core.somaxconn = 16096' >> /etc/sysctl.conf
+
+mount -oremount,noatime /
+sed -i 's/ext4 rw,relatime,/ext4 rw,noatime,/' /etc/mtab
