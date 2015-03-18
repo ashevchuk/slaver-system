@@ -9,3 +9,5 @@ echo "server 0.pool.ntp.org iburst" >> /etc/ntp.conf
 echo "server 1.pool.ntp.org iburst" >> /etc/ntp.conf
 echo "server 2.pool.ntp.org iburst" >> /etc/ntp.conf
 echo "server 3.pool.ntp.org iburst" >> /etc/ntp.conf
+echo "Etc/UTC" > /etc/timezone
+dpkg-reconfigure ntp
