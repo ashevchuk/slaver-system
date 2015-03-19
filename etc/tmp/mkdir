@@ -1,10 +1,10 @@
 #!/bin/bash
 
-UPLOAD_ROOT=/home/developer/devel/perl/Slaver
-UPLOAD_DIR=var/tmp
-
 NGINX_USER=nginx
 NGINX_GROUP=nginx
+
+UPLOAD_ROOT=/home/developer/devel/perl/Slaver
+UPLOAD_DIR=var/tmp
 
 for i in {0..9}
 do
