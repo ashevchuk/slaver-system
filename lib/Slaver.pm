@@ -27,7 +27,8 @@ use Catalyst qw/
 
 	Session
 	Session::State::Cookie
-	Session::Store::Memcached::Fast
+	Session::Store::MongoDB
+
 
 	StatusMessage
 
@@ -41,8 +42,9 @@ use Catalyst qw/
 	SmartURI
 /;
 
-#	Session::Store::MongoDB
+#		Session::Store::Memcached::Fast
 extends 'Catalyst';
+#with 'CatalystX::LeakChecker';
 
 our $VERSION = '0.01';
 
