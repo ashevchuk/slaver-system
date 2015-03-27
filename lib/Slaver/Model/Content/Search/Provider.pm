@@ -3,7 +3,7 @@ use Moose;
 
 BEGIN { extends 'Slaver::Model::Data::Provider' }
 
-#use Data::Dumper;
+use Data::Dumper;
 
 use Encode qw(encode_utf8);
 
@@ -31,7 +31,8 @@ sub search {
 
     my $query_hash = Digest::SHA->new(1)->add(encode_utf8($query))->hexdigest;
 
-    my $search_db = $self->connection->db('content');
+#    my $search_db = $self->connection->db('content');
+    my $search_db = $self->get_database('content');
 
     my $search_collection = $search_db->get_collection($query_collection);
 
@@ -74,7 +75,7 @@ sub fetch {
     my $page_items = $params->{page}->{items} || $context->config->{application}->{content}->{pager}->{elements};
     my $page_current = $params->{page}->{current} || 1;
 
-    my $search_db = $self->connection->db('content');
+    my $search_db = $self->get_database('content');
 
     my $search_results_collection = $search_db->get_collection("content");
 
