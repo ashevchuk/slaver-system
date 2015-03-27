@@ -87,15 +87,19 @@ Smoke test
 **Debian** requirements script
 =====
 
-apt-get install git mercurial
-apt-get install gcc libpcre++-dev libssl-dev
-apt-get install make cmake automake autoconf
-apt-get install clang g++
-apt-get install libpng++-dev libjpeg-dev
-apt-get install libdb++-dev libdb-dev
-apt-get install libxml2-dev zlibc
-apt-get install expat libexpat-dev
-apt-get install libgmp-dev
+apt-get install -y zlib1g-dev
+apt-get install -y libpcre3
+apt-get install -y libpcre3-dev
+apt-get install -y unzip
+apt-get install -y git mercurial
+apt-get install -y gcc libpcre++-dev libssl-dev
+apt-get install -y make cmake automake autoconf
+apt-get install -y clang g++
+apt-get install -y libpng++-dev libjpeg-dev
+apt-get install -y libdb++-dev libdb-dev
+apt-get install -y libxml2-dev zlibc
+apt-get install -y expat libexpat-dev
+apt-get install -y libgmp-dev
 apt-get install -y ntp
 apt-get install -y tmux mc
 apt-get install -y ghostscript
@@ -115,13 +119,14 @@ apt-get install -y chm2pdf
 apt-get install -y libevent-dev
 apt-get install -y liblcms2-2
 apt-get install -y liblcms2-dev
+apt-get install -y libyajl-dev
 
 Install all
 =====
 
     $ git clone https://github.com/ashevchuk/slaver-system.git
 
-    $ apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev liblcms2-2 liblcms2-dev
+    $ apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev liblcms2-2 liblcms2-dev libyajl-dev zlib1g-dev libpcre3 libpcre3-dev unzip
 
     $ wget http://download.zeromq.org/zeromq-3.2.4.tar.gz
     $ ./configure --prefix=/home/developer/local
