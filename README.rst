@@ -4,7 +4,7 @@ Slaver
 Distributed Smart System. Version 0.01093.
 
 **MongoDB** configuration script
-============
+=====
 
 sh.addShard( "nodeX.enslaver.net:27018" )
 
@@ -80,12 +80,12 @@ db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000c"), "owner" : "main", "
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000d"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f00000c", "caption" : "Tech Labs 2 0", "description" : "Tech Labs20 Page", "alias" : "tech-labs-2-0", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
 
 Smoke test
-============
+=====
 
     $ ./script/slaver_test.pl
 
 **Debian** requirements script
-============
+=====
 
 apt-get install git mercurial
 apt-get install gcc libpcre++-dev libssl-dev
@@ -117,7 +117,7 @@ apt-get install -y liblcms2-2
 apt-get install -y liblcms2-dev
 
 Install all
-============
+=====
 
     $ git clone https://github.com/ashevchuk/slaver-system.git
 
@@ -127,13 +127,13 @@ Install all
     $ ./configure --prefix=/home/developer/local
 
 Configure Environment
-============
+=====
 
     $ echo 'export LD_LIBRARY_PATH=$HOME/local/lib' >> ~/.bash_profile
     $ echo 'export ZMQ_HOME=$HOME/local' >> ~/.bash_profile
 
 Add Multimedia sources
-============
+=====
 
     $ wget http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2014.2_all.deb
     $ dpkg -i deb-multimedia-keyring_2014.2_all.deb
@@ -142,7 +142,7 @@ Add Multimedia sources
     $ echo 'deb http://www.deb-multimedia.org jessie main non-free' >> /etc/apt/sources.list
 
 Setup **NTP**
-============
+=====
 
     $ echo "logfile /var/log/xntpd" > /etc/ntp.conf
     $ echo "driftfile /var/lib/ntp/ntp.drift" >> /etc/ntp.conf
@@ -160,7 +160,7 @@ Setup **NTP**
     $ dpkg-reconfigure ntp
 
 Setup IO Timeouts
-============
+=====
 
     $ echo 600> /sys/block/sda/device/timeout
     $ echo 600> /sys/block/sr0/device/timeout
@@ -174,7 +174,7 @@ Setup IO Timeouts
     $ echo 'echo never > /sys/kernel/mm/transparent_hugepage/defrag' >> /etc/rc.local
 
 Setup Limits
-============
+=====
 
     $ echo '*                soft    nofile          64000' >> /etc/security/limits.conf
     $ echo '*                hard    nofile          64000' >> /etc/security/limits.conf
@@ -182,7 +182,7 @@ Setup Limits
     $ echo '*                hard    nproc           64000' >> /etc/security/limits.conf
 
 Setup System Paramenters
-============
+=====
 
     $ echo 'net.ipv4.conf.all.accept_redirects = 0' >> /etc/sysctl.conf
     $ echo 'net.ipv4.conf.eth0.accept_redirects = 0' >> /etc/sysctl.conf
