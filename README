@@ -1,5 +1,12 @@
-MongoDB:
-sh.addShard( "node0.enslaver.net:27018" )
+Slaver
+============
+
+Distributed Smart System. Version 0.01093.
+
+**MongoDB** configuration script
+============
+
+sh.addShard( "nodeX.enslaver.net:27018" )
 
 use content
 db.content.ensureIndex( { "$**": "text" }, { name: "All_FT_Idx" } )
@@ -25,12 +32,10 @@ sh.shardCollection( "data.fs.files", { _id : 1 } )
 #sh.shardCollection( "queue.service.image.convert", { host : "hashed" } )
 sh.shardCollection( "log.slaver", { host : "hashed" } )
 sh.shardCollection( "content.content", { _id : 1 } )
-
-use content
-db.menu.ensureIndex( { role : "hashed" } )
 sh.shardCollection( "content.menu", { role : "hashed" } )
 
 use content
+db.menu.ensureIndex( { role : "hashed" } )
 db.votes.ensureIndex( { "issue": 1 }, { expireAfterSeconds: 1440 } )
 
 use queue
@@ -74,9 +79,14 @@ db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000b"), "owner" : "main", "
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000c"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f000009", "caption" : "Tech Labs 2", "description" : "Tech Labs2 Page", "alias" : "tech-labs-2", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000d"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f00000c", "caption" : "Tech Labs 2 0", "description" : "Tech Labs20 Page", "alias" : "tech-labs-2-0", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
 
-Run script/slaver_server.pl to test the application.
+Smoke test
+============
 
-Debian requirements:
+    $ ./script/slaver_test.pl
+
+**Debian** requirements script
+============
+
 apt-get install git mercurial
 apt-get install gcc libpcre++-dev libssl-dev
 apt-get install make cmake automake autoconf
@@ -106,66 +116,90 @@ apt-get install -y libevent-dev
 apt-get install -y liblcms2-2
 apt-get install -y liblcms2-dev
 
-apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev liblcms2-2 liblcms2-dev
+Install all
+============
 
-hg clone https://dev.ashevchuk@code.google.com/p/slaver-system/ ./Slaver
-wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.2.tgz
+    $ git clone https://github.com/ashevchuk/slaver-system.git
 
-wget http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2014.2_all.deb
-dpkg -i deb-multimedia-keyring_2014.2_all.deb
+    $ apt-get install -y git mercurial gcc libpcre++-dev libssl-dev make cmake automake autoconf clang g++ libpng++-dev libjpeg-dev libdb++-dev libdb-dev libxml2-dev zlibc expat libexpat-dev libgmp-dev ntp tmux mc ghostscript djvulibre-bin libdjvulibre-dev liblcms liblcms-dev liblcms1-dev liblcms2-dev libfreetype6-dev libxft-dev libxft2-dev libxft2 sshfs vpx-tools chm2pdf libevent-dev liblcms2-2 liblcms2-dev
 
-echo 'deb http://www.deb-multimedia.org squeeze main' >> /etc/apt/sources.list
-echo 'deb http://www.deb-multimedia.org jessie main non-free' >> /etc/apt/sources.list
+    $ wget http://download.zeromq.org/zeromq-3.2.4.tar.gz
+    $ ./configure --prefix=/home/developer/local
 
-echo "logfile /var/log/xntpd" > /etc/ntp.conf
-echo "driftfile /var/lib/ntp/ntp.drift" >> /etc/ntp.conf
-echo "statsdir /var/log/ntpstats/" >> /etc/ntp.conf
-echo "statistics loopstats peerstats clockstats" >> /etc/ntp.conf
-echo "filegen loopstats file loopstats type day enable" >> /etc/ntp.conf
-echo "filegen peerstats file peerstats type day enable" >> /etc/ntp.conf
-echo "filegen clockstats file clockstats type day enable" >> /etc/ntp.conf
-echo "server 0.pool.ntp.org iburst" >> /etc/ntp.conf
-echo "server 1.pool.ntp.org iburst" >> /etc/ntp.conf
-echo "server 2.pool.ntp.org iburst" >> /etc/ntp.conf
-echo "server 3.pool.ntp.org iburst" >> /etc/ntp.conf
+Configure Environment
+============
 
-dpkg-reconfigure tzdata
-dpkg-reconfigure ntp
+    $ echo 'export LD_LIBRARY_PATH=$HOME/local/lib' >> ~/.bash_profile
+    $ echo 'export ZMQ_HOME=$HOME/local' >> ~/.bash_profile
 
-echo 600> /sys/block/sda/device/timeout
-echo 600> /sys/block/sr0/device/timeout
+Add Multimedia sources
+============
 
-echo 'echo 600> /sys/block/sda/device/timeout' >> /etc/rc.local
-echo 'echo 600> /sys/block/sr0/device/timeout' >> /etc/rc.local
-echo '*                soft    nofile          64000' >> /etc/security/limits.conf
-echo '*                hard    nofile          64000' >> /etc/security/limits.conf
-echo '*                soft    nproc           64000' >> /etc/security/limits.conf
-echo '*                hard    nproc           64000' >> /etc/security/limits.conf
+    $ wget http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2014.2_all.deb
+    $ dpkg -i deb-multimedia-keyring_2014.2_all.deb
 
-echo 'echo never > /sys/kernel/mm/transparent_hugepage/defrag' >> /etc/rc.local
+    $ echo 'deb http://www.deb-multimedia.org squeeze main' >> /etc/apt/sources.list
+    $ echo 'deb http://www.deb-multimedia.org jessie main non-free' >> /etc/apt/sources.list
 
-echo 'export LD_LIBRARY_PATH=$HOME/local/lib' >> ~/.bash_profile
-echo 'export ZMQ_HOME=$HOME/local' >> ~/.bash_profile
+Setup **NTP**
+============
 
-wget http://download.zeromq.org/zeromq-3.2.4.tar.gz
-./configure --prefix=/home/developer/local
+    $ echo "logfile /var/log/xntpd" > /etc/ntp.conf
+    $ echo "driftfile /var/lib/ntp/ntp.drift" >> /etc/ntp.conf
+    $ echo "statsdir /var/log/ntpstats/" >> /etc/ntp.conf
+    $ echo "statistics loopstats peerstats clockstats" >> /etc/ntp.conf
+    $ echo "filegen loopstats file loopstats type day enable" >> /etc/ntp.conf
+    $ echo "filegen peerstats file peerstats type day enable" >> /etc/ntp.conf
+    $ echo "filegen clockstats file clockstats type day enable" >> /etc/ntp.conf
+    $ echo "server 0.pool.ntp.org iburst" >> /etc/ntp.conf
+    $ echo "server 1.pool.ntp.org iburst" >> /etc/ntp.conf
+    $ echo "server 2.pool.ntp.org iburst" >> /etc/ntp.conf
+    $ echo "server 3.pool.ntp.org iburst" >> /etc/ntp.conf
 
-echo 'net.ipv4.conf.all.accept_redirects = 0' >> /etc/sysctl.conf
-echo 'net.ipv4.conf.eth0.accept_redirects = 0' >> /etc/sysctl.conf
-echo 'net.ipv4.conf.default.accept_redirects = 0' >> /etc/sysctl.conf
-echo 'net.core.rmem_max = 996777216' >> /etc/sysctl.conf
-echo 'net.core.wmem_max = 996777216' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_rmem = 4096 87380 4194304' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_mem = 786432 1048576 996777216' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_wmem = 4096 87380 4194304' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_max_orphans = 2255360' >> /etc/sysctl.conf
-echo 'net.core.netdev_max_backlog = 10000' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_fin_timeout = 10' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_keepalive_intvl = 15' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_max_syn_backlog = 2048' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_synack_retries = 1' >> /etc/sysctl.conf
-echo 'kernel.msgmnb = 65536' >> /etc/sysctl.conf
-echo 'kernel.msgmax = 65536' >> /etc/sysctl.conf
-echo 'kernel.shmmax = 494967295' >> /etc/sysctl.conf
-echo 'kernel.shmall = 268435456' >> /etc/sysctl.conf
-echo 'net.core.somaxconn = 16096' >> /etc/sysctl.conf
+    $ dpkg-reconfigure tzdata
+    $ dpkg-reconfigure ntp
+
+Setup IO Timeouts
+============
+
+    $ echo 600> /sys/block/sda/device/timeout
+    $ echo 600> /sys/block/sr0/device/timeout
+
+    $ echo 'echo 600> /sys/block/sda/device/timeout' >> /etc/rc.local
+    $ echo 'echo 600> /sys/block/sr0/device/timeout' >> /etc/rc.local
+
+    $ echo 'echo noop> /sys/block/sda/queue/scheduler' >> /etc/rc.local
+    $ echo 'echo noop> /sys/block/sr0/queue/scheduler' >> /etc/rc.local
+
+    $ echo 'echo never > /sys/kernel/mm/transparent_hugepage/defrag' >> /etc/rc.local
+
+Setup Limits
+============
+
+    $ echo '*                soft    nofile          64000' >> /etc/security/limits.conf
+    $ echo '*                hard    nofile          64000' >> /etc/security/limits.conf
+    $ echo '*                soft    nproc           64000' >> /etc/security/limits.conf
+    $ echo '*                hard    nproc           64000' >> /etc/security/limits.conf
+
+Setup System Paramenters
+============
+
+    $ echo 'net.ipv4.conf.all.accept_redirects = 0' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.conf.eth0.accept_redirects = 0' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.conf.default.accept_redirects = 0' >> /etc/sysctl.conf
+    $ echo 'net.core.rmem_max = 996777216' >> /etc/sysctl.conf
+    $ echo 'net.core.wmem_max = 996777216' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_rmem = 4096 87380 4194304' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_mem = 786432 1048576 996777216' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_wmem = 4096 87380 4194304' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_max_orphans = 2255360' >> /etc/sysctl.conf
+    $ echo 'net.core.netdev_max_backlog = 10000' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_fin_timeout = 10' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_keepalive_intvl = 15' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_max_syn_backlog = 2048' >> /etc/sysctl.conf
+    $ echo 'net.ipv4.tcp_synack_retries = 1' >> /etc/sysctl.conf
+    $ echo 'kernel.msgmnb = 65536' >> /etc/sysctl.conf
+    $ echo 'kernel.msgmax = 65536' >> /etc/sysctl.conf
+    $ echo 'kernel.shmmax = 494967295' >> /etc/sysctl.conf
+    $ echo 'kernel.shmall = 268435456' >> /etc/sysctl.conf
+    $ echo 'net.core.somaxconn = 16096' >> /etc/sysctl.conf
