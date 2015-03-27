@@ -2,6 +2,7 @@ Slaver
 ============
 
 Distributed Smart System. Version 0.01093.
+Big Data, Distributed, Event-based, Peer-to-Peer Systems, Artificial Intelligence, Parallel Computing Research Project.
 
 **MongoDB** configuration script
 =====
