@@ -1,6 +1,5 @@
 *~
 *.log
-*log*
 *.pid
 *.tar.gz
 *.ttc

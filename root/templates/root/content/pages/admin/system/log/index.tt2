@@ -1,0 +1,33 @@
+[% title = loc('Log') %]
+[%# USE Dumper %]
+[% USE time_dir = Time.Duration %]
+[% USE date %]
+[%# Dumper.dump(results) %]
+<h1>[% loc('System journal') %]</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">[% loc('Journal') %]</div>
+
+    <table class="table table-striped table-hover">
+	<thead>
+	    <tr>
+		<th>Issue</th>
+		<th>Level</th>
+		<th>Host</th>
+		<th>Message</th>
+	    </tr>
+	</thead>
+	<tbody>
+
+	[% FOREACH item IN results.items %]
+	    <tr>
+		<td>[% time_dir.ago(date.now - item.id_time) %]</td>
+		<td>[% item.level %]</td>
+		<td>[% item.host %]</td>
+		<td><pre class="log-entry-text">[% item.text %]</pre></td>
+	    </tr>
+	[% END %]
+
+	</tbody>
+    </table>
+</div>
