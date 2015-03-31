@@ -6,11 +6,11 @@ NGINX_GROUP=nginx
 UPLOAD_ROOT=/home/developer/devel/perl/Slaver
 UPLOAD_DIR=var/tmp
 
-for i in {0..9}
+for i in {0..9} {a..z} {A..Z}
 do
-    for i2 in {0..9}
+    for i2 in {0..9} {a..z} {A..Z}
     do
-        for i3 in {0..9}
+        for i3 in {0..9} {a..z} {A..Z}
         do
             mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_state/$i/$i2/$i3";
             mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_store/$i/$i2/$i3";
