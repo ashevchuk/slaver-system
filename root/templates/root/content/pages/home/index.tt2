@@ -1,2 +1,4 @@
 <h1>Cloud Computing Research Initiative</h1>
 documents and resources library
+
+[% INCLUDE templates/root/last_search_panel.tt2 %]
