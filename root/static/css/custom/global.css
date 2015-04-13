@@ -21,6 +21,10 @@
     margin-top: 12px;
 }
 
+.col-sm-10 {
+    margin-top: 12px;
+}
+
 .form-control {
     height: 32px;
 }
@@ -101,3 +105,22 @@
     margin-bottom: 10px;
 }
 
+.login-form-menu {
+    margin: 10px;
+    width: 180px;
+}
+
+.user-dashboard-menu {
+    margin: 4px;
+    width: auto;
+}
+
+.menu-avatar-image {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-flag-image {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

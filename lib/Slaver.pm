@@ -9,7 +9,7 @@ use MRO::Compat;
 use Class::C3::Adopt::NEXT;
 use Log::Log4perl::Catalyst;
 
-use Data::Dumper qw(Dumper);
+#use Data::Dumper;
 #use Data::Page;
 
 use Catalyst::Runtime 5.90;
@@ -27,7 +27,7 @@ use Catalyst qw/
 
 	Session
 	Session::State::Cookie
-	Session::Store::MongoDB
+	Session::Store::Memcached::Fast
 
 	StatusMessage
 
@@ -41,7 +41,8 @@ use Catalyst qw/
 	SmartURI
 /;
 
-#		Session::Store::Memcached::Fast
+#	Session::Store::MongoDB
+#	Session::Store::Memcached::Fast
 extends 'Catalyst';
 #with 'CatalystX::LeakChecker';
 
@@ -85,14 +86,9 @@ sub prepare_path {
     $c->maybe::next::method(@_);
 
     my $language = $c->config->{application}->{content}->{localization}->{default}->{language};
-
     $language = $c->session->{locale} if $c->session->{locale};
-
     $language = $c->stash->{language} if $c->stash->{language};
-
 #    $language = $c->request->params->{lang} if $c->request->params->{lang};
-
-#    $c->log->debug('Request params:', Dumper($c->request));
 
     my $captures = {
 	page => { default => 1, value => undef }

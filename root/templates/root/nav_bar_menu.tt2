@@ -16,6 +16,26 @@
 
 			</li>
 
+
+			<li class="dropdown">
+				<a href="#" class="dropdown" data-toggle="dropdown">
+				    [% IF c.user_exists %]
+					<i class="icon-fixed-width">
+					    <img class="menu-avatar-image" src="/user/profile/avatar/get/avatar.png" alt="">
+					</i>
+					[% c.user.name OR c.user.username | html %]
+				    [% ELSE %]
+					<i class="icon-fixed-width fa fa-sign-in"></i>[% loc('Sign in') %]
+				    [% END %]
+				    <b class="caret"></b>
+			</a>
+			<div class="dropdown-menu" role="menu">
+			    <div>
+                        	    [% INCLUDE templates/root/user_panel_menu.tt2 %]
+	                    </div>
+			</div>
+			</li>
+
 [% cache.inc( 'template' => 'templates/root/locale.tt2',
 'keys' => { 'language' => language },
 'ttl' => c.config.application.content.template.cache_ttl ) %]

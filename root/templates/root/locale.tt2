@@ -1,7 +1,11 @@
 [% USE LanguageName %]
 
 <li class="dropdown">
-	<a href="#" class="dropdown" data-toggle="dropdown"><i class="icon-fixed-width fa fa-flag"></i>[% loc('Locale') %]<b class="caret"></b></a>
+	<a href="#" class="dropdown" data-toggle="dropdown">
+	    [%# loc('Locale') %][%# c.session.locale %]
+	    <img class="flag-active menu-flag-image" width="16" height="14" src="/static/images/flags/[% c.session.locale %].png"/>
+	    <!--<b class="caret"></b><i class="icon-fixed-width fa fa-flag"></i>-->
+	</a>
 	<ul class="dropdown-menu">
 
 [% BLOCK locale_block %]

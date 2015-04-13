@@ -1,0 +1,23 @@
+<div class="user-dashboard-menu">
+[% INCLUDE templates/root/avatar.tt2 %]
+
+<div class="row">
+	    <a href="[% c.uri_for('/content/pages/admin/content/create') %]" class="button-image">
+		<i class="fa fa-asterisk" data-toggle="popover" data-content="[% loc('Create content') %]"></i>
+	    </a>
+	    <a href="[% c.uri_for('/content/pages/user/profile') %]" class="button-image">
+		<i class="fa fa-dashboard" data-toggle="popover" data-content="[% loc('Profile') %]"></i>
+	    </a>
+	    <a href="[% c.uri_for('/auth/logout') %]" class="button-image">
+		<i class="fa fa-sign-out" data-toggle="popover" data-content="[% loc('Logout') %]"></i>
+	    </a>
+</div>
+
+<div class="row">
+	    <a class="btn btn-default btn-xs pull-right" href="[% c.uri_for('/auth/logout') %]">
+		<i class="fa fa-sign-out" data-toggle="popover" data-content="[% loc('Logout') %]"></i>
+		[% loc("Logout") %]
+	    </a>
+</div>
+
+</div>

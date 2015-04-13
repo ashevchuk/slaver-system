@@ -1,0 +1,7 @@
+<div>
+	[% IF c.user_exists %]
+		[% INCLUDE templates/root/user_dashboard_menu.tt2 %]
+	[% ELSE %]
+		[% INCLUDE templates/root/login_form_menu.tt2 %]
+	[% END %]
+</div>

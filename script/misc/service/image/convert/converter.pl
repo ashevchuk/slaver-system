@@ -5,7 +5,7 @@ use warnings;
 
 use lib qw(/home/developer/devel/perl/Slaver/lib);
 
-use ZMQx::Class;
+#use ZMQx::Class;
 use JSON::XS;
 use MongoDBx::Queue;
 use MongoDBx::Class;
@@ -206,8 +206,8 @@ sub image2image {
 sub receive_tasks {
   while (my $task = $queue->reserve_task({query => {host => $hostname}})) {
 
-    #		my $json = $coder->encode ($task);
-    #		printf("received task: %s\n", $json);
+#    		my $json = $coder->encode ($task);
+#    		printf("received task: %s\n", $json);
 
     unless ( -e $task->{file_name} ) {
 	$queue->reschedule_task($task);

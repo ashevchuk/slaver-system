@@ -1,16 +1,22 @@
 #!/bin/bash
 
-NGINX_USER=nginx
-NGINX_GROUP=nginx
+NGINX_USER=developer
+NGINX_GROUP=developer
 
 UPLOAD_ROOT=/home/developer/devel/perl/Slaver
 UPLOAD_DIR=var/tmp
 
 for i in {0..9} {a..z} {A..Z}
 do
-    mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_state/$i";
-    mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_store/$i";
-done
+    for i2 in {0..9} {a..z} {A..Z}
+    do
+        for i3 in {0..9} {a..z} {A..Z}
+        do
+            mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_state/$i/$i2/$i3";
+            mkdir -p "$UPLOAD_ROOT/$UPLOAD_DIR/upload_store/$i/$i2/$i3";
 
-chown -R $NGINX_USER:$NGINX_GROUP "$UPLOAD_ROOT/$UPLOAD_DIR/upload_state"
-chown -R $NGINX_USER:$NGINX_GROUP "$UPLOAD_ROOT/$UPLOAD_DIR/upload_store"
+        done
+    done
+done
+ 
+chown -R $NGINX_USER:$NGINX_GROUP "$UPLOAD_ROOT/$UPLOAD_DIR"

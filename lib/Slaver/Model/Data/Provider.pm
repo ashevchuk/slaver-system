@@ -14,11 +14,21 @@ BEGIN { extends 'Catalyst::Model' }
 
 our $VERSION = '0.06';
 
-has host           => ( isa => 'Str', is => 'ro', required => 1, default => sub { 'localhost' } );
+has host           => ( isa => 'Str', is => 'ro', required => 1, default => sub { '127.0.0.1' } );
 has port           => ( isa => 'Int', is => 'ro', required => 1, default => sub { 27017 } );
 has dbname         => ( isa => 'Str', is => 'ro' );
 has collectionname => ( isa => 'Str', is => 'ro' );
 has gridfsname     => ( isa => 'Str', is => 'ro' );
+
+sub new {
+    my ($class, $config, $app) = @_;
+	
+    my $self = {
+	config => $config
+    };
+
+    bless $self, $class;
+}
 
 has 'connection' => (
   isa => 'MongoDBx::Class::Connection',
@@ -32,8 +42,8 @@ sub _build_connection {
     unless defined $self->{dbx};
 
   $self->{pool} = $self->{dbx}->pool(max_conns => 32, type => 'rotated', params => {
-	host => $self->host,
-	port => $self->port,
+	host => "127.0.0.1", #$self->{config}->{host},
+	port => "27017", #$self->{config}->{port},
 	auto_reconnect => 1,
 	auto_connect => 1,
   }) unless defined $self->{pool};
@@ -43,8 +53,8 @@ sub _build_connection {
   return $self->{dbx_connection} = $self->{pool}->get_conn;
 
     $self->{dbx_connection} = $self->{dbx}->connect(
-    host => $self->host,
-    port => $self->port,
+    host => "127.0.0.1", #$self->{config}->{host},
+    port => "27017", #$self->{config}->{port},
     wtimeout => 10000,
     auto_reconnect => 1,
     auto_connect => 1,
@@ -70,10 +80,11 @@ sub db {
   my ( $self, $dbname ) = @_;
   $dbname = $self->dbname if !$dbname;
   confess "no dbname given via parameter or config" if !$dbname;
-  if (!$self->dbs->{$dbname}) {
-    $self->dbs->{$dbname} = $self->connection->get_database($dbname);
-  }
-  return $self->dbs->{$dbname};
+  return $self->connection->get_database($dbname);
+#  if (!$self->dbs->{$dbname}) {
+#    $self->dbs->{$dbname} = $self->connection->get_database($dbname);
+# }
+#  return $self->dbs->{$dbname};
 }
 
 sub c { shift->collection(@_) }

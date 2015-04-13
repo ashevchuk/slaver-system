@@ -1,9 +1,11 @@
 package Slaver::Controller::Auth;
 
-use Data::Dumper;
+use Data::Dumper qw(Dumper);
 use Moose;
 use namespace::autoclean;
 use Slaver::Resource::String::Auth;
+
+use MongoDB::OID;
 
 BEGIN { extends 'Slaver::Base::Controller::Generic' }
 #use parent qw/Catalyst::Controller::RateLimit Catalyst::Controller/;
@@ -18,8 +20,10 @@ sub login : Local {
 
     delete $c->stash->{user} if exists $c->stash->{user};
     delete $c->session->{username} if exists $c->session->{username};
+    delete $c->session->{userinfo} if exists $c->session->{userinfo};
 
     if ($username && $password) {
+
 	if( $c->authenticate({username => $username, password => $password}) ) {
 	    $c->stash( user => $username );
 	    $c->session->{username} = $username;
@@ -49,6 +53,10 @@ sub logout : Local {
 
     $c->stash(status_msg => $c->loc(Slaver::Resource::String::Auth::RS_LOGOUT_SUCCESSFUL));
     $c->flash->{status_msg} = $c->loc(Slaver::Resource::String::Auth::RS_LOGOUT_SUCCESSFUL);
+
+    delete $c->stash->{user} if exists $c->stash->{user};
+    delete $c->session->{username} if exists $c->session->{username};
+    delete $c->session->{userinfo} if exists $c->session->{userinfo};
 
     $c->response->redirect($c->uri_for('/'));
 }
