@@ -12,4 +12,4 @@ ROOT_PASSWORD=$(cat ./etc/root)
     --root \
     --timeout=1440 \
     --verbose \
-    --host=config2.enslaver.net:22
+    --host=config2.lambda-cloud.net:22

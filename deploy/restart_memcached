@@ -11,14 +11,14 @@ ROOT_PASSWORD=$(cat ./etc/root)
     --root_password $ROOT_PASSWORD \
     --timeout=1440 \
     --verbose \
-    --host=node0.enslaver.net:220 \
-    --host=node1.enslaver.net:220 \
-    --host=node2.enslaver.net:220 \
-    --host=node3.enslaver.net:220 \
-    --host=node4.enslaver.net:220 \
-    --host=node5.enslaver.net:220 \
-    --host=node6.enslaver.net:220 \
-    --host=node7.enslaver.net:220
+    --host=node0.lambda-cloud.net:220 \
+    --host=node1.lambda-cloud.net:220 \
+    --host=node2.lambda-cloud.net:220 \
+    --host=node3.lambda-cloud.net:220 \
+    --host=node4.lambda-cloud.net:220 \
+    --host=node5.lambda-cloud.net:220 \
+    --host=node6.lambda-cloud.net:220 \
+    --host=node7.lambda-cloud.net:220
 
 ./deploy.pl \
     --plan start_memcached \
@@ -27,11 +27,11 @@ ROOT_PASSWORD=$(cat ./etc/root)
     --root_password $ROOT_PASSWORD \
     --timeout=1440 \
     --verbose \
-    --host=node0.enslaver.net:220 \
-    --host=node1.enslaver.net:220 \
-    --host=node2.enslaver.net:220 \
-    --host=node3.enslaver.net:220 \
-    --host=node4.enslaver.net:220 \
-    --host=node5.enslaver.net:220 \
-    --host=node6.enslaver.net:220 \
-    --host=node7.enslaver.net:220
+    --host=node0.lambda-cloud.net:220 \
+    --host=node1.lambda-cloud.net:220 \
+    --host=node2.lambda-cloud.net:220 \
+    --host=node3.lambda-cloud.net:220 \
+    --host=node4.lambda-cloud.net:220 \
+    --host=node5.lambda-cloud.net:220 \
+    --host=node6.lambda-cloud.net:220 \
+    --host=node7.lambda-cloud.net:220
