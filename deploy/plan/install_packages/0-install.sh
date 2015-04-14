@@ -6,6 +6,7 @@
 #cd /home/developer/devel/perl/Slaver/var/tmp/upload_state
 #./mkdir
 #usermod -a -G fuse developer
-cp /usr/home/developer/devel/perl/Slaver/etc/freebsd/newsyslog.conf.d/* /etc/newsyslog.conf.d/
-echo 'newsyslog_enable="YES"' >> /etc/rc.conf
-/etc/rc.d/newsyslog restart
+#cp /usr/home/developer/devel/perl/Slaver/etc/freebsd/newsyslog.conf.d/* /etc/newsyslog.conf.d/
+#echo 'newsyslog_enable="YES"' >> /etc/rc.conf
+#/etc/rc.d/newsyslog restart
+#ps aux | grep slayer | grep -v ssh | grep -v bash | grep -v grep | grep -v "(sh)" | awk '{print $2}' | xargs kill -9

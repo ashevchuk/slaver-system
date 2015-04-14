@@ -1,10 +1,10 @@
 #!/bin/bash
 
-USER_NAME=$(cat ./etc/user)
+USER_NAME=$(cat ./etc/suser)
 PASSWORD=$(cat ./etc/password)
 ROOT_PASSWORD=$(cat ./etc/root)
 
-./deploy.pl \
+./deploy_bsd.pl \
     --plan restart_nginx \
     --user $USER_NAME \
     --password $PASSWORD \
