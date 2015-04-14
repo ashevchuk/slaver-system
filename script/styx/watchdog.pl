@@ -4,7 +4,8 @@ use strict;
 use warnings;
 use utf8;
 
-use EV;
+use AnyEvent;
+
 use JSON;
 use File::Slurp;
 use Daemon::Generic;
@@ -27,7 +28,10 @@ sub watch {
 	$processes->{ $proc->{pid} } = $proc->{cmndline};
     }
 
+#    print $json->encode($processes);
+
     foreach my $proc ( @{ $services->{proc_table} } ) {
+	next if $proc->{enabled} != JSON::true;
 	my $pidfile = $proc->{pid_file};
 	if( -f $pidfile ) {
 	    my $pid = read_file( $pidfile );
@@ -53,7 +57,7 @@ sub watch {
 	printf("Respawning process %s...\n", $proc->{name});
 	my $pidfile = $proc->{pid_file};
 #	unlink( $pidfile );
-	system( sprintf("su -l - %s --command \"%s\"", $proc->{user}, $proc->{restart} );
+#	system( sprintf("su -l - %s --command \"%s\"", $proc->{user}, $proc->{restart} );
 
 	if ($? == -1) {
 	    print "Failed to restart service: $!\n";
@@ -65,6 +69,16 @@ sub watch {
     }
 }
 
+
+sub gd_run {
+    my $exit_cond = AnyEvent->condvar;
+
+    my $w = AnyEvent->timer (after => 0, interval => 5, cb => sub { eval { watch } } );
+    my $sig_term = AnyEvent->signal (signal => "TERM", cb => sub { $exit_cond->send; });
+
+    $exit_cond->recv;
+}
+
 newdaemon(
     progname => "watchdog",
     configfile => "/home/developer/devel/perl/Slaver/etc/services.json",
@@ -74,24 +88,3 @@ newdaemon(
     debug => 0,
     version => 1
 );
-
-sub gd_run {
-
-    my $wq = EV::signal 'QUIT', sub {
-      warn "sigquit received\n";
-      die;
-    };
-
-    my $wt = EV::signal 'TERM', sub {
-      warn "sigterm received\n";
-      die;
-    };
-
-    my $w0 = EV::timer 0, 60, sub {
-	eval {
-	    watch;
-	};
-    };
-
-    EV::run;
-}
