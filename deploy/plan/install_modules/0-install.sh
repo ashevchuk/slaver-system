@@ -8,4 +8,5 @@
 #rm -rf /tmp/memcached
 #rm -f /tmp/memcached.tar.gz
 #cpanm -n -f Catalyst::Model::Adaptor
-cpanm -n -f Catalyst::Plugin::Authorization::ACL
+#cpanm -n -f Catalyst::Plugin::Authorization::ACL
+cpanm -n -f Log::Dispatch::FileRotate

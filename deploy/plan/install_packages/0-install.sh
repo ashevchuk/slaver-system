@@ -5,4 +5,7 @@
 #./mkdir
 #cd /home/developer/devel/perl/Slaver/var/tmp/upload_state
 #./mkdir
-usermod -a -G fuse developer
+#usermod -a -G fuse developer
+cp /usr/home/developer/devel/perl/Slaver/etc/freebsd/newsyslog.conf.d/* /etc/newsyslog.conf.d/
+echo 'newsyslog_enable="YES"' >> /etc/rc.conf
+/etc/rc.d/newsyslog restart
