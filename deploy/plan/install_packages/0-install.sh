@@ -10,3 +10,5 @@
 #echo 'newsyslog_enable="YES"' >> /etc/rc.conf
 #/etc/rc.d/newsyslog restart
 #ps aux | grep slayer | grep -v ssh | grep -v bash | grep -v grep | grep -v "(sh)" | awk '{print $2}' | xargs kill -9
+#find /tmp -type f -maxdepth 1 -print -exec rm -f {} \;
+ps aux | grep mongod | grep -v grep | awk '{print $2}' | xargs kill -9
