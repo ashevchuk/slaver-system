@@ -1,0 +1,10 @@
+db.getMongo().getDB('admin').repairDatabase();
+db.getMongo().getDB('auth').repairDatabase();
+db.getMongo().getDB('avatars').repairDatabase();
+db.getMongo().getDB('blackboard').repairDatabase();
+db.getMongo().getDB('content').repairDatabase();
+db.getMongo().getDB('data').repairDatabase();
+db.getMongo().getDB('local').repairDatabase();
+db.getMongo().getDB('log').repairDatabase();
+db.getMongo().getDB('queue').repairDatabase();
+db.getMongo().getDB('thumbnails').repairDatabase();
