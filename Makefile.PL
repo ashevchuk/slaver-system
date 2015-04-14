@@ -167,6 +167,8 @@ requires 'URI::SmartURI';
 requires 'CatalystX::LeakChecker';
 requires 'CatalystX::Profile';
 
+requires 'Log::Dispatch::FileRotate';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 

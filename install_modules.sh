@@ -132,3 +132,4 @@ cpanm -n -f Test::More
 cpanm -n -f URI::SmartURI
 cpanm -n -f CatalystX::Profile
 cpanm -n -f CatalystX::LeakChecker
+cpanm -n -f Log::Dispatch::FileRotate
