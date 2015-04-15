@@ -2,7 +2,7 @@
 	"name": "mongodb",
 	"restart": "/home/developer/devel/perl/Slaver/etc/single/init.d/mongodb.start",
 	"pid_file": "/home/developer/devel/perl/Slaver/var/run/mongod.pid",
-	"cmd": "/home/developer/bin/mongod --config /home/developer/devel/perl/Slaver/etc/mongodb/mongod.conf --storageEngine wiredTiger --wiredTigerDirectoryForIndexes",
+	"cmd": "mongod",
 	"user": "developer",
 	"enabled": true
 },
@@ -10,7 +10,7 @@
 	"name": "mongos",
 	"restart": "/home/developer/devel/perl/Slaver/etc/single/init.d/mongos.start",
 	"pid_file": "/home/developer/devel/perl/Slaver/var/run/mongos.pid",
-	"cmd": "/home/developer/bin/mongos --config /home/developer/devel/perl/Slaver/etc/mongos/mongod.conf",
+	"cmd": "mongos",
 	"user": "developer",
 	"enabled": true
 },
@@ -18,23 +18,23 @@
 	"name": "memcached",
 	"restart": "/home/developer/devel/perl/Slaver/etc/single/init.d/memcached.start",
 	"pid_file": "/home/developer/devel/perl/Slaver/var/run/memcached.pid",
-	"cmd": "/home/developer/local/bin/memcached -d -m 256 -c 1024 -t 4 -P /home/developer/devel/perl/Slaver/var/run/memcached.pid",
+	"cmd": "memcached",
 	"user": "developer",
 	"enabled": true
 },
 {
 	"name": "slaver",
-	"restart": "/home/developer/devel/perl/Slaver/etc/single/init.d/slaver",
+	"restart": "/home/developer/devel/perl/Slaver/etc/single/init.d/slaver restart",
 	"pid_file": "/home/developer/devel/perl/Slaver/var/run/slaver.pid",
-	"cmd": "starman master --workers 2 --listen 127.0.0.1:8080 --listen /home/developer/devel/perl/Slaver/var/run/slaver.sock --pid /home/developer/devel/perl/Slaver/var/run/slaver.pid --user developer --group developer --daemonize slaver.psgi",
+	"cmd": "starman master",
 	"user": "developer",
 	"enabled": true
 },
 {
 	"name": "image_converter",
-	"restart": "/home/developer/devel/perl/Slaver/script/misc/service/image/convert/converter.pl start",
+	"restart": "/home/developer/devel/perl/Slaver/script/misc/service/image/convert/converter.pl restart",
 	"pid_file": "/home/developer/devel/perl/Slaver/var/run/image_converter.pid",
-	"cmd": "perl /home/developer/devel/perl/Slaver/script/misc/service/image/convert/converter.pl start",
+	"cmd": "converter.pl",
 	"user": "developer",
 	"enabled": true
 },
@@ -42,7 +42,7 @@
 	"name": "nginx",
 	"restart": "/home/developer/local/sbin/nginx",
 	"pid_file": "/home/developer/local/logs/nginx.pid",
-	"cmd": "nginx: master process /home/developer/local/sbin/nginx",
+	"cmd": "nginx: master process",
 	"user": "root",
 	"enabled": true
 }
