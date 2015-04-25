@@ -37,7 +37,7 @@ sub watch {
 	    my $pid = read_file( $pidfile );
 	    chomp($pid);
 	    if( exists $processes->{$pid} ) {
-		if ( $processes->{$pid} eq $proc->{cmd} ) {
+		if ( $processes->{$pid} =~ m/$proc->{cmd}/ ) {
 		    printf("Process %s is running\n", $proc->{name});
 		} else {
 		    printf("PID found, but for another processs. %s\n", $proc->{name});
@@ -56,8 +56,8 @@ sub watch {
     foreach my $proc ( @{ $respawn_processes } ) {
 	printf("Respawning process %s...\n", $proc->{name});
 	my $pidfile = $proc->{pid_file};
-#	unlink( $pidfile );
-#	system( sprintf("su -l - %s --command \"%s\"", $proc->{user}, $proc->{restart} );
+	unlink( $pidfile ) if -f $pidfile;
+	system( sprintf("su -l %s -c \"%s\"", $proc->{user}, $proc->{restart} ) );
 
 	if ($? == -1) {
 	    print "Failed to restart service: $!\n";
@@ -69,11 +69,10 @@ sub watch {
     }
 }
 
-
 sub gd_run {
     my $exit_cond = AnyEvent->condvar;
 
-    my $w = AnyEvent->timer (after => 0, interval => 5, cb => sub { eval { watch } } );
+    my $w = AnyEvent->timer (after => 10, interval => 300, cb => sub { eval { watch } } );
     my $sig_term = AnyEvent->signal (signal => "TERM", cb => sub { $exit_cond->send; });
 
     $exit_cond->recv;
