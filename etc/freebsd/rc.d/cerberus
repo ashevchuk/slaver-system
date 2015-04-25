@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+
+# PROVIDE: cerberus
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=cerberus
+rcvar=cerberus_enable
+
+load_rc_config $name
+
+: ${cerberus_enable="NO"}
+
+command="/usr/home/developer/devel/perl/Slaver/script/styx/watchdog.pl"
+command_args="restart"
+
+pidfile="/home/developer/devel/perl/Slaver/var/run/watchdog.pid"
+
+run_rc_command $*
