@@ -70,6 +70,10 @@ __PACKAGE__->config(
 #	    },
 
 
+__PACKAGE__->config->{session} = {
+            servers => ['127.0.0.1:11211']
+};
+
 #__PACKAGE__->setup_middleware('ReverseProxy');
 
 __PACKAGE__->log(Log::Log4perl::Catalyst->new(__PACKAGE__->path_to('slaver.log.conf')->stringify));
