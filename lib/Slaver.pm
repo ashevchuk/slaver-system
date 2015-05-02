@@ -27,7 +27,7 @@ use Catalyst qw/
 
 	Session
 	Session::State::Cookie
-	Session::Store::Memcached::Fast
+	Session::Store::MongoDB
 
 	StatusMessage
 
@@ -68,11 +68,6 @@ __PACKAGE__->config(
 #		# max_process_size_in_kb => '16384', # 16MB
 #		check_every_n_requests => 10
 #	    },
-
-
-__PACKAGE__->config->{session} = {
-            servers => ['127.0.0.1:11211']
-};
 
 #__PACKAGE__->setup_middleware('ReverseProxy');
 
