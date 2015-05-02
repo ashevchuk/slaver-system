@@ -27,7 +27,7 @@ use Catalyst qw/
 
 	Session
 	Session::State::Cookie
-	Session::Store::MongoDB
+	Session::Store::Memcached::Fast
 
 	StatusMessage
 
