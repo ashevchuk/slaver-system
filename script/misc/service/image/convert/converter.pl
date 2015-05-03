@@ -34,6 +34,7 @@ my $dbx = MongoDBx::Class->new(
 
 my $conn           = $dbx->connect(host => 'localhost', port => 27017);
 my $db             = $conn->get_database('content');
+my $data_grid      = $conn->get_database('data')->get_gridfs;
 my $thumbnail_grid = $conn->get_database('thumbnails')->get_gridfs;
 
 #$person->update({ name => 'Some Smart Guy' });
@@ -212,6 +213,27 @@ sub receive_tasks {
     unless ( -e $task->{file_name} ) {
 	$queue->reschedule_task($task);
 	next;
+    }
+
+    if ($task->{reinsert}) {
+	my $file_oid = MongoDB::OID->new(value => $task->{file_id});
+	eval {
+	    $data_grid->delete($file_oid);
+	    my $fh = IO::File->new($task->{file_name}, "r");
+	    my $file_id = $data_grid->insert($fh, {
+		_id => $file_oid,
+		filename => $task->{caption},
+		host => $task->{host}
+	    });
+	    $fh->close;
+	};
+
+	if ($@) {
+	    if ($task->{remove}) {
+		unlink $task->{file_name};
+	    }
+	    $queue->remove_task($task);
+	}
     }
 
     if ($task->{media_type} eq "image") {
