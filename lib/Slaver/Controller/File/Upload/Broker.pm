@@ -106,6 +106,7 @@ sub slurp : Local {
 
     my $convert_task = {
 	file_name => $file_path,
+	caption => $file_name,
 	extension => $suffix,
 	file_id => $file_id->to_string,
 	convert_to => "png",
