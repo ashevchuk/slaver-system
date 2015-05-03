@@ -232,7 +232,9 @@ sub receive_tasks {
 	    if ($task->{remove}) {
 		unlink $task->{file_name};
 	    }
+
 	    $queue->remove_task($task);
+	    next;
 	}
     }
 
