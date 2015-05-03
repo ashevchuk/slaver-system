@@ -3,22 +3,22 @@
 SERVICE_ROOT="/home/developer/devel/perl/Slaver/"
 
 SERVICE_WORKERS="8"
+SERVICE_ARGS="-d -e"
 
-SERVICE_ARGS="--daemonize"
-
-SERVICE_IMAGE="starman"
-
-SERVICE_USER="developer"
-SERVICE_GROUP="developer"
+SERVICE_INTERPRETER="perl"
+SERVICE_IMAGE="script/slaver_fastcgi.pl"
 
 SERVICE_APPLICATION="Slaver"
-SERVICE_APPLICATION_IMAGE="slaver.psgi"
-
-SERVICE_APPLICATION_CMD_PID=$(ps ax -opid,ppid,args | awk '{if ($3" "$4 == "starman master") print($1);}')
+SERVICE_APPLICATION_CMD="perl-fcgi-pm [$SERVICE_APPLICATION]"
+SERVICE_APPLICATION_CMD_PID=$(ps ax -opid,ppid,args | awk '{if ($3" "$4 == "perl-fcgi-pm [Slaver]") print($1);}')
 
 SERVICE_PID_FILE="${SERVICE_ROOT}var/run/slaver.pid"
-SERVICE_LISTEN="127.0.0.1:8080"
 SERVICE_SOCKET_FILE="${SERVICE_ROOT}var/run/slaver.sock"
+
+#SERVICE_INCLUDES+=" -I lib/WebAPI"
+#SERVICE_MODULES+=" -MWebAPIConfig"
+
+ORPHANED_PIDS=$(ps ax -opid,ppid,args | awk '{if (($3 == "perl-fcgi") && ($2 == 1)) printf("%s ", $1);}')
 
 if [ ! -f $SERVICE_PID_FILE ];
 then
@@ -42,7 +42,7 @@ then
 fi
 
 status() {
-    echo Checking status $SERVICE_APPLICATION
+    echo Checking status $SERVICE_IMAGE
 
     if [ "$SERVICE_PID" != "0" ];
     then
@@ -55,14 +55,14 @@ status() {
 }
 
 start() {
-    echo Starting $SERVICE_APPLICATION
+    echo Starting $SERVICE_IMAGE
 
     cd $SERVICE_ROOT
-    $SERVICE_IMAGE --workers $SERVICE_WORKERS --listen $SERVICE_LISTEN --listen $SERVICE_SOCKET_FILE --pid $SERVICE_PID_FILE --user $SERVICE_USER --group $SERVICE_GROUP $SERVICE_ARGS $SERVICE_APPLICATION_IMAGE
+    $SERVICE_INTERPRETER $SERVICE_MODULES $SERVICE_INCLUDES $SERVICE_IMAGE -n $SERVICE_WORKERS -l $SERVICE_SOCKET_FILE -p $SERVICE_PID_FILE $SERVICE_ARGS
 }
 
 stop() {
-    echo Killing $SERVICE_APPLICATION
+    echo Killing $SERVICE_IMAGE
 
     if [ "$SERVICE_PID" == "0" ];
     then
@@ -72,19 +72,10 @@ stop() {
 	sleep 1
     fi
 
-    rm -f $SERVICE_PID_FILE
-}
-
-reload() {
-    echo Restarting $SERVICE_APPLICATION
-
-    if [ "$SERVICE_PID" == "0" ];
-    then
-	 echo "Service is already stoped"
-    else
-	kill -HUP $SERVICE_PID > /dev/null 2>&1
-	sleep 1
-    fi
+    for ORPHANED_PID in $ORPHANED_PIDS; do
+	echo Killing orphaned process: $ORPHANED_PID
+	kill -KILL $ORPHANED_PID > /dev/null 2>&1
+    done
 }
 
 case "$1" in
@@ -99,16 +90,13 @@ case "$1" in
   status)
     status
     ;;
-  reload)
-    reload
-    ;;
   restart)
     $0 stop
     sleep 1
     $0 start
     ;;
   *)
-    echo "usage: $0 {start|stop|reload|restart}"
+    echo "usage: $0 {start|stop|restart}"
 esac
 
 exit 0

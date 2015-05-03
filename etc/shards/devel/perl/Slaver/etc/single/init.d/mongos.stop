@@ -1,0 +1,13 @@
+#!/bin/bash
+
+~/bin/mongos --config /home/developer/devel/perl/Slaver/etc/mongos/mongod.conf --shutdown
+
+PID=$(ps aux | grep mongos/mongod.conf | grep -v grep | awk '{print $2}')
+
+if [ $PID ]
+then
+    echo "Killing $PID"
+    kill -9 $PID
+else
+    echo "Process not found"
+fi

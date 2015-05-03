@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PID=$(cat /home/developer/devel/perl/Slaver/var/run/memcached.pid)
+
+PID=$(ps aux | grep "memcached -d" | grep -v grep | awk '{print $2}')
+
+if [ $PID ]
+then
+    echo "Killing $PID"
+    kill -9 $PID
+else
+    echo "Process not found"
+fi
+
+rm -f /home/developer/devel/perl/Slaver/var/run/memcached.pid

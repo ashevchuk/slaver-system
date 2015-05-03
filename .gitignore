@@ -6,14 +6,4 @@
 *.git
 *.sock
 cache/*
-root/cache/*
-tmp/*
-var/tmp/*
-var/tmp/tt/home/*
-var/tmp/mongodb/*
-var/data/*
-var/log/mongodb/*
-var/monitor/*
-var/run/*
-var/data/backup/dump/*
 blib/*
