@@ -34,12 +34,14 @@ use Catalyst qw/
 	I18N
 
 	Cache
-	Cache::FastMmap
-	Cache::Store::FastMmap
+	Cache::Memcached::Fast
+	PageCache
 
 	Widget
 	SmartURI
 /;
+#	Cache::FastMmap
+#	Cache::Store::FastMmap
 
 #	Session::Store::MongoDB
 #	Session::Store::Memcached::Fast
