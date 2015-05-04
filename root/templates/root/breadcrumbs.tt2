@@ -10,7 +10,7 @@
 
 [% IF category_items %]
 <ul class="breadcrumb breadcrumb-sub">
-&#x21B3;
+
 [% FOREACH category_item_id IN category_items.order %]
 [% SET category_item = category_items.nodes.$category_item_id %]
     <li><a href="[% category_item.path.last.uri | html %]">[% loc(category_item.caption) %]</a></li>
