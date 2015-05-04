@@ -2,19 +2,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=[% IF charset.defined %][% charset %][% ELSE %][% c.config.application.content.charset %][% END %]" />
-		<meta http-equiv="Content-Language" content="[% IF language.defined %][% language %][% ELSE %][% c.config.application.content.language %][% END %]" />
+		<meta http-equiv="Content-Type" content="text/html; charset=[% IF charset.defined %][% charset | html %][% ELSE %][% c.config.application.content.charset | html %][% END %]" />
+		<meta http-equiv="Content-Language" content="[% IF language.defined %][% language | html %][% ELSE %][% c.config.application.content.language | html %][% END %]" />
 
-		<meta http-equiv="powered by" content="[% c.config.name -%] [% c.config.version -%]" />
+		<meta http-equiv="powered by" content="[% c.config.name | html -%] [% c.config.version | html -%]" />
 
-		<meta name="language" content="[% IF language %][% language %][% ELSE %][% c.config.application.content.language %][% END %]" />
-		<meta name="keywords" content="[% IF keywords %][% keywords %][% ELSE %][% c.config.application.content.keywords %][% END %]" />
-		<meta name="description" content="[% IF description %][% description %][% ELSE %][% c.config.application.content.description %][% END %]" />
+		<meta name="language" content="[% IF language %][% language | html %][% ELSE %][% c.config.application.content.language | html %][% END %]" />
+		<meta name="keywords" content="[% IF keywords %][% keywords | html %][% ELSE %][% c.config.application.content.keywords | html %][% END %]" />
+		<meta name="description" content="[% IF description %][% description | html %][% ELSE %][% c.config.application.content.description | html %][% END %]" />
 
-		<meta name="robots" content="[% IF robots %][% robots%][% ELSE %][% robots or c.config.application.content.robots %][% END %]" />
+		<meta name="robots" content="[% IF robots %][% robots | html %][% ELSE %][% robots or c.config.application.content.robots | html %][% END %]" />
 <!-- Automatic meta includes -->
 		[% FOREACH meta IN include.header.meta %]
-		<meta name="[% meta.name %]" content="[% meta.content %]" />
+		<meta name="[% meta.name | html %]" content="[% meta.content | html %]" />
 		[% END %]
 <!-- /Automatic meta includes -->
 

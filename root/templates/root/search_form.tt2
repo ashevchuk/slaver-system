@@ -7,7 +7,7 @@
     });
 </script>
 
-<form id="query-form" action="javascript:return;" class="navbar-form navbar-right">
+<form id="query-form" action="javascript:$( location ).attr(\"href\", \"/search/\" + $(\"#query-input\").val());" class="navbar-form navbar-right">
     <div class="input-group">
 	<input id="query-input" type="text" class="form-control col-lg-8" value="[% search_query | html %]" placeholder="[% l('Search') %]" name="query">
 	<span class="input-group-btn">

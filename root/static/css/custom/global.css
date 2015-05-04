@@ -124,3 +124,23 @@
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
+@media (min-width: 768px) {
+    .navbar-collapsed {
+	display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-toggled {
+	display: block !important;
+	visibility: visible !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-toggled {
+	display: none !important;
+	visibility: hidden !important;
+    }
+}

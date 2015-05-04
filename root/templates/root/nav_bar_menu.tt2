@@ -1,11 +1,28 @@
 [% USE cache = Cache ( cache_root => c.config.application.content.template.cache_root ) %]
 		<ul class="nav navbar-nav">
-			<li><a href="/"><i class="icon-fixed-width fa fa-home"></i>[% loc('Home') %]</a></li>
-			<li><a href="/content/pages/about/"><i class="icon-fixed-width fa fa-group"></i>[% loc('About') %]</a></li>
-			<li><a href="/content/pages/contacts/"><i class="icon-fixed-width fa fa-envelope"></i>[% loc('Contacts') %]</a></li>
+<!--
+			<li>
+			    <a href="/">
+				<i class="icon-fixed-width fa fa-home">
+				</i>
+			    </a>
+			</li>
+			<li>
+			    <a href="/content/pages/about/">
+				<i class="icon-fixed-width fa fa-group">
+				</i>
+			    </a>
+			</li>
+			<li>
+			    <a href="/content/pages/contacts/">
+				<i class="icon-fixed-width fa fa-envelope">
+				</i>
+			    </a>
+			</li>
+-->
 			<li class="dropdown">
 				<a href="#" class="dropdown" data-toggle="dropdown">
-				    <i class="icon-fixed-width fa fa-cloud"></i>[% loc('Categories') %]<b class="caret"></b>
+				    <i class="icon-fixed-width fa fa-cloud2"></i>[% loc('Resources') %]<b class="caret"></b>
 				</a>
 
 [% cache.inc( 'template' => 'templates/root/block/menu/nested_list.tt2',
@@ -16,7 +33,6 @@
 
 			</li>
 
-
 			<li class="dropdown">
 				<a href="#" class="dropdown" data-toggle="dropdown">
 				    [% IF c.user_exists %]
@@ -25,15 +41,15 @@
 					</i>
 					[% c.user.name OR c.user.username | html %]
 				    [% ELSE %]
-					<i class="icon-fixed-width fa fa-sign-in"></i>[% loc('Sign in') %]
+					<i class="icon-fixed-width fa fa-sign-in2"></i>[% loc('Sign in') %]
 				    [% END %]
 				    <b class="caret"></b>
-			</a>
-			<div class="dropdown-menu" role="menu">
-			    <div>
-                        	    [% INCLUDE templates/root/user_panel_menu.tt2 %]
-	                    </div>
-			</div>
+				</a>
+				<div class="dropdown-menu" role="menu">
+				    <div>
+                        		[% INCLUDE templates/root/user_panel_menu.tt2 %]
+	                	    </div>
+				</div>
 			</li>
 
 [% cache.inc( 'template' => 'templates/root/locale.tt2',
