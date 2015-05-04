@@ -201,6 +201,13 @@ sub tree {
   $config->{limit}->{depth} = 32 unless defined $config->{limit}->{depth};
   $config->{limit}->{depth}--;
 
+  unless (defined $config->{model}) {
+    my $context = $self->context;
+    my $db   = $context->model('Data::Provider')->db('content');
+    my $coll = $db->get_collection('menu');
+    $config->{model} = $coll;
+  }
+
   return $self->depth_tree($config);
 }
 

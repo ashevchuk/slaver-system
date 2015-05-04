@@ -1,9 +1,22 @@
 [% IF breadcrumbs %]
+[% SET category_items = c.model('Content::Menu').tree({limit => { depth => 1}, node_id => category_id }) %]
+
 <div class="row">
 <ul class="breadcrumb">
 [% FOREACH link IN breadcrumbs %]
-  <li><a href="[% link.uri %]">[% loc(link.caption) %]</a> <span class="breadcrumb-separator"></span></li>
+  <li><a href="[% link.uri  | html%]">[% loc(link.caption) %]</a></li>
 [% END %]
 </ul>
+
+[% IF category_items %]
+<ul class="breadcrumb breadcrumb-sub">
+&#x21B3;
+[% FOREACH category_item_id IN category_items.order %]
+[% SET category_item = category_items.nodes.$category_item_id %]
+    <li><a href="[% category_item.path.last.uri | html %]">[% loc(category_item.caption) %]</a></li>
+[% END %]
+</ul>
+[% END %]
+
 </div>
 [% END %]

@@ -144,3 +144,29 @@
 	visibility: hidden !important;
     }
 }
+
+.breadcrumb-sub {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.breadcrumb-sub {
+    margin-bottom: 0px;
+    padding-left: 32px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.breadcrumb-sub {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.breadcrumb-sub > li + li:before {
+    content: ":";
+    padding: 0 4px;
+    color: #cccccc;
+}
