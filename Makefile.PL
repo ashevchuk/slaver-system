@@ -168,6 +168,8 @@ requires 'CatalystX::LeakChecker';
 requires 'CatalystX::Profile';
 
 requires 'Log::Dispatch::FileRotate';
+requires 'Catalyst::Plugin::Cache::Memcached::Fast';
+requires 'Catalyst::Plugin::PageCache';
 
 requires 'WWW::Sitemap::XML';
 
