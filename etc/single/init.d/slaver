@@ -2,7 +2,7 @@
 
 SERVICE_ROOT="/home/developer/devel/perl/Slaver/"
 
-SERVICE_WORKERS="4"
+SERVICE_WORKERS="8"
 
 SERVICE_ARGS="--daemonize"
 
