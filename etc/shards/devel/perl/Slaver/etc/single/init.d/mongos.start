@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/bin/mongos --config /home/developer/devel/perl/Slaver/etc/mongos/mongod.conf

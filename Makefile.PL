@@ -169,6 +169,8 @@ requires 'CatalystX::Profile';
 
 requires 'Log::Dispatch::FileRotate';
 
+requires 'WWW::Sitemap::XML';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 

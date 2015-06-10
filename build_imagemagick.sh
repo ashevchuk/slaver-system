@@ -42,7 +42,15 @@ gmake clean
 
 LDFLAGS="-fPIC -L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE -L/usr/local/lib -L/home/developer/local/lib"
 MAGICK_LDFLAGS="-fPIC -L/usr/local/lib -L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE -lfreetype -L/home/developer/local/lib"
-CFLAGS="-fPIC"
+CFLAGS="-fPIC -L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE -L/usr/local/lib -L/home/developer/local/lib"
+PKG_CONFIG_PATH="${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE"
+PKG_CONFIG_LIBDIR="${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE"
+
+export CPPFLAGS="-fPIC -L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE"
+export LDFLAGS="-fPIC -L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE -L/usr/local/lib -L/home/developer/local/lib"
+export PKG_CONFIG_PATH="${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE"
+export PKG_CONFIG_LIBDIR="${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE"
+
 ./configure \
     CFLAGS="-fPIC -I/home/developer/local/include" \
     CPPFLAGS="-fPIC -I/home/developer/local/include" \
@@ -54,12 +62,26 @@ CFLAGS="-fPIC"
     --without-gcc-arch \
     --with-quantum-depth=16 \
     --without-x \
+    --disable-openmp \
+    --with-sysroot=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
     --with-perl=$HOME/perl5/perlbrew/perls/perl-$PERL/bin/perl \
-    --with-perl-options=LIB=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE
+    --with-perl-options="LIB=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    PERL_INC=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    PERL_LIB=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    LDDLFLAGS=-L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    CCFLAGS=-L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    CCDLAGS=-L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    CCCDLAGS=-L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    INC=-L${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE \
+    LIBS=${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE" \
 
 #--with-perl-options=PREFIX=/some/place". Other options accepted by MakeMaker are 'LIB', 'LIBPERL_A', 'LINKTYPE', and 'OPTIMIZE'. See the ExtUtils::MakeMaker(3) manual page for more information on configuring PERL extensions.
 
-gmake
+mkdir $BUILD_DIR/ImageMagick-$IMAGE_MAGICK/magick/.libs
+
+ln -s ${HOME}/perl5/perlbrew/perls/perl-${PERL}/lib/${PERL}/amd64-freebsd-thread-multi-ld/CORE/libperl.so $BUILD_DIR/ImageMagick-$IMAGE_MAGICK/magick/.libs/libperl.so
+
+gmake V=1 all perl-build 
 
 gmake install
 
