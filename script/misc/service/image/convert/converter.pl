@@ -320,6 +320,10 @@ sub receive_tasks {
   #	select( undef, undef, undef, 1);
 }
 
+sub do_receive_tasks {
+    eval { receive_tasks };
+}
+
 newdaemon(
   progname   => "image_converter",
   configfile => "/home/developer/devel/perl/Slaver/etc/image_converter.conf",
@@ -333,7 +337,7 @@ newdaemon(
 sub gd_run {
   my $exit_handler =
     AnyEvent->signal(signal => "TERM", cb => sub { $exit_flag->send(); });
-  my $stat_handler = AnyEvent->timer(interval => 60, cb => \&receive_tasks);
+  my $stat_handler = AnyEvent->timer(interval => 60, cb => \&do_receive_tasks);
 
   $exit_flag->recv;
 
