@@ -32,7 +32,14 @@ my $dbx = MongoDBx::Class->new(
   search_dirs => ['/home/developer/devel/perl/Slaver/lib/Slaver/Schema']
 );
 
-my $conn           = $dbx->connect(host => 'localhost', port => 27017);
+my $conn           = $dbx->connect(
+    host => 'localhost',
+    port => 27017,
+    auto_reconnect => 1,
+    auto_connect => 1,
+    timeout => 600000,
+    query_timeout => 600000
+);
 my $db             = $conn->get_database('content');
 my $data_grid      = $conn->get_database('data')->get_gridfs;
 my $thumbnail_grid = $conn->get_database('thumbnails')->get_gridfs;
@@ -208,15 +215,17 @@ sub receive_tasks {
   while (my $task = $queue->reserve_task({query => {host => $hostname}})) {
 
 #    		my $json = $coder->encode ($task);
-#    		printf("received task: %s\n", $json);
+#    		printf("Received task: %s\n", $json);
 
     unless ( -e $task->{file_name} ) {
 	$queue->reschedule_task($task);
+#	printf("File not found: %s\n", $task->{file_name});
 	next;
     }
 
     if ($task->{reinsert}) {
 	my $file_oid = MongoDB::OID->new(value => $task->{file_id});
+#	printf("Try to reinsert file OID: %s\n", $task->{file_id});
 	eval {
 	    $data_grid->delete($file_oid);
 	    my $fh = IO::File->new($task->{file_name}, "r");
@@ -229,6 +238,7 @@ sub receive_tasks {
 	};
 
 	if ($@) {
+#	    printf("Error while reinserting file: %s\n", $@);
 	    if ($task->{remove}) {
 		unlink $task->{file_name};
 	    }
@@ -237,6 +247,8 @@ sub receive_tasks {
 	    next;
 	}
     }
+
+#    printf("Try to convert %s...\n", $task->{media_type});
 
     if ($task->{media_type} eq "image") {
       if ($task->{media_sub_type} eq "vnd.djvu") {
@@ -298,12 +310,13 @@ sub receive_tasks {
     }
 
     if (defined $task->{remove} && $task->{remove}) {
+#      printf("Removing file\n");
       unlink $task->{file_name};
     }
-
+#    printf("Removing task\n");
     $queue->remove_task($task);
   }
-
+#	printf("End of tasks\n");
   #	select( undef, undef, undef, 1);
 }
 
