@@ -55,6 +55,14 @@ sub end : Private {
 
     $self->return_error( $c ) if scalar @{ $c->error };
 
+    if (my $category_id = $c->stash->{category_id}) {
+	my $category = $c->model('Content::Menu')->id_to_alias($category_id);
+	my $category_obj = $c->model('Content::Menu')->from_id($category);
+	my $path_to_category = $c->model('Content::Menu')->path_to($category);
+	$c->stash('breadcrumbs', $path_to_category);
+	$c->stash('category', $category_obj);
+    }
+
     $c->response->content_type('text/html; charset=utf-8') unless ( $c->response->content_type );
 
     return 1 if $c->response->status =~ /^3\d\d$/;

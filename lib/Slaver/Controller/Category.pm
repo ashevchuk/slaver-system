@@ -25,7 +25,7 @@ sub index : Path CaptureArgs(3) {
 
     my $result;
 
-    my $path_to_category = $c->model('Content::Menu')->path_to($category);
+#    my $path_to_category = $c->model('Content::Menu')->path_to($category);
 
     my $db = $c->model('Data::Provider::Adaptor')->db('content');
 
@@ -52,9 +52,8 @@ sub index : Path CaptureArgs(3) {
     $c->stash('results', $result);
 
     $c->stash('category_id', $category_obj->_id->value);
-    $c->stash('category', $category_obj);
-
-    $c->stash('breadcrumbs', $path_to_category);
+#    $c->stash('category', $category_obj);
+#    $c->stash('breadcrumbs', $path_to_category);
 
     $c->stash('template' => 'templates/root/content/pages/category/results.tt2');
 }

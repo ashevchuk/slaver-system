@@ -68,7 +68,7 @@ sub item : Private {
 
     my $db = $c->model('Data::Provider::Adaptor')->db('content');
 
-    my $coll = $db->get_collection('menu');
+#    my $coll = $db->get_collection('menu');
     my $content = $db->get_collection('content');
 
     my $result;
@@ -88,11 +88,12 @@ sub item : Private {
 	if ( exists $doc->{props}->{categories} ) {
 	    if ( scalar @{ $doc->{props}->{categories} } ) {
 		my $category = $doc->{props}->{categories}->[0];
-		my $path_to_category = $c->model('Content::Menu')->path_to_by_id($category);
-		my $category_obj = $c->model('Content::Menu')->by_id($category);
-		$c->stash('category_id', $category_obj->_id->value);
+#		my $path_to_category = $c->model('Content::Menu')->path_to_by_id($category);
+#		my $category_obj = $c->model('Content::Menu')->by_id($category);
+#		$c->stash('category_id', $category_obj->_id->value);
+		$c->stash('category_id', $category);
 #		$c->stash('category', $category_obj);
-		$c->stash('breadcrumbs', $path_to_category);
+#		$c->stash('breadcrumbs', $path_to_category);
 	    }
 	}
 

@@ -110,7 +110,7 @@ sub id_to_alias {
   my ($self, $id) = @_;
 
   my $context = $self->context;
-
+  $id = MongoDB::OID->new(value => $id) unless ref $id eq "MongoDB::OID";
   my $db   = $context->model('Data::Provider')->db('content');
   my $coll = $db->get_collection('menu');
   my $cat  = $coll->find_one({_id => $id});
