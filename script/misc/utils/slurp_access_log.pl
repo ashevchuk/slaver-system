@@ -38,6 +38,10 @@ my $strp_nginx_datetime = DateTime::Format::Strptime->new(
     locale    => 'en_US',
     time_zone => 'UTC',
 );
+
+my $client     = MongoDB::MongoClient->new(host => 'localhost', port => 27017);
+my $database   = $client->get_database( 'log' );
+my $collection = $database->get_collection('access');
 				
 open my $fh, "<", $log or die;
 
@@ -51,8 +55,8 @@ my $handle = AnyEvent::Handle->new(
     	    my( $h, $line ) = @_;
     	    #print "line=$line\n";
 	    my $deparsed = Nginx::ParseLog::parse($line);
-#	    my $dt = $strp_nginx_datetime->parse_datetime($deparsed->{'time'});
-#	    $deparsed->{'time'} = $dt if defined $dt;
+	    my $dt = $strp_nginx_datetime->parse_datetime($deparsed->{'time'});
+	    $deparsed->{'time'} = $dt if defined $dt;
 #'bytes_send' => '4651',
 #'time' => '27/Aug/2015:19:56:32 +0000',
 #'ip' => '10.100.100.6',
@@ -63,7 +67,8 @@ my $handle = AnyEvent::Handle->new(
 #'referer' => '-',
 	    ($deparsed->{method}, $deparsed->{uri}, $deparsed->{protocol}) = 
 		$deparsed->{request} =~ m/^(.*?)\s(.*?)\s(.*?)$/sg;
-	    print Data::Dumper->Dump([$deparsed]);
+	    $collection->insert($deparsed);
+#	    print Data::Dumper->Dump([$deparsed]);
         } );
     }
 );										
