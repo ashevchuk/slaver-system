@@ -34,11 +34,11 @@ use Catalyst qw/
 	I18N
 
 	Cache
-	Cache::Memcached::Fast
-	PageCache
 
 	Widget
 	SmartURI
+
+	PageCache
 /;
 #	Cache::FastMmap
 #	Cache::Store::FastMmap
