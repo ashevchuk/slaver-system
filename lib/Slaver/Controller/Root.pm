@@ -53,14 +53,20 @@ sub default :Path {
 sub end : Private {
     my ( $self, $c ) = @_;
 
-    $self->return_error( $c ) if scalar @{ $c->error };
+    if ( $c->error ) {
 
-    if (my $category_id = $c->stash->{category_id}) {
-	my $category = $c->model('Content::Menu')->id_to_alias($category_id);
-	my $category_obj = $c->model('Content::Menu')->from_id($category);
-	my $path_to_category = $c->model('Content::Menu')->path_to($category);
-	$c->stash('breadcrumbs', $path_to_category);
-	$c->stash('category', $category_obj);
+	$self->return_error( $c );
+
+    } else {
+
+	if ( my $category_id = $c->stash->{category_id} ) {
+	    my $category = $c->model('Content::Menu')->id_to_alias($category_id);
+	    my $category_obj = $c->model('Content::Menu')->from_id($category);
+	    my $path_to_category = $c->model('Content::Menu')->path_to($category);
+	    $c->stash('breadcrumbs', $path_to_category);
+	    $c->stash('category', $category_obj);
+	}
+
     }
 
     $c->response->content_type('text/html; charset=utf-8') unless ( $c->response->content_type );
@@ -76,9 +82,11 @@ sub return_error : Private {
 
     if ( scalar @{ $c->error } ) {
 
-	for my $error ( @{ $c->error } ) {
-	    $c->log->error($error);
-	}
+	eval {
+	    for my $error ( @{ $c->error } ) {
+		$c->log->error($error);
+	    }
+	};
 
 #	$c->log->error(dump($c));
 
