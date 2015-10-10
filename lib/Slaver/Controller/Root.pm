@@ -103,7 +103,8 @@ sub return_error : Private {
 
 	    foreach my $trace_item (@{$c->{_stacktrace}}) {
 
-		if ( -e $trace_item->{file} && my @lines = read_file($trace_item->{file}) ) {
+		if ( -f $trace_item->{file} ) {
+		    my @lines = read_file($trace_item->{file});
 		    my $start_slice = $trace_item->{line} - $c->config->{stacktrace}->{lines};
 		    $start_slice = 0 if $start_slice < 0;
 
