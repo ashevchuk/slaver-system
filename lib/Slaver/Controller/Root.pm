@@ -53,16 +53,18 @@ sub default :Path {
 sub end : Private {
     my ( $self, $c ) = @_;
 
-    if ( $c->error ) {
+    if ( scalar @{ $c->error } ) {
 
 	$self->return_error( $c );
 
     } else {
-
 	if ( my $category_id = $c->stash->{category_id} ) {
+	    $c->log->debug("Got category id: " . $category_id);
+
 	    my $category = $c->model('Content::Menu')->id_to_alias($category_id);
 	    my $category_obj = $c->model('Content::Menu')->from_id($category);
 	    my $path_to_category = $c->model('Content::Menu')->path_to($category);
+
 	    $c->stash('breadcrumbs', $path_to_category);
 	    $c->stash('category', $category_obj);
 	}
