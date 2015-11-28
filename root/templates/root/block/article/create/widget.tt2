@@ -43,7 +43,7 @@ $(function() {
 	    }
 	})
 	.done(function() {
-	    //alert( "success" );
+	    alert( "success" );
 	})
 	.fail(function() {
 	    alert( "error" );
