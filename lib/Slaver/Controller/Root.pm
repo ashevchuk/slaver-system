@@ -12,6 +12,11 @@ BEGIN { extends 'Slaver::Base::Controller::Generic' }
 
 use Data::Dump qw(dump);
 
+our $session_renew_id_uris = [
+    '^auth',
+    '^locale'
+];
+
 __PACKAGE__->config(namespace => '');
 
 sub begin : Private {
@@ -20,6 +25,15 @@ sub begin : Private {
     Log::Log4perl::MDC->put("ip", $c->req->address());
 
 #    $c->log->debug("Remote IP: " . $c->req->address());
+
+    if ( $c->config->{application}->{session}->{renewal}->{path} ) {
+	for ( map qr/$_/, @{ $c->config->{application}->{session}->{renewal}->{path} } ) {
+	    if ( $c->request->path =~ m{$_}i ) {
+		$c->change_session_id;
+		last;
+	    }
+	}
+    }
 
     my $page = $c->stash->{page};
     $page = $c->request->params->{page} if $c->request->params->{page};
