@@ -171,6 +171,8 @@ requires 'Log::Dispatch::FileRotate';
 requires 'Catalyst::Plugin::Cache::Memcached::Fast';
 requires 'Catalyst::Plugin::PageCache';
 
+requires 'HTML::Escape';
+
 requires 'WWW::Sitemap::XML';
 
 test_requires 'Test::More' => '0.88';

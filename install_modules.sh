@@ -136,3 +136,4 @@ cpanm -n -f Log::Dispatch::FileRotate
 cpanm -n -f WWW::Sitemap::XML
 cpanm -n -f Catalyst::Plugin::Cache::Memcached::Fast
 cpanm -n -f Catalyst::Plugin::PageCache
+cpanm -n -f HTML::Escape
