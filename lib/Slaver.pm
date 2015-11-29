@@ -13,9 +13,9 @@ use Log::Log4perl::Catalyst;
 #use Data::Page;
 
 use Catalyst::Runtime 5.90;
-
+#	-Debug
 use Catalyst qw/
-	-Debug
+
 	StackTrace
 	ConfigLoader
 
