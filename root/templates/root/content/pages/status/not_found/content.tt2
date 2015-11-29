@@ -4,7 +4,11 @@
 
     <div id="content">
 	<p>[% c.loc('Page not found') %] : <a href="[% c.req.uri | html %]">[% c.req.uri | html %]</a></p>
-	<p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
+
+	[% IF c.req.uri != c.request.headers.referer %]
+	    <p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
+	[% END %]
+
 	[% content %]
     </div>
 

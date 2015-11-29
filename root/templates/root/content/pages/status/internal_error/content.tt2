@@ -6,17 +6,17 @@
 
 <div class="internal-error-container">
 
-	<span class="internal-error-header">[% c.loc('Internal error') %]</span>
+    <span class="internal-error-header">[% c.loc('Internal error') %]</span>
 
-	<p>[% c.loc('Internal error') %] : <a href="[% c.req.uri | html %]">[% c.req.uri | html %]</a></p>
+    [% IF c.req.uri != c.request.headers.referer %]
+        <p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
+    [% END %]
 
     [% IF errors %]
 	[% FOREACH error IN errors %]
 	    <pre>[% error | html %]</pre>
 	[% END %]
     [% END %]
-
-	<p><a href="[% c.request.headers.referer | html %]">[% c.loc('Go back') %]</a></p>
 
 	[% IF content %]
 	    <div class="trace-item">
