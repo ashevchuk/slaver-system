@@ -108,6 +108,7 @@
 .login-form-menu {
     margin: 10px;
     width: 180px;
+    display: inline-block;
 }
 
 .user-dashboard-menu {
