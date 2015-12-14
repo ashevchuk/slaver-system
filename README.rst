@@ -209,3 +209,7 @@ Setup System Paramenters
     $ echo 'kernel.shmmax = 494967295' >> /etc/sysctl.conf
     $ echo 'kernel.shmall = 268435456' >> /etc/sysctl.conf
     $ echo 'net.core.somaxconn = 16096' >> /etc/sysctl.conf
+
+MongoDB Build Paramenters
+=====
+    scons CC=clang37 CXX=clang++37 all
