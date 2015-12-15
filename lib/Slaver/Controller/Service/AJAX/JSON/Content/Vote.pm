@@ -25,28 +25,40 @@ sub mark :Local {
     my $vote_inc = 1;
     my $vote_field = $body->{vote} > 0 ? "likes" : "dislikes";
 
-    my $vote_issue = $votes->find_one({
-	session => $c->sessionid,
-	document => MongoDB::OID->new( value => $body->{document_id} ),
-    });
+    my $vote_issue_key = sprintf("session:vote:%s:doc%s", $c->sessionid, $body->{document_id});
+
+    my $vote_issue = $c->cache->get($vote_issue_key);
+
+#    my $vote_issue = $votes->find_one({
+#	session => $c->sessionid,
+#	document => MongoDB::OID->new( value => $body->{document_id} ),
+#    });
 
     if ( $vote_issue ) {
 	if ( $vote_issue->{mark} eq $vote_field ) {
 	    $vote_inc = -1;
-	    $vote_issue->remove;
+#	    $vote_issue->remove;
+	    $c->cache->remove($vote_issue_key);
 	}
 	else {
 	    $vote_inc = 0;
 	}
     }
 
-    $votes->insert({
+#    $votes->insert({
+#	session => $c->sessionid,
+#	document => MongoDB::OID->new( value => $body->{document_id} ),
+#	mark => $vote_field,
+#	issue => DateTime->now,
+#	_class => "Content::Type::Votes"
+#    }) if $vote_inc > 0;
+
+    $c->cache->set($vote_issue_key, {
 	session => $c->sessionid,
-	document => MongoDB::OID->new( value => $body->{document_id} ),
+	document => $body->{document_id},
 	mark => $vote_field,
-	issue => DateTime->now,
-	_class => "Content::Type::Votes"
-    }) if $vote_inc > 0;
+	issue => DateTime->now->epoch,
+    }, 60*60*24*1) if $vote_inc > 0;
 
     my $document = $content->find_and_modify({
 	query => { '_id' => MongoDB::OID->new( value => $body->{document_id} ) },
