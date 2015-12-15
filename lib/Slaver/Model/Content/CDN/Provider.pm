@@ -34,6 +34,8 @@ sub get_cluster_hosts {
     while ( my $stat = $stats->next ) {
 	push @{ $hosts }, $stat->{host};
     }
+    
+    push @{ $hosts }, $context->config->{application}->{host} unless scalar @{ $hosts };
 
     return $hosts;
 }

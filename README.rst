@@ -1,11 +1,23 @@
 Slaver
 ============
 
-Distributed Smart System. Version 0.01093.
-Big Data, Distributed, Event-based, Peer-to-Peer Systems, Artificial Intelligence, Parallel Computing Research Project.
+Distributed System. Version 0.01093.
+Big Data, Distributed, Event-based, Peer-to-Peer Systems, Parallel Computing Research Project.
 
 **MongoDB** configuration script
 =====
+
+Initialize MongoDB Config servers replica set
+
+rs.initiate( {
+    _id: "configReplSet",
+    configsvr: true,
+    members: [
+	{ _id: 0, host: "config0.lambda-cloud.net:27019" },
+	{ _id: 1, host: "config1.lambda-cloud.net:27019" },
+	{ _id: 2, host: "config2.lambda-cloud.net:27019" }
+    ]
+} )
 
 sh.addShard( "nodeX.enslaver.net:27018" )
 
@@ -212,4 +224,5 @@ Setup System Paramenters
 
 MongoDB Build Paramenters
 =====
+    MongoDB 3.2.0 must be builded by clang 3.7
     scons CC=clang37 CXX=clang++37 all
