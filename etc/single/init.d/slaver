@@ -1,12 +1,16 @@
 #!/bin/bash
 
+source /home/developer/perl5/perlbrew/etc/bashrc
+export LD_LIBRARY_PATH=/home/developer/local/lib
+
 SERVICE_ROOT="/home/developer/devel/perl/Slaver/"
 
-SERVICE_WORKERS="8"
+SERVICE_WORKERS="4"
 
 SERVICE_ARGS="--daemonize"
 
-SERVICE_IMAGE="starman"
+SERVICE_IMAGE_ROOT="/home/developer/perl5/perlbrew/perls/perl-5.22.0/bin/"
+SERVICE_IMAGE="${SERVICE_IMAGE_ROOT}starman"
 
 SERVICE_USER="developer"
 SERVICE_GROUP="developer"
