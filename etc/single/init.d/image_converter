@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source /home/developer/perl5/perlbrew/etc/bashrc
+export LD_LIBRARY_PATH=/home/developer/local/lib
+
 SERVICE_ROOT="/home/developer/devel/perl/Slaver/"
 
 SERVICE_PID_FILE="${SERVICE_ROOT}var/run/image_converter.pid"
