@@ -188,6 +188,7 @@ sub html2image {
   return if $@;
   my $is_empty_image =
     `~/bin/convert $orig_temp_file -format "%[fx:mean>0.99?1:0]" info:`;
+  printf("page image is empty: %s", $page) if $is_empty_image;
   unlink($orig_temp_file) if $is_empty_image;
   return if $is_empty_image;
   return unless (-e $orig_temp_file);
@@ -396,7 +397,7 @@ sub receive_tasks {
     printf("Removing task\n");
     $queue->remove_task($task);
   }
-	printf("End of tasks\n");
+#	printf("End of tasks\n");
   #	select( undef, undef, undef, 1);
 }
 
