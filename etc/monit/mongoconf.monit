@@ -22,7 +22,7 @@ check process mongoconf with pidfile /home/developer/devel/perl/Slaver/var/run/c
     if failed
 	host 127.0.0.1
 	port 27019
-	protocol mongodb
+	type tcp
 	with timeout 60 seconds
 	retry 10
 	for 64 cycles
