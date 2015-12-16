@@ -1,0 +1,25 @@
+check process imageconverter with pidfile /usr/home/developer/devel/perl/Slaver/var/run/image_converter.pid
+    every 2 cycles
+    group app
+    mode active
+    depends on mongos, mongodb, mongoconf, memcached
+    start program =   "/usr/home/developer/devel/perl/Slaver/etc/single/init.d/image_converter start"
+	as uid "developer" and gid "developer"
+	with timeout 60 seconds
+    stop program =    "/usr/home/developer/devel/perl/Slaver/etc/single/init.d/image_converter stop"
+	as uid "developer" and gid "developer"
+	with timeout 60 seconds
+    restart program = "/usr/home/developer/devel/perl/Slaver/etc/single/init.d/image_converter restart"
+	as uid "developer" and gid "developer"
+	with timeout 60 seconds
+    if total memory > 1000.0 MB
+	for 5 cycles
+    then restart
+    if cpu > 90%
+	for 64 cycles
+    then restart
+    if uptime > 365 days
+    then restart
+    if 10 restarts
+	within 30 cycles
+    then alert

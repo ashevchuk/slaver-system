@@ -1,0 +1,29 @@
+check process mongodb with pidfile /home/developer/devel/perl/Slaver/var/run/mongod.pid
+    every 2 cycles
+    group db
+    mode active
+    start program =   "/usr/home/developer/devel/perl/Slaver/etc/single/init.d/mongodb.start"
+	as uid "developer" and gid "developer"
+	with timeout 600 seconds
+    stop program =    "/usr/home/developer/devel/perl/Slaver/etc/single/init.d/mongodb.stop"
+	as uid "developer" and gid "developer"
+	with timeout 600 seconds
+    if total memory > 4000.0 MB
+	for 5 cycles
+    then restart
+    if cpu > 90%
+	for 64 cycles
+    then restart
+    if uptime > 365 days
+    then restart
+    if 10 restarts
+	within 30 cycles
+    then alert
+    if failed
+	host 127.0.0.1
+	port 27018
+	protocol mongodb
+	with timeout 60 seconds
+	retry 10
+	for 64 cycles
+    then restart

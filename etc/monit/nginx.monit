@@ -1,0 +1,31 @@
+check process nginx with pidfile /usr/home/developer/local/logs/nginx.pid
+    every 2 cycles
+    group http
+    mode active
+    depends on mongos, mongodb, mongoconf, memcached
+    start = "/usr/home/developer/local/sbin/nginx"
+	as uid "root" and gid "wheel"
+	with timeout 60 seconds
+    stop = "/usr/home/developer/local/sbin/nginx -s stop"
+	as uid "root" and gid "wheel"
+	with timeout 60 seconds
+    if total memory > 1000.0 MB
+	for 5 cycles
+    then restart
+    if cpu > 90%
+	for 64 cycles
+    then restart
+    if uptime > 365 days
+    then restart
+    if 10 restarts
+	within 30 cycles
+    then alert
+    if failed
+	host 127.0.0.1
+	port 80
+	type tcp
+	protocol http
+	with timeout 60 seconds
+	retry 10
+	for 64 cycles
+    then restart

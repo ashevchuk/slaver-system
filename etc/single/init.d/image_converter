@@ -1,0 +1,98 @@
+#!/bin/bash
+
+SERVICE_ROOT="/home/developer/devel/perl/Slaver/"
+
+SERVICE_PID_FILE="${SERVICE_ROOT}var/run/image_converter.pid"
+
+if [ ! -f $SERVICE_PID_FILE ];
+then
+    echo -n "0" > $SERVICE_PID_FILE
+fi
+
+SERVICE_PID=$(<$SERVICE_PID_FILE)
+
+if [ "$SERVICE_PID" != "0" ];
+then
+    echo Service pid $SERVICE_PID
+fi
+
+status() {
+    echo Checking status
+
+    if [ "$SERVICE_PID" != "0" ];
+    then
+	echo Service is running
+	exit 0
+    else
+	echo Service is stopped
+	exit 1
+    fi
+}
+
+start() {
+    echo Starting image converter
+
+    cd $SERVICE_ROOT
+    cd script/misc/service/image/convert
+    ./converter.pl restart
+}
+
+stop() {
+    echo Killing image converter
+
+    cd $SERVICE_ROOT
+    cd script/misc/service/image/convert
+    ./converter.pl stop
+
+    if [ "$SERVICE_PID" == "0" ];
+    then
+	 echo "Service is already stoped"
+    else
+	kill -TERM $SERVICE_PID > /dev/null 2>&1
+	sleep 1
+    fi
+
+    rm -f $SERVICE_PID_FILE
+}
+
+reload() {
+    echo Restarting image converter
+
+    if [ "$SERVICE_PID" == "0" ];
+    then
+	 echo "Service is already stoped"
+    else
+	kill -HUP $SERVICE_PID > /dev/null 2>&1
+	sleep 1
+    fi
+
+    cd $SERVICE_ROOT
+    cd script/misc/service/image/convert
+    ./converter.pl restart
+}
+
+case "$1" in
+  start)
+    stop
+    sleep 1
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  reload)
+    reload
+    ;;
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+  *)
+    echo "usage: $0 {start|stop|reload|restart}"
+esac
+
+exit 0
