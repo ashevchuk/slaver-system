@@ -5,7 +5,7 @@ then
     echo "file already exists"
 else
     echo "generate book"
-    /usr/local/bin/htmldoc --no-strict --duplex --no-title --format 'pdf14' --jpeg='100' --linkcolor 'blue' --no-numbered --no-links --header 'c C' --size 'a4' --linkstyle 'plain' --embedfonts --bodyfont times --no-toc --charset cp-1251 --book --footer 'c C' "$1" "$1.pdf"
+    /usr/local/bin/htmldoc --no-strict --duplex --no-title --format 'pdf14' --jpeg='100' --linkcolor 'blue' --no-numbered --no-links --header 'c C' --size 'a4' --linkstyle 'plain' --embedfonts --bodyfont times --no-toc --charset cp-1251 --book --footer 'c C' -f "$1.pdf" "$1"
 fi
 
 if [ -e "$1.pdf" ]
