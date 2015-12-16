@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -e "$1.pdf" ]
+then
+    echo "file already exists"
+else
+    echo "generate book"
+    /usr/local/bin/htmldoc --no-strict --duplex --no-title --format 'pdf14' --jpeg='100' --linkcolor 'blue' --no-numbered --no-links --header 'c C' --size 'a4' --linkstyle 'plain' --embedfonts --bodyfont times --no-toc --charset cp-1251 --book --footer 'c C' "$1" "$1.pdf"
+fi
+
+if [ -e "$1.pdf" ]
+then
+    echo "get image"
+    ~/local/bin/convert -alpha remove -density 288 -resize 100% "$1.pdf"[$2] $3
+else
+    echo "generated file not found"
+fi

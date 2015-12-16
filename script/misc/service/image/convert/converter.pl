@@ -172,6 +172,63 @@ sub chm2image {
   return 1;
 }
 
+sub html2image {
+  my $task           = shift;
+  my $page           = shift || 0;
+  my $temp_file      = File::Temp::tempnam($task->{tmp}, "thumb_");
+  my $orig_temp_file = $temp_file . "orig." . $task->{convert_to};
+  $temp_file .= "." . $task->{convert_to};
+  printf("converting html image %s to %s\n",
+    $task->{file_name}, $orig_temp_file);
+  my $conv_cmd = sprintf(
+    "/home/developer/devel/perl/Slaver/script/misc/converters/html2image %s %s %s",
+    $task->{file_name}, $page, $orig_temp_file);
+  eval { system($conv_cmd); };
+  unlink($orig_temp_file) if $@;
+  return if $@;
+  my $is_empty_image =
+    `~/bin/convert $orig_temp_file -format "%[fx:mean>0.99?1:0]" info:`;
+  unlink($orig_temp_file) if $is_empty_image;
+  return if $is_empty_image;
+  return unless (-e $orig_temp_file);
+  printf("converting html page to thumb %s to %s\n",
+    $orig_temp_file, $temp_file);
+  my $conv_cmd2 = sprintf(
+    "/home/developer/devel/perl/Slaver/script/misc/converters/image2image thumb %s %s 640 480",
+    $orig_temp_file, $temp_file);
+  eval { system($conv_cmd2); };
+  unlink($orig_temp_file) if $@;
+  unlink($temp_file)      if $@;
+  return                  if $@;
+  return unless (-e $temp_file);
+  unlink($orig_temp_file);
+  my ($filename, $dirs, $suffix) = fileparse($temp_file, qr/\.[^.]*/);
+
+  my $fh = IO::File->new($temp_file, "r");
+  my $thumbnail_id = $thumbnail_grid->insert($fh,
+    {filename => $filename . "." . $task->{convert_to}});
+  $fh->close;
+
+  unlink($temp_file);
+
+  my $file =
+    $db->get_collection('content')
+    ->find_one({_id => MongoDB::OID->new(value => $task->{content_file_id})});
+
+  my $thumbs = $file->{props}->{thumbnails};
+  push(
+    @{$thumbs},
+    { "id"  => $thumbnail_id,
+      "ref" => 'thumbnails.fs.files'
+    }
+  );
+
+  $db->get_collection('content')
+    ->update({_id => MongoDB::OID->new(value => $task->{content_file_id})},
+    {"\$set" => {"props.thumbnails", $thumbs}});
+  return 1;
+}
+
 sub image2image {
   my $task = shift;
   my $temp_file = File::Temp::tempnam($task->{tmp}, "thumb_");
@@ -284,6 +341,22 @@ sub receive_tasks {
           }
           $i++;
         }
+      }
+    }
+
+    if ($task->{media_type} eq "text") {
+      if ($task->{media_sub_type} eq "html") {
+        my $i         = 0;
+        my $max_frame = 3;
+        while (($i <= $max_frame) && ($i < 32)) {
+          if (html2image($task, $i)) {
+          }
+          else {
+            $max_frame++;
+          }
+          $i++;
+        }
+        unlink($task->{file_name} . ".pdf");
       }
     }
 
