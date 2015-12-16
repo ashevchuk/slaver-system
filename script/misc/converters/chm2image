@@ -5,14 +5,14 @@ then
     echo "file already exists"
 else
     echo "generate book"
-    /usr/local/bin/chm2pdf UTF8 --book "$1" "$1.pdf"
+    /usr/local/bin/chm2pdf --charset cp-1251 --no-toc --no-title --no-strict --no-numbered --no-links --book "$1" "$1.pdf"
 
     if [ -e "$1.pdf" ]
     then
 	echo "generated book"
     else
 	echo "generate webpage"
-	/usr/local/bin/chm2pdf UTF8 --webpage "$1" "$1.pdf"
+	/usr/local/bin/chm2pdf --charset cp-1251 --no-toc --no-title --no-strict --no-numbered --no-links --webpage "$1" "$1.pdf"
     fi
 
     if [ -e "$1.pdf" ]
@@ -20,7 +20,7 @@ else
 	echo "generated webpage"
     else
 	echo "generate continuous"
-	/usr/local/bin/chm2pdf --continuous "$1" "$1.pdf"
+	/usr/local/bin/chm2pdf --charset cp-1251 --no-toc --no-title --no-strict --no-numbered --no-links --continuous "$1" "$1.pdf"
     fi
 fi
 
