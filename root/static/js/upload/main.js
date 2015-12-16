@@ -11,9 +11,9 @@ $(function () {
 	retryTimeout: 500,
 	multipart: false,
 	dataType: "",
-	limitConcurrentUploads: Math.floor( CLUSTER_HOSTS_MAX_HOTS / 2 ) + 1,
+	limitConcurrentUploads: Math.floor( CLUSTER_HOSTS_MAX_HOTS / 2 ) + 2,
 	singleFileUploads: true,
-	limitMultiFileUploads: Math.floor( CLUSTER_HOSTS_MAX_HOTS / 2 ) + 1,
+	limitMultiFileUploads: Math.floor( CLUSTER_HOSTS_MAX_HOTS / 2 ) + 2,
 	disableValidation: true,
 	beforeSend: function(e, data, index, xhr, handler, callback) {
 	    var filename = data.files[0].lastModified + data.files[0].name;

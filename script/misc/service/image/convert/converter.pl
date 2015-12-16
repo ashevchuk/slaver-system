@@ -214,18 +214,18 @@ sub image2image {
 sub receive_tasks {
   while (my $task = $queue->reserve_task({query => {host => $hostname}})) {
 
-#    		my $json = $coder->encode ($task);
-#    		printf("Received task: %s\n", $json);
+    		my $json = $coder->encode ($task);
+    		printf("Received task: %s\n", $json);
 
     unless ( -e $task->{file_name} ) {
 	$queue->reschedule_task($task);
-#	printf("File not found: %s\n", $task->{file_name});
+	printf("File not found: %s\n", $task->{file_name});
 	next;
     }
 
     if ($task->{reinsert}) {
 	my $file_oid = MongoDB::OID->new(value => $task->{file_id});
-#	printf("Try to reinsert file OID: %s\n", $task->{file_id});
+	printf("Try to reinsert file OID: %s\n", $task->{file_id});
 	eval {
 	    $data_grid->delete($file_oid);
 	    my $fh = IO::File->new($task->{file_name}, "r");
@@ -238,17 +238,24 @@ sub receive_tasks {
 	};
 
 	if ($@) {
-#	    printf("Error while reinserting file: %s\n", $@);
-	    if ($task->{remove}) {
-		unlink $task->{file_name};
+	    printf("Error while reinserting file: %s\n", $@);
+	    if (exists $task->{_reservations} && $task->{_reservations} > 10) {
+		if ($task->{remove}) {
+			printf("Error while reinserting file over max reservations\n");
+			unlink $task->{file_name};
+	    	}
+
+		$queue->remove_task($task);
+		next;
 	    }
 
-	    $queue->remove_task($task);
+	    $queue->reschedule_task($task);
+
 	    next;
 	}
     }
 
-#    printf("Try to convert %s...\n", $task->{media_type});
+    printf("Try to convert %s...\n", $task->{media_type});
 
     if ($task->{media_type} eq "image") {
       if ($task->{media_sub_type} eq "vnd.djvu") {
@@ -310,13 +317,13 @@ sub receive_tasks {
     }
 
     if (defined $task->{remove} && $task->{remove}) {
-#      printf("Removing file\n");
+      printf("Removing file\n");
       unlink $task->{file_name};
     }
-#    printf("Removing task\n");
+    printf("Removing task\n");
     $queue->remove_task($task);
   }
-#	printf("End of tasks\n");
+	printf("End of tasks\n");
   #	select( undef, undef, undef, 1);
 }
 
