@@ -81,6 +81,7 @@ sub slurp : Local {
 
 	    locations => [
 		{
+		    "id" => $file_id,
 		    "ref" => "data.fs.files"
         	}
 	    ],
