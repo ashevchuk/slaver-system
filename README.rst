@@ -19,7 +19,7 @@ rs.initiate( {
     ]
 } )
 
-sh.addShard( "nodeX.enslaver.net:27018" )
+sh.addShard( "nodeX.lambda-cloud.net:27018" )
 
 use content
 db.content.ensureIndex( { "$**": "text" }, { name: "All_FT_Idx" } )
@@ -91,6 +91,8 @@ db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000a"), "owner" : "main", "
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000b"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f000009", "caption" : "Tech Labs 1", "description" : "Tech Labs1 Page", "alias" : "tech-labs-1", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000c"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f000009", "caption" : "Tech Labs 2", "description" : "Tech Labs2 Page", "alias" : "tech-labs-2", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
 db.menu.save({ "_id" : ObjectId("514c2e7c08e4a52d1f00000d"), "owner" : "main", "sub_id" : "514c2e7c08e4a52d1f00000c", "caption" : "Tech Labs 2 0", "description" : "Tech Labs20 Page", "alias" : "tech-labs-2-0", "role" : "category", "icon" : "fa fa-graduation-cap", "_class" : "Content::Menu" })
+
+db.access.aggregate( [ { $group: { _id: "$uri" } }, { $project : { _id : 0, uri : "$_id" } }, { $out: "access.uri" } ] )
 
 Smoke test
 =====
