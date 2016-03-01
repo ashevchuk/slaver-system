@@ -13,9 +13,9 @@
 
 		<meta name="robots" content="[% IF robots %][% robots | html %][% ELSE %][% robots or c.config.application.content.robots | html %][% END %]" />
 <!-- Automatic meta includes -->
-		[% FOREACH meta IN include.header.meta %]
+		[%- FOREACH meta IN include.header.meta -%]
 		<meta name="[% meta.name | html %]" content="[% meta.content | html %]" />
-		[% END %]
+		[%- END -%]
 <!-- /Automatic meta includes -->
 
 		<link href=[% c.config.application.content.favicon or "/static/favicon.ico" %] rel="icon" type="image/x-icon" />
@@ -23,15 +23,15 @@
 <!-- Manual css includes -->
 		[% PROCESS templates/root/css.tt2 %]
 
-		[% FOREACH file IN include.default.header.files.css %]
+		[%- FOREACH file IN include.default.header.files.css -%]
 		<link href='[% file %]' rel='stylesheet' type='text/css'>
-		[% END %]
+		[%- END -%]
 <!-- /Manual css includes -->
 
 <!-- Automatic css includes -->
-		[% FOREACH file IN include.header.files.css %]
+		[%- FOREACH file IN include.header.files.css -%]
 		<link href='[% file %]' rel='stylesheet' type='text/css'>
-		[% END %]
+		[%- END -%]
 <!-- /Automatic css includes -->
 
 [% INCLUDE templates/root/block/ga.tt2 %]
@@ -41,15 +41,15 @@
 <!-- Manual js includes -->
 		[% PROCESS templates/root/js.tt2 %]
 
-		[% FOREACH file IN include.default.header.files.js %]
+		[%- FOREACH file IN include.default.header.files.js -%]
 		<script src="[% file %]"></script>
-		[% END %]
+		[%- END -%]
 <!-- /Manual js includes -->
 
 <!-- Automatic js includes -->
-		[% FOREACH file IN include.header.files.js %]
+		[%- FOREACH file IN include.header.files.js -%]
 		<script src="[% file %]"></script>
-		[% END %]
+		[%- END -%]
 <!-- /Automatic js includes -->
 
 		<title>[% c.config.application.content.name | html -%] - [% title or c.config.application.content.title | html -%]</title>

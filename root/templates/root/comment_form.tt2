@@ -25,9 +25,9 @@
                                 Subject</label>
                             <select name="subject" class="form-control form-input-subject">
                                 <option value="na" selected="">Choose One:</option>
-                                <option value="service">General Customer Service</option>
+                                <option value="service">Service</option>
                                 <option value="suggestions">Suggestions</option>
-                                <option value="product">Product Support</option>
+                                <option value="product">Support</option>
                             </select>
                         </div>
                     </div>

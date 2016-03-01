@@ -4,7 +4,7 @@
 <div class="row">
 <ul class="breadcrumb">
 [% FOREACH link IN breadcrumbs %]
-  <li><a href="[% link.uri  | html%]">[% loc(link.caption) %]</a></li>
+  <li><a href="[% link.uri  | html %]">[% loc(link.caption) %]</a></li>
 [% END %]
 </ul>
 

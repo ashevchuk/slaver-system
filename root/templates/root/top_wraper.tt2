@@ -16,11 +16,7 @@
 		<div class="collapse navbar-collapse">
 
 			[% INCLUDE templates/root/nav_bar_menu.tt2 %]
-<!--
-					</ul>
-				</li>
-			</ul>
--->
+
 			[% INCLUDE templates/root/search_form.tt2 %]
 
 		</div><!-- navbar-collapse -->

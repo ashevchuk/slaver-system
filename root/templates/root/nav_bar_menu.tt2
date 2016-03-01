@@ -7,18 +7,6 @@
 				</i>
 			    </a>
 			</li>
-			<li>
-			    <a href="/content/pages/about/">
-				<i class="icon-fixed-width fa fa-group">
-				</i>
-			    </a>
-			</li>
-			<li>
-			    <a href="/content/pages/contacts/">
-				<i class="icon-fixed-width fa fa-envelope">
-				</i>
-			    </a>
-			</li>
 -->
 			<li class="dropdown">
 				<a href="#" class="dropdown" data-toggle="dropdown">
@@ -37,7 +25,7 @@
 				<a href="#" class="dropdown" data-toggle="dropdown">
 				    [% IF c.user_exists %]
 					<i class="icon-fixed-width">
-					    <img class="menu-avatar-image" src="/user/profile/avatar/get/avatar.png" alt="">
+					    <img class="menu-avatar-image" src="/user/profile/avatar/get/avatar.png" alt="[% c.user.name OR c.user.username | html %]">
 					</i>
 					[% c.user.name OR c.user.username | html %]
 				    [% ELSE %]
