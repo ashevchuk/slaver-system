@@ -11,12 +11,12 @@
 
 <script type="application/ld+json">
 {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
-    "url": "http://www.lambda-cloud.net/",
+    "url": "https://www.lambda-cloud.net/",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "http://www.enslaver.net/search?&q={query}",
+      "target": "https://www.lambda-cloud.net/search/{query}",
       "query-input": "required"
     }
 }
