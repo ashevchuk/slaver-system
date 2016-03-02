@@ -43,10 +43,10 @@ sub add :Local {
     $c->forward('View::JSON');
 }
 
-sub load :Path :CaptureArgs(1) {
+sub load :Local :CaptureArgs(1) {
     my ( $self, $c, $document_id ) = @_;
 
-    return $c->response->body(q({"error": true})) unless $document_id;
+    return $c->response->body(q({"error": true, "message": "no id"})) unless $document_id;
 
     my $db = $c->model('Data::Provider')->db('content');
 
@@ -55,6 +55,8 @@ sub load :Path :CaptureArgs(1) {
     my $document = $content->find_one( { '_id' => MongoDB::OID->new( value => $document_id ) } );
 
 #    $c->stash->{session} = $c->sessionid;
+
+    return $c->response->body(q({"error": true, "message": "document not found"})) unless defined $document;
 
     $c->stash->{comments} = $document->get_props->get_comments;
     $c->stash( template => 'templates/root/comments_panel.tt2' );
