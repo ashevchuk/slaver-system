@@ -60,14 +60,14 @@ $('.expander').click(function(){ $($(this).parent().children('.expandable')).tog
 
 function load_comments(comments, context) {
     $.ajax({
-	type: "POST",
-	url: "/service/ajax/json/content/comment/load",
-	contentType: "application/json",
+	type: "GET",
+	url: "/service/ajax/json/content/comment/load/" + comments.document_id,
+//	contentType: "application/json",
 	crossDomain: true,
 	dataType: "html",
 	processData: false,
 	context: context,
-	data: JSON.stringify(comments),
+//	data: JSON.stringify(comments),
 	xhrFields: {
 	    withCredentials: true
 	}

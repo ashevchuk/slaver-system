@@ -5,6 +5,8 @@
 [% USE Dumper %]
 [% USE date %]
 
+<!-- comments section -->
+
 [% IF comments %]
 <section class="comment-list">
 
