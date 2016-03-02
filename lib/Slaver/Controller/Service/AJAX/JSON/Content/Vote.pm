@@ -25,12 +25,15 @@ sub mark :Local {
     my $vote_inc = 1;
     my $vote_field = $body->{vote} > 0 ? "likes" : "dislikes";
 
-    my $vote_issue_key = sprintf("session:vote:%s:doc%s", $c->sessionid, $body->{document_id});
+#    my $session = $c->sessionid;
+    my $session = $c->req->address;
+
+    my $vote_issue_key = sprintf("session:vote:%s:doc%s", $session, $body->{document_id});
 
     my $vote_issue = $c->cache->get($vote_issue_key);
 
 #    my $vote_issue = $votes->find_one({
-#	session => $c->sessionid,
+#	session => $session,
 #	document => MongoDB::OID->new( value => $body->{document_id} ),
 #    });
 
@@ -46,7 +49,7 @@ sub mark :Local {
     }
 
 #    $votes->insert({
-#	session => $c->sessionid,
+#	session => $session,
 #	document => MongoDB::OID->new( value => $body->{document_id} ),
 #	mark => $vote_field,
 #	issue => DateTime->now,
@@ -54,7 +57,7 @@ sub mark :Local {
 #    }) if $vote_inc > 0;
 
     $c->cache->set($vote_issue_key, {
-	session => $c->sessionid,
+	session => $session,
 	document => $body->{document_id},
 	mark => $vote_field,
 	issue => DateTime->now->epoch,
@@ -66,7 +69,7 @@ sub mark :Local {
 	new => 1
     });
 
-#    $c->stash->{session} = $c->sessionid;
+#    $c->stash->{session} = $session;
 
     $c->stash->{likes} = $document->{props}->{votes}->{likes} || 0;
     $c->stash->{dislikes} = $document->{props}->{votes}->{dislikes} || 0;
