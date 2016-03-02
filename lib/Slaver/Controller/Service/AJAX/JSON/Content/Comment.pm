@@ -43,18 +43,16 @@ sub add :Local {
     $c->forward('View::JSON');
 }
 
-sub load :Local {
-    my ( $self, $c ) = @_;
+sub load :Path :CaptureArgs(1) {
+    my ( $self, $c, $document_id ) = @_;
 
-    my $body = $c->request->body_data;
-
-    return $c->response->body(q({"error": true})) unless $body->{document_id};
+    return $c->response->body(q({"error": true})) unless $document_id;
 
     my $db = $c->model('Data::Provider')->db('content');
 
     my $content = $db->get_collection('content');
 
-    my $document = $content->find_one( { '_id' => MongoDB::OID->new( value => $body->{document_id} ) } );
+    my $document = $content->find_one( { '_id' => MongoDB::OID->new( value => $document_id ) } );
 
 #    $c->stash->{session} = $c->sessionid;
 
