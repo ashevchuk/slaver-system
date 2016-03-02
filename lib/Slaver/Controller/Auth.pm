@@ -22,6 +22,8 @@ sub login : Local {
     delete $c->session->{username} if exists $c->session->{username};
     delete $c->session->{userinfo} if exists $c->session->{userinfo};
 
+    $c->change_session_id;
+
     if ($username && $password) {
 
 	if( $c->authenticate({username => $username, password => $password}) ) {
@@ -50,6 +52,9 @@ sub logout : Local {
     my ($self, $c) = @_;
 
     $c->logout;
+    $c->delete_session('logout');
+
+    $c->change_session_id;
 
     $c->stash(status_msg => $c->loc(Slaver::Resource::String::Auth::RS_LOGOUT_SUCCESSFUL));
     $c->flash->{status_msg} = $c->loc(Slaver::Resource::String::Auth::RS_LOGOUT_SUCCESSFUL);
