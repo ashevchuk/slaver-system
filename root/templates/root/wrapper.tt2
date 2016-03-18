@@ -52,7 +52,7 @@
 		[%- END -%]
 <!-- /Automatic js includes -->
 
-		<title>[% c.config.application.content.name | html -%] - [% title or c.config.application.content.title | html -%]</title>
+		<title>[% c.config.application.content.name | html -%] - [% title or c.config.application.content.title | html -%][%- IF pager && pager.last_page > 1 -%] | [% loc("Page") %] [%- pager.current_page -%][%- END -%]</title>
 
 	</head>
 

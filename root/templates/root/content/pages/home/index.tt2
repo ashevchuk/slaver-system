@@ -1,4 +1,5 @@
 <h1>Cloud Computing Research Initiative</h1>
-documents and resources library
+
+This project was created as an experiment to create a system, which may be scaled horizontally on a lot of servers and easy to carry out its expansion, using the advanced technology of distributed computing. Also, a library of resources and documents on related topics.
 
 [% INCLUDE templates/root/last_search_panel.tt2 %]
