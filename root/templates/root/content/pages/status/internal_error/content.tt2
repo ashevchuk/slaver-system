@@ -36,7 +36,7 @@
 		    [[% trace_item.pkg %]] File: "[% trace_item.file %]" line: [% trace_item.line %]
 		</div>
 		<div class="trace-item-code">
-		    <pre>[% trace_item.content %]</pre>
+		    <pre>[% trace_item.content | html %]</pre>
 		</div>
 	    </div>
 	[% END %]
