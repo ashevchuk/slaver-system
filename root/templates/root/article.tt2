@@ -12,7 +12,7 @@
 		<h2>[% article.props.caption | html %]</h2>
 		[% END %]
 
-		[% IF article.props.description | html %]
+		[% IF article.props.description %]
 		<p>
 			[% FILTER elide(128) -%]
 				[% FILTER html2text %]
