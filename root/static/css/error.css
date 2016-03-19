@@ -47,7 +47,7 @@
 .trace-item .trace-item-code {
 	width: 99%;
 	display: none;
-	border: 1px solid #00ff00;
+	border: 0px solid #00ff00;
 	padding-bottom: 24px;
 	padding-top: 24px;
 }

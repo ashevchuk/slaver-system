@@ -5,17 +5,13 @@ use namespace::autoclean;
 
 use File::Slurp;
 use Data::Page;
+use HTML::Escape qw/escape_html/;
 
 use Log::Log4perl::MDC;
 
 BEGIN { extends 'Slaver::Base::Controller::Generic' }
 
 use Data::Dump qw(dump);
-
-our $session_renew_id_uris = [
-    '^auth',
-    '^locale'
-];
 
 __PACKAGE__->config(namespace => '');
 
@@ -52,6 +48,12 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash('template' => 'templates/root/index.tt2');
+}
+
+sub eee :Local :Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->eee();
 }
 
 sub default :Path {
@@ -136,7 +138,7 @@ sub return_error : Private {
 			    chomp $line;
 
 			    my $line_style = $line_number == $trace_item->{line} ? "error-line" : "normal-line";
-			    push @formated_lines, sprintf("<div class=\"source-line %s\"><div class=\"line-number\">%s:</div><div class=\"trace-item-code-source-line\"><pre class=\"code\"><code>%s</code></pre></div></div>", $line_style, $line_number, $line);
+			    push @formated_lines, sprintf(qq|<div class="source-line %s"><div class="line-number">%s:</div><div class="trace-item-code-source-line"><pre class="code-line"><code>%s</code></pre></div></div>|, $line_style, $line_number, escape_html $line);
 			}
 
 			push(@{$stack_trace}, {
