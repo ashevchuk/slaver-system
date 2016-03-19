@@ -9,14 +9,14 @@
 	<div class="col-xs-12">
 
 		[% IF article.props.caption %]
-		<h2>[% article.props.caption %]</h2>
+		<h2>[% article.props.caption | html %]</h2>
 		[% END %]
 
-		[% IF article.props.description %]
+		[% IF article.props.description | html %]
 		<p>
 			[% FILTER elide(128) -%]
 				[% FILTER html2text %]
-					[% article.props.description %]
+					[% article.props.description | html %]
 				[% END %]
 			[%- END %]
 		</p>
@@ -34,7 +34,7 @@
 
 		<p class="pull-right">
 			[% FOREACH tag IN article.props.tags %]
-			    <a href="/search/[% tag %]/" class="label label-default">[% tag %]</a>
+			    <a href="/search/[% tag | html %]/" class="label label-default">[% tag | html %]</a>
 			[% END %]
 
 			<ul class="list-inline">
