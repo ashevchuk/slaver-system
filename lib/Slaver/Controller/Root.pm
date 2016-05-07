@@ -73,7 +73,7 @@ sub end : Private {
     	$c->response->status(500);
 	$c->stash->{template} = 'templates/root/content/pages/status/internal_error/index.tt2';
 
-	$self->return_error( $c );
+	eval { $self->return_error( $c ); };
 
 	$c->clear_errors;
     } else {
