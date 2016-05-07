@@ -70,20 +70,7 @@ sub end : Private {
     my ( $self, $c ) = @_;
 
     if ( scalar @{ $c->error } ) {
-    	$c->response->status(500);
-	$c->stash->{template} = 'templates/root/content/pages/status/internal_error/index.tt2';
-
-	#eval { $self->return_error( $c ); };
-	$c->response->body('error');
-
-	$c->clear_errors;
-
-	$c->response->content_type('text/html; charset=utf-8') unless ( $c->response->content_type );
-
-	#$c->forward('Slaver::View::HTML');
-
-	return 1;
-
+	eval { $self->return_error( $c ); };
     } else {
 	if ( my $category_id = $c->stash->{category_id} ) {
 	    $c->log->debug("Got category id: " . $category_id);
