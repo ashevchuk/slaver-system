@@ -76,6 +76,13 @@ sub end : Private {
 	eval { $self->return_error( $c ); };
 
 	$c->clear_errors;
+
+	$c->response->content_type('text/html; charset=utf-8') unless ( $c->response->content_type );
+
+	$c->forward('Slaver::View::HTML');
+
+	return 1;
+
     } else {
 	if ( my $category_id = $c->stash->{category_id} ) {
 	    $c->log->debug("Got category id: " . $category_id);
