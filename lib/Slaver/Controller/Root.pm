@@ -70,9 +70,12 @@ sub end : Private {
     my ( $self, $c ) = @_;
 
     if ( scalar @{ $c->error } ) {
+    	$c->response->status(500);
+	$c->stash->{template} = 'templates/root/content/pages/status/internal_error/index.tt2';
 
 	$self->return_error( $c );
 
+	$c->clear_errors;
     } else {
 	if ( my $category_id = $c->stash->{category_id} ) {
 	    $c->log->debug("Got category id: " . $category_id);
